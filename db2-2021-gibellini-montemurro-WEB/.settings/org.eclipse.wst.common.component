@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="db2-2021-gibellini-montemurro-WEB">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="db2-2021-gibellini-montemurro-EJB.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/db2-2021-gibellini-montemurro-EJB/db2-2021-gibellini-montemurro-EJB">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="db2-2021-gibellini-montemurro-WEB"/>
+        <property name="java-output-path" value="/db2-2021-gibellini-montemurro-WEB/build/classes"/>
+    </wb-module>
+</project-modules>
