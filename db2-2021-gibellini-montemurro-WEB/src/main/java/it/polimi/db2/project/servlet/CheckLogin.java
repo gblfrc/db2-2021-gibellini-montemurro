@@ -10,6 +10,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.User;
 import it.polimi.db2.project.services.UserService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
@@ -33,20 +34,24 @@ public class CheckLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// fetch user
 		// try client first
-		Client client;
-		client = uService.getClient(request.getParameter("username"), request.getParameter("password"));
+		User user;
+		user = uService.getClient(request.getParameter("username"), request.getParameter("password"));
+		if (user == null) {
+			user = uService.getEmployee(request.getParameter("username"), request.getParameter("password"));
+		}
 
-		request.getSession().setAttribute("user", client);
-
-		if (client != null) {
+		if (user != null) {
+			//save user in session
+			request.getSession().setAttribute("user", user);
 			// give actual access to result page
 			String path = "/WEB-INF/OK.html";
 			ServletContext servletContext = getServletContext();
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-			ctx.setVariable("username", client.getUsername());
-			ctx.setVariable("email", client.getEmail());
+			ctx.setVariable("username", user.getUsername());
+			ctx.setVariable("email", user.getEmail());
 			templateEngine.process(path, ctx, response.getWriter());
 		}
 		else {
