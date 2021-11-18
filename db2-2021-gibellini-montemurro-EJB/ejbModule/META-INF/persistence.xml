@@ -8,6 +8,10 @@
 		<jta-data-source>ProjectDB</jta-data-source>
 		<class>it.polimi.db2.project.entities.Client</class>
 		<class>it.polimi.db2.project.entities.Employee</class>
+		<class>it.polimi.db2.project.entities.Service</class>
+		<class>it.polimi.db2.project.entities.ServicePackage</class>
+		<class>it.polimi.db2.project.entities.Subscription</class>
+		<class>it.polimi.db2.project.entities.Validityperiod</class>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
 		</properties>

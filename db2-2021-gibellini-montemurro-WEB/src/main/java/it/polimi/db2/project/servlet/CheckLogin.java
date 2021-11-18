@@ -10,6 +10,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.Employee;
 import it.polimi.db2.project.entities.User;
 import it.polimi.db2.project.services.UserService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
@@ -47,12 +48,18 @@ public class CheckLogin extends HttpServlet {
 			//save user in session
 			request.getSession().setAttribute("user", user);
 			// give actual access to result page
-			String path = "/WEB-INF/OK.html";
-			ServletContext servletContext = getServletContext();
-			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-			ctx.setVariable("username", user.getUsername());
-			ctx.setVariable("email", user.getEmail());
-			templateEngine.process(path, ctx, response.getWriter());
+			if (user.getClass().equals(Client.class))
+				response.sendRedirect(getServletContext().getContextPath() + "/GetUserHomePage");
+			/*else if (user.getClass().equals(Employee.class))
+				response.sendRedirect(getServletContext().getContextPath() + "/GetEmployeeHomePage");*/
+			else {
+				String path = "/WEB-INF/OK.html";
+				ServletContext servletContext = getServletContext();
+				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				ctx.setVariable("username", user.getUsername());
+				ctx.setVariable("email", user.getEmail());
+				templateEngine.process(path, ctx, response.getWriter());
+			}
 		}
 		else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Non-existent user for given credentials");

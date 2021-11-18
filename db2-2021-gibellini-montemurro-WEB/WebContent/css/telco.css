@@ -9,7 +9,7 @@ form {
 	display: inline-block;
 }
 
-div.login, div.registration {
+div.login, div.registration, div.package {
 	background-color: coral;
 	width: 40%;
 	margin: 10 px;
@@ -26,6 +26,10 @@ input[type="submit"] {
 	background-color: orange;
 	border-style: inset;
 	border-color: orange;
+}
+
+a.noLog {
+	color: orange;
 }
 
 /*
