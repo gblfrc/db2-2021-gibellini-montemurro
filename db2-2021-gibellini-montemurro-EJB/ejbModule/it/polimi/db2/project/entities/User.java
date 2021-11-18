@@ -1,35 +1,19 @@
 package it.polimi.db2.project.entities;
 
-public abstract class User {
-
-	private String username;
-	private String password;
-	private String email;
+public interface User {
 
 	// getters
-	public String getUsername() {
-		return username;
-	}
+	public String getUsername(); 
 
-	public String getPassword() {
-		return password;
-	}
+	public String getPassword();
 
-	public String getEmail() {
-		return email;
-	}
+	public String getEmail();
 
 	// setters
-	public void setUsername(String usrn) {
-		username = usrn;
-	}
+	public void setUsername(String usrn);
 
-	public void setPassword(String pwd) {
-		password = pwd;
-	}
+	public void setPassword(String pwd);
 
-	public void setEmail(String em) {
-		email = em;
-	}
+	public void setEmail(String em);
 
 }

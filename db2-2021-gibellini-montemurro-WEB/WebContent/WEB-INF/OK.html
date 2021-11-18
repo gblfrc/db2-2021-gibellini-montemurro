@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/telco.css" th:href="@{/css/telco.css}" />
+
 <title>Ok page</title>
 </head>
 <body>
 	<h1>Welcome back</h1>
-	<p th:text="${username}"> Aldo </p>
-	<p th:text="${email}"> Baglio </p>
+	<p th:text="${username}">Aldo</p>
+	<p th:text="${email}">Baglio</p>
 </body>
 </html>

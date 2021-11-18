@@ -11,13 +11,22 @@ public class UserService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
+	//method to get a client given the username and the password
+	//returns null if no user is found
 	public Client getClient(String username, String password) {
-		Query query = em.createNamedQuery("Client.checkCredentials", Client.class);
+		TypedQuery<Client> query = em.createNamedQuery("Client.clientFromCredentials", Client.class);
 		query.setParameter(1, username);
 		query.setParameter(2, password);
-		Client result =(Client) query.getResultList().get(0);
+		Client result;
+		try {
+			result = query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 		return result;
 	}
+	
+	
 	
 	
 }
