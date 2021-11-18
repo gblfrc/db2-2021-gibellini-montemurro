@@ -5,6 +5,6 @@
 	version="3.0">
   <display-name>db2-2021-gibellini-montemurro-WEB</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>GetLogin</welcome-file>
   </welcome-file-list>
 </web-app>

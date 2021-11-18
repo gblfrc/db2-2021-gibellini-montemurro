@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: teal;
+	font-family: "Lucida console";
+}
+
+form {
+	display: inline-block;
+}
+
+div.login, div.registration {
+	background-color: coral;
+	width: 40%;
+	margin: 10 px;
+	border-style: inset;
+	border-color: orange;
+	border-radius: 10px; padding-top : 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+}
+
+input[type="submit"] {
+	background-color: orange;
+	border-style: inset;
+	border-color: orange;
+}
+
+/*
+input[type="submit"], input[type="button"], button {
+	background-color: LightSkyBlue;
+	display: inline-block;
+	border-radius: 4px;
+	border-style: outset;
+	border-color: LightSkyBlue;
+	cursor: pointer;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+}*/
