@@ -12,6 +12,7 @@ The aim of the project was building a simple website for a Telco enterprise to o
 The project is developed in JAVA and it uses some technologies which are proper of JAVA EE, like EJB and JPA: make sure the IDE on which you're interested to import the project is properly set up to run both the EJB and the WEB sections you find in this repository.
 
 **Required software**
+
 Here are the pieces of software you need to have installed on your machine to correctly run the project
 - DB server, like MySQL server;
 - JAVA EE IDE, like Eclipse IDE for Enterprise Java and Web Developers;
