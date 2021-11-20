@@ -7,30 +7,43 @@
 <title>Home</title>
 </head>
 <body>
+	<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
 	<h1>Service packages</h1>
 	<div class="allPackages" th:remove="all-but-first">
 		<div class="package" th:each="package: ${packages}">
 			<div class="packageName" th:text="${package.name}">Sauron</div>
-			<br> Included services <br><br>
+			<br> Included services <br>
+			<br>
 			<div class="allServices" th:remove="all-but-first">
-				<div class="service" th:each="service: ${package.services}">
-					<div> Type: <span th:text="${service.type}">Uruk Hai</span> </div>
-					<div> Included GB: <span th:text="${service.includedGB}">Bilbo</span> </div>
-					<div> Extra GB Fee: <span th:text="${service.extraGBFee}">Gandalf</span> </div>
-					<div> Included SMS: <span th:text="${service.includedSMS}">Galadriel</span> </div>
-					<div> Extra SMS Fee: <span th:text="${service.extraSMSFee}">Aragorn</span> </div>
-					<div> Included Minutes: <span th:text="${service.includedMinutes}">Frodo</span> </div>
-					<div> Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">Sam</span> </div> <br>
-					<!-- <div class="includedGB" th:text="${service.includedGB}"> 50</div>
-					<div class="extraGBFee" th:text="${service.extraGBFee}"> 1</div>
-					<div class="includedSMS" th:text="${service.includedSMS}"> 500</div>
-					<div class="extraSMSFee" th:text="${service.extraSMSFee}"> 1</div>
-					<div class="includedMinutes" th:text="${service.includedMinutes}"> 500</div>
-					<div class="extraMinutesFee" th:text="${service.extraMinutesFee}"> 0.2</div>  -->
-				</div>
+				<ul>
+					<li class="service" th:each="service: ${package.services}">
+						<div>
+							Type: <span th:text="${service.type}">Uruk Hai</span>
+						</div>
+						<div th:if="${service.includedGB}!=0">
+							Included GB: <span th:text="${service.includedGB}">Bilbo</span>
+						</div>
+						<div th:if="${service.includedGB}!=0">
+							Extra GB Fee: <span th:text="${service.extraGBFee}">Gandalf</span>
+						</div>
+						<div th:if="${service.includedSMS}!=0">
+							Included SMS: <span th:text="${service.includedSMS}">Galadriel</span>
+						</div>
+						<div th:if="${service.includedSMS}!=0">
+							Extra SMS Fee: <span th:text="${service.extraSMSFee}">Aragorn</span>
+						</div>
+						<div th:if="${service.includedMinutes}!=0">
+							Included Minutes: <span th:text="${service.includedMinutes}">Frodo</span>
+						</div>
+						<div th:if="${service.includedMinutes}!=0">
+							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">Sam</span>
+						</div> <br>
+					</li>
+				</ul>
 			</div>
 		</div>
-
 	</div>
+	<br>
+	<button>Buy a package</button>
 </body>
 </html>

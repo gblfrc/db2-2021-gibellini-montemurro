@@ -22,14 +22,33 @@ div.login, div.registration, div.package {
 	padding-top: 0.5em;
 }
 
-input[type="submit"] {
+div.package {
+	min-width: 100px;
+	width: auto;
+	display: inline-block;
+}
+
+div.package>*{
+	padding-right: 5px;
+}
+
+input[type="submit"], button {
 	background-color: orange;
 	border-style: inset;
 	border-color: orange;
+	border-radius: 5px;
 }
 
 a.noLog {
 	color: orange;
+}
+
+div.user {
+	text-align:right;
+	color: orange;
+	position: absolute;
+	right: 5px;
+	top:2px;
 }
 
 /*
