@@ -50,8 +50,8 @@ public class CheckLogin extends HttpServlet {
 			// give actual access to result page
 			if (user.getClass().equals(Client.class))
 				response.sendRedirect(getServletContext().getContextPath() + "/GetUserHomePage");
-			/*else if (user.getClass().equals(Employee.class))
-				response.sendRedirect(getServletContext().getContextPath() + "/GetEmployeeHomePage");*/
+			else if (user.getClass().equals(Employee.class))
+				response.sendRedirect(getServletContext().getContextPath() + "/GetEmployeeHomePage");
 			else {
 				String path = "/WEB-INF/OK.html";
 				ServletContext servletContext = getServletContext();

@@ -11,9 +11,9 @@ public class UserService {
 
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
-	
-	//method to get a client given the username and the password
-	//returns null if no user is found
+
+	// method to get a client given the username and the password
+	// returns null if no user is found
 	public Client getClient(String username, String password) {
 		TypedQuery<Client> query = em.createNamedQuery("Client.clientFromCredentials", Client.class);
 		query.setParameter(1, username);
@@ -26,9 +26,9 @@ public class UserService {
 		}
 		return result;
 	}
-	
-	//method to get an employee given the username and the password
-	//returns null if no user is found
+
+	// method to get an employee given the username and the password
+	// returns null if no user is found
 	public Employee getEmployee(String username, String password) {
 		TypedQuery<Employee> query = em.createNamedQuery("Employee.employeeFromCredentials", Employee.class);
 		query.setParameter(1, username);
@@ -41,6 +41,14 @@ public class UserService {
 		}
 		return result;
 	}
-	
-	
+
+	// method to add client given username,password,email
+	public void addClient(String username, String password, String email) {
+		Client client = new Client();
+		client.setUsername(username);
+		client.setPassword(password);
+		client.setEmail(email);
+		em.persist(client);
+	}
+
 }

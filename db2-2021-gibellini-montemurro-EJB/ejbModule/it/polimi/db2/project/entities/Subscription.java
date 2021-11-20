@@ -3,6 +3,7 @@ package it.polimi.db2.project.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -31,6 +32,12 @@ public class Subscription implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="ValidityPeriod")
 	private Validityperiod validityperiod;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="optionalsub",
+			   joinColumns=@JoinColumn(name="Subscription"),
+	           inverseJoinColumns=@JoinColumn(name="Product"))
+	private List<OptionalProduct> optionalProductsSub;
 
 	public Subscription() {
 	}

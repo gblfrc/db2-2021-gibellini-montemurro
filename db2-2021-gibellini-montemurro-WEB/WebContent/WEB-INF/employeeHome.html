@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome in your home page</title>
+</head>
+<body>
+	<div>
+		<h1>Create a service package</h1>
+		<form action="CreateServicePackage" method="POST">
+			<label> Name: <input type="text" name="name" required></label> <br> 
+			<h2>Choose services to add</h2>
+			<div class="allServices" th:remove="all-but-first">
+				<div class="service" th:each="service: ${services}">
+					<div><input type="checkbox" name="typeService" th:value="${service.id}">Type: <span th:text="${service.type}">Uruk Hai</span></div>
+					<div> Included GB: <span th:text="${service.includedGB}">Bilbo</span> </div>
+					<div> Extra GB Fee: <span th:text="${service.extraGBFee}">Gandalf</span> </div>
+					<div> Included SMS: <span th:text="${service.includedSMS}">Galadriel</span> </div>
+					<div> Extra SMS Fee: <span th:text="${service.extraSMSFee}">Aragorn</span> </div>
+					<div> Included Minutes: <span th:text="${service.includedMinutes}">Frodo</span> </div>
+					<div> Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">Sam</span> </div> <br>
+				</div>
+			</div> <br>
+			<h2>Choose optional products to add</h2>
+			<div class="allOptionalProducts" th:remove="all-but-first">
+				<div class="optionalProduct" th:each="optionalProduct: ${optionalProducts}">
+					<div><input type="checkbox" name="typeOptional" th:value="${optionalProduct.name}"> Name: <span th:text="${optionalProduct.name}">Uruk Hai</span> </div>
+					<div> MonthlyFee: <span th:text="${optionalProduct.monthlyFee}">Bilbo</span> </div><br>
+				</div>
+			</div>
+			<input type="submit" value="Create">
+		</form>
+	</div>
+	<div>
+		<h1>Create an optional product</h1>
+		<form action="CreateOptionalProduct" method="POST">
+			<label> Name: <input type="text" name="name" required></label> <br> 
+			<label> MonthlyFee: <input type="text" name="monthlyFee" required> </label><br><br> 
+			<input type="submit" value="Create">
+		</form>
+	</div>
+</body>
+</html>

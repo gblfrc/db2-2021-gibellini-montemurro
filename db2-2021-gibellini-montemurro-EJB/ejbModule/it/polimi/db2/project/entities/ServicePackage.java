@@ -25,6 +25,11 @@ public class ServicePackage implements Serializable {
 				inverseJoinColumns=@JoinColumn(name="Service"))
 	private List<Service> services;
 	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="optionalpack",
+			   joinColumns=@JoinColumn(name="Package"),
+	           inverseJoinColumns=@JoinColumn(name="Product"))
+	private List<OptionalProduct> optionalProductsSp;
 	
 	//getters
 	public int getId() {
@@ -39,6 +44,10 @@ public class ServicePackage implements Serializable {
 		return services;
 	}
 	
+	public List<OptionalProduct> getOptionalProducts(){
+		return optionalProductsSp;
+	}
+	
 	//setters
 	public void setId(int id) {
 		this.id = id;
@@ -46,6 +55,14 @@ public class ServicePackage implements Serializable {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setServices(List<Service> services){
+		this.services=services;
+	}
+	
+	public void setOptionalProducts(List<OptionalProduct> optionalProducts){
+		optionalProductsSp=optionalProducts;
 	}
 	
 	

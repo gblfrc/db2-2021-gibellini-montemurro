@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "service")
+@NamedQuery(name="Service.findAllServices", query="SELECT s FROM Service s")
 public class Service implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +30,10 @@ public class Service implements Serializable {
 	private List<ServicePackage> packages;
 
 	//getters
+	public int getId() {
+		return id;
+	}
+	
 	public String getType() {
 		return type;
 	}
