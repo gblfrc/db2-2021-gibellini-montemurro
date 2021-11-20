@@ -1,7 +1,5 @@
 package it.polimi.db2.project.entities;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity

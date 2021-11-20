@@ -12,7 +12,8 @@
 			<h2>Choose services to add</h2>
 			<div class="allServices" th:remove="all-but-first">
 				<div class="service" th:each="service: ${services}">
-					<div><input type="checkbox" name="typeService" th:value="${service.id}">Type: <span th:text="${service.type}">Uruk Hai</span></div>
+					<input type="checkbox" name="typeService" th:value="${service.id}">
+					<div>Type: <span th:text="${service.type}">Uruk Hai</span></div>
 					<div> Included GB: <span th:text="${service.includedGB}">Bilbo</span> </div>
 					<div> Extra GB Fee: <span th:text="${service.extraGBFee}">Gandalf</span> </div>
 					<div> Included SMS: <span th:text="${service.includedSMS}">Galadriel</span> </div>
@@ -24,7 +25,8 @@
 			<h2>Choose optional products to add</h2>
 			<div class="allOptionalProducts" th:remove="all-but-first">
 				<div class="optionalProduct" th:each="optionalProduct: ${optionalProducts}">
-					<div><input type="checkbox" name="typeOptional" th:value="${optionalProduct.name}"> Name: <span th:text="${optionalProduct.name}">Uruk Hai</span> </div>
+					<input type="checkbox" name="typeOptional" th:value="${optionalProduct.name}"> 
+					<div> Name: <span th:text="${optionalProduct.name}">Uruk Hai</span> </div>
 					<div> MonthlyFee: <span th:text="${optionalProduct.monthlyFee}">Bilbo</span> </div><br>
 				</div>
 			</div>
