@@ -11,32 +11,32 @@
 	<h1>Service packages</h1>
 	<div class="allPackages" th:remove="all-but-first">
 		<div class="package" th:each="package: ${packages}">
-			<div class="packageName" th:text="${package.name}">Sauron</div>
-			<br> Included services <br>
-			<br>
+			<div class="packageName" th:text="${package.name}">Simple
+				package</div>
+			<br> Included services <br> <br>
 			<div class="allServices" th:remove="all-but-first">
 				<ul>
 					<li class="service" th:each="service: ${package.services}">
 						<div>
-							Type: <span th:text="${service.type}">Uruk Hai</span>
+							Type: <span th:text="${service.type}">Mobile Phone</span>
 						</div>
 						<div th:if="${service.includedGB}!=0">
-							Included GB: <span th:text="${service.includedGB}">Bilbo</span>
+							Included GB: <span th:text="${service.includedGB}">0</span>
 						</div>
 						<div th:if="${service.includedGB}!=0">
-							Extra GB Fee: <span th:text="${service.extraGBFee}">Gandalf</span>
+							Extra GB Fee: <span th:text="${service.extraGBFee}">0</span>
 						</div>
 						<div th:if="${service.includedSMS}!=0">
-							Included SMS: <span th:text="${service.includedSMS}">Galadriel</span>
+							Included SMS: <span th:text="${service.includedSMS}">500</span>
 						</div>
 						<div th:if="${service.includedSMS}!=0">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}">Aragorn</span>
+							Extra SMS Fee: <span th:text="${service.extraSMSFee}">1</span>
 						</div>
 						<div th:if="${service.includedMinutes}!=0">
-							Included Minutes: <span th:text="${service.includedMinutes}">Frodo</span>
+							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
 						</div>
 						<div th:if="${service.includedMinutes}!=0">
-							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">Sam</span>
+							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">0</span>
 						</div> <br>
 					</li>
 				</ul>
@@ -45,5 +45,30 @@
 	</div>
 	<br>
 	<button>Buy a package</button>
+	<br>
+	<br>
+	<div class="allInvalidOrders" th:remove="all-but-first">
+		<div class="order" th:each="order: ${invOrders}">
+			<div>Rejected order</div>
+			<br>
+			<div>
+				Amount: <span th:text=${order.subscription.amount}> 500</span>
+			</div>
+			<div>
+				Creation date: <span th:text="${#dates.format(order.creationDate, 'dd-MM-yyyy')}">
+					16-02-2000</span>
+			</div>
+			<div>
+				Creation time: <span th:text="${order.creationTime}"> 00:00</span>
+			</div>
+		</div>
+		<div class="order">
+			<div>Rejected order</div>
+			<br>
+			<div>Amount: 500</div>
+			<div>Creation date: 03-04-1999</div>
+			<div>Creation time: 00:00</div>
+		</div>
+	</div>
 </body>
 </html>
