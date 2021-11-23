@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome in sales page</title>
+</head>
+<body>
+	<div>
+		<h1>Insolvent clients</h1>
+			<div class="allInsolvents" th:remove="all-but-first">
+				<div class="client" th:each="insolvent: ${insolvents}">
+					<div> Username: <span th:text="${insolvent.username}">Uruk Hai</span></div>
+					<div> Email: <span th:text="${insolvent.email}">Bilbo</span> </div> <br>
+				</div>
+			</div> <br>		
+	</div>
+</body>
+</html>

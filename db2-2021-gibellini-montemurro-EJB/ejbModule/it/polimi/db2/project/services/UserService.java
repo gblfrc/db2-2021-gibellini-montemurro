@@ -1,5 +1,7 @@
 package it.polimi.db2.project.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
@@ -49,6 +51,17 @@ public class UserService {
 		client.setPassword(password);
 		client.setEmail(email);
 		em.persist(client);
+	}
+	
+	public List<Client> findInsolvents(){
+		TypedQuery<Client> query = em.createNamedQuery("Client.getInsolventClients", Client.class);
+		List<Client> result;
+		try {
+			result = query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+		return result;
 	}
 
 }

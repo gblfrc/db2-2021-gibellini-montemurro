@@ -6,7 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "client")
-@NamedQuery(name="Client.clientFromCredentials", query="SELECT c FROM Client c WHERE c.username = ?1 and c.password = ?2")
+@NamedQueries({
+@NamedQuery(name="Client.clientFromCredentials", query="SELECT c FROM Client c WHERE c.username = ?1 and c.password = ?2"),
+@NamedQuery(name="Client.getInsolventClients", query="SELECT c FROM Client c WHERE c.insolvent=true"),
+})
 public class Client implements Serializable, User {
 
 	private static final long serialVersionUID = 1L;
