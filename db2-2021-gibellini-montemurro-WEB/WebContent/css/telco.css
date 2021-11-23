@@ -9,34 +9,52 @@ form {
 	display: inline-block;
 }
 
-div.login, div.registration, div.package, div.order {
+/* form:not(.onlyButton) is introduced to give the style to all forms
+   beside the ones which only contain a button */
+div.package, div.order, form:not(.onlyButton) {
 	background-color: coral;
 	width: 40%;
 	margin: 10 px;
 	border-style: inset;
 	border-color: orange;
-	border-radius: 10px; padding-top : 0.5em;
+	border-radius: 10px;
+	padding-top: 0.5em;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 	padding-bottom: 0.5em;
 	padding-top: 0.5em;
 }
 
-div.package, div.order {
+div.package, div.order{
 	min-width: 100px;
 	width: auto;
 	display: inline-block;
 }
 
-div.package>*{
+div.checkbox {
+	display: table-row;
+}
+
+div.package>* {
 	padding-right: 5px;
 }
 
 input[type="submit"], button {
 	background-color: orange;
-	border-style: inset;
+	border-style: outset;
 	border-color: orange;
 	border-radius: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	cursor: pointer;
+}
+
+input[name="startDay"], input[name="startMonth"] {
+	width: 12%;
+}
+
+input[name="startYear"]{
+	width: 20%;
 }
 
 a.noLog {
@@ -44,23 +62,9 @@ a.noLog {
 }
 
 div.user {
-	text-align:right;
+	text-align: right;
 	color: orange;
 	position: absolute;
 	right: 5px;
-	top:2px;
+	top: 2px;
 }
-
-/*
-input[type="submit"], input[type="button"], button {
-	background-color: LightSkyBlue;
-	display: inline-block;
-	border-radius: 4px;
-	border-style: outset;
-	border-color: LightSkyBlue;
-	cursor: pointer;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	padding-left: 8px;
-	padding-right: 8px;
-}*/

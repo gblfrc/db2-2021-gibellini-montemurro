@@ -8,16 +8,13 @@
 </head>
 <body>
 	<h1>Welcome to Telco services project</h1>
-	<div class="login">
 		<form action="CheckLogin" method="POST">
 			<label> Username: <input type="text" name="username" required>
 			</label> <br> <label> Password: <input type="password"
 				name="password" required>
 			</label><br> <br> <input type="submit" value="Login">
 		</form>
-	</div>
-	<br>
-	<div class="login">
+	<br> <br>
 		<form action="Register" method="POST">
 			<label> Username: <input type="text" name="username" required>
 			</label> <label> E-mail: <input type="text" name="email" required>
@@ -25,7 +22,7 @@
 				name="password" required>
 			</label><br> <br> <input type="submit" value="Register">
 		</form>
-	</div>
+		<br>
 	<br>
 	<a class="noLog" href="index.html" th:href="@{/GetUserHomePage}">Enter without logging</a>
 </body>
