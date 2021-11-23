@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/telco.css" th:href="@{/css/telco.css}" />
+<title>Subscription confirmation</title>
+</head>
+<body>
+	<h1>Subscription data</h1>
+	<div class="subData">
+		<p>
+			Subscription ID: <span th:text="${sub.id}"> 404 </span>
+		</p>
+		<p>
+			Amount to pay: <span th:text="${sub.amount}"> 404 </span> €
+		</p>
+		<p>
+			Service package: <span th:text="${sub.package_}"> Basic </span>
+		</p>
+		<p>
+			Activation date: <span
+				th:text="${#dates.format(sub.startDate, 'dd-MM-yyyy')}">
+				03-04-1999 </span>
+		</p>
+		<p>
+			Deactivation date: <span
+				th:text="${#dates.format(deactivationDate, 'dd-MM-yyyy')}">
+				16-02-2000 </span>
+		</p>
+		<p>Optional products: 
+		<ul th:remove="all-but-first">
+			<li th:each="product: ${sub.optionalProductsSub}"
+				th:text="${product.name}">Product 1</li>
+			<li>Product 2</li>
+			<li>Product 3</li>
+		</ul>
+		</p>
+		<form class="onlyButton">
+			<!-- SET ACTION ATTRIBUTE TO FORM AS SOON AS IT IS AVAILABLE -->
+			<input type="submit" value="Confirm">
+		</form>
+	</div>
+</body>
+</html>

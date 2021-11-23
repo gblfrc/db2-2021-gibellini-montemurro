@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.entities.ValidityPeriod;
@@ -89,13 +90,24 @@ public class CreateSubscription extends HttpServlet {
 		}
 		sub.setAmount(amount);
 		
-		//give access to actual home page which should show the packages
-		//String path = "/WEB-INF/prova.html";
-		//ServletContext servletContext = getServletContext();
-		//final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		//ctx.setVariable("sub", sub);
-		//templateEngine.process(path, ctx, response.getWriter());
-
+		//save subscription in session
+		request.getSession().setAttribute("subscription", sub);
+		
+		//get user and, if null, redirect to login
+		Client client = (Client) request.getSession().getAttribute("user");
+		if(client == null) {
+			response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");
+			return;
+		}
+		
+		//user is not null; link to subscription
+		sub.setUser(client);
+		
+		//STILL NEED TO ENTER PART TO PERSIST SUBSCRIPTION OBJECT
+		
+		//redirect to get confirmation page
+		response.sendRedirect(getServletContext().getContextPath() + "/GetConfirmationPage");
+		
 	}
 
 }
