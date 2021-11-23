@@ -24,6 +24,16 @@ public class SpService {
 		return result;
 	}
 	
+	/**
+	 * Method to retrieve a package given its id (primary key)
+	 * @param id is the id of the package to find
+	 * @return is the package whose id is the given one
+	 * MAY BE USELESS, NEVER USED
+	 */
+	public ServicePackage getServicePackageById(int id) {
+		return em.find(ServicePackage.class, id);
+	}
+	
 	/*
 	 * This method adds a service package
 	 */

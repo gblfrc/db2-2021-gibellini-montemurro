@@ -6,8 +6,8 @@ import java.util.List;
 
 
 @Entity
-@NamedQuery(name="Validityperiod.findAll", query="SELECT v FROM Validityperiod v")
-public class Validityperiod implements Serializable {
+@NamedQuery(name="ValidityPeriod.findAll", query="SELECT v FROM ValidityPeriod v")
+public class ValidityPeriod implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -19,7 +19,7 @@ public class Validityperiod implements Serializable {
 	@OneToMany(mappedBy="validityperiod")
 	private List<Subscription> subscriptions;
 
-	public Validityperiod() {
+	public ValidityPeriod() {
 	}
 
 	public int getMonths() {

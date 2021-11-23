@@ -32,7 +32,7 @@ public class Subscription implements Serializable {
 	//bi-directional many-to-one association to Validityperiod
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ValidityPeriod")
-	private Validityperiod validityperiod;
+	private ValidityPeriod validityperiod;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="optionalsub",
@@ -81,12 +81,20 @@ public class Subscription implements Serializable {
 		this.user = user;
 	}
 
-	public Validityperiod getValidityperiod() {
+	public ValidityPeriod getValidityperiod() {
 		return this.validityperiod;
 	}
 
-	public void setValidityperiod(Validityperiod validityperiod) {
+	public void setValidityperiod(ValidityPeriod validityperiod) {
 		this.validityperiod = validityperiod;
+	}
+	
+	public void setOptionalProductsSub(List<OptionalProduct> products) {
+		this.optionalProductsSub = products;
+	}
+	
+	public List<OptionalProduct> getOptionalProductsSub(){
+		return optionalProductsSub;
 	}
 
 }

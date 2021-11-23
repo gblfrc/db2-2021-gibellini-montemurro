@@ -35,6 +35,7 @@ public class OptService {
 	
 	/*
 	 * This method finds all the optional products selected
+	 * WHY NOT USING A LIST INSTEAD OF AN ARRAY?
 	 */
 	public List<OptionalProduct> findProductsSelected(String[] optProdList){
 		List<OptionalProduct> optionals=new ArrayList<OptionalProduct>();
