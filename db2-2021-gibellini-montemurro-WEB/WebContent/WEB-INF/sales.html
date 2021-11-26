@@ -6,13 +6,77 @@
 </head>
 <body>
 	<div>
-		<h1>Insolvent clients</h1>
-			<div class="allInsolvents" th:remove="all-but-first">
-				<div class="client" th:each="insolvent: ${insolvents}">
-					<div> Username: <span th:text="${insolvent.username}">Uruk Hai</span></div>
-					<div> Email: <span th:text="${insolvent.email}">Bilbo</span> </div> <br>
+		<h1>Total Purchases</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="sale: ${allSales}">
+				<div>
+					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
 				</div>
-			</div> <br>		
+				<div>
+					Total Number of purchases: <span th:text="${sale[1]}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Total Purchases per validity period</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="sale: ${allSalesPerValidityAndPackage}">
+				<div>
+					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
+				</div>
+				<div>
+					Validity Period: <span th:text="${sale[1]}">Bilbo</span>
+				</div>
+				<div>
+					Total Number of purchases: <span th:text="${sale[2]}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Total Amount per package with optional product</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="sale: ${salesAmountWithOpt}">
+				<div>
+					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
+				</div>
+				<div>
+					Total Amount: <span th:text="${sale[1]}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Insolvent clients</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="insolvent: ${insolvents}">
+				<div>
+					Username: <span th:text="${insolvent.username}">Uruk Hai</span>
+				</div>
+				<div>
+					Email: <span th:text="${insolvent.email}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Suspended orders</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="order: ${suspendedOrders}">
+				<div>
+					ID: <span th:text="${order.id}">Uruk Hai</span>
+				</div>
+				<div>
+					Creation date: <span th:text="${order.creationDate}">Bilbo</span>
+				</div>
+				<div>
+					Creation time: <span th:text="${order.creationTime}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
 	</div>
 </body>
 </html>

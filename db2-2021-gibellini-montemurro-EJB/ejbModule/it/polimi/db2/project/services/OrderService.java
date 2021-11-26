@@ -28,4 +28,49 @@ public class OrderService {
 		}
 		return result;
 	}
+	
+	public List<Object[]> findAllPurchasesPerPackage() {
+		TypedQuery<Object[]> query = em.createNamedQuery("Order.findPurchasesPerPackage", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Object[]> findAllPurchasesPerPackageAndValidityPeriod() {
+		TypedQuery<Object[]> query = em.createNamedQuery("Order.findPurchasesPerPackageAndValidityPeriod", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Object[]> getAmountWithOpt(){
+		TypedQuery<Object[]> query = em.createNamedQuery("Order.amountWithOptional", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Order> getSuspendedOrders(){
+		TypedQuery<Order> query = em.createNamedQuery("Order.suspendedOrders", Order.class);
+		List<Order> result;
+		try {
+			result = query.getResultList();
+		} catch (NoResultException e) {
+			return result=new LinkedList<>();
+		}
+		return result;
+	}
+	
 }

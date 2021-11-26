@@ -11,6 +11,10 @@ import java.util.Date;
 @NamedQueries({
 	@NamedQuery(name="Order.findAllByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1"),
 	@NamedQuery(name="Order.findAllInvalidByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1 and o.validity = false"),
+	@NamedQuery(name="Order.findPurchasesPerPackage", query="SELECT o.subscription.package_,count (o) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_"),
+	@NamedQuery(name="Order.findPurchasesPerPackageAndValidityPeriod", query="SELECT o.subscription.package_,o.subscription.validityperiod.months,count (o) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_,o.subscription.validityperiod.months"),
+	@NamedQuery(name="Order.amountWithOptional",query="SELECT o.subscription.package_,sum(o.subscription.amount) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_"),
+	@NamedQuery(name="Order.suspendedOrders",query="SELECT o FROM Order o WHERE o.validity=false"),
 })
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
