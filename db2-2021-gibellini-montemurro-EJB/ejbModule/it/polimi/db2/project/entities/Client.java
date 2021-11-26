@@ -9,6 +9,7 @@ import javax.persistence.*;
 @NamedQueries({
 @NamedQuery(name="Client.clientFromCredentials", query="SELECT c FROM Client c WHERE c.username = ?1 and c.password = ?2"),
 @NamedQuery(name="Client.getInsolventClients", query="SELECT c FROM Client c WHERE c.insolvent=true"),
+@NamedQuery(name="Client.getAlerts", query="SELECT c FROM Order o INNER JOIN o.subscription.user c GROUP BY c.username HAVING sum(o.refusedPayments)>=3 "),
 })
 public class Client implements Serializable, User {
 

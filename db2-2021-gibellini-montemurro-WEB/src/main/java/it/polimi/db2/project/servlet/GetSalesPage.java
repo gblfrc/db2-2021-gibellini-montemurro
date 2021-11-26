@@ -51,8 +51,9 @@ public class GetSalesPage extends HttpServlet {
 		List<Object[]> salesAmountWithOpt=orderService.getAmountWithOpt();
 		List<Client> insolvents= uService.findInsolvents();
 		List<Order> suspendedOrders= orderService.getSuspendedOrders();
-		
-		
+		Object bestSeller=orderService.findBestSeller();
+		List<Client> alerts= uService.findAlerts();
+
 		String path = "/WEB-INF/sales.html";
 		ServletContext servletContext = getServletContext();
 		
@@ -62,6 +63,8 @@ public class GetSalesPage extends HttpServlet {
 		ctx.setVariable("salesAmountWithOpt", salesAmountWithOpt);
 		ctx.setVariable("insolvents", insolvents);
 		ctx.setVariable("suspendedOrders", suspendedOrders);
+		ctx.setVariable("bestSeller", bestSeller);
+		ctx.setVariable("alerts", alerts);
 
 		templateEngine.process(path, ctx, response.getWriter());
 	}

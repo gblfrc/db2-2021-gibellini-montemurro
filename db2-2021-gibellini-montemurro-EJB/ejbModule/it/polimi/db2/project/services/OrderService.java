@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Order;
 
 @Stateless
@@ -73,4 +74,14 @@ public class OrderService {
 		return result;
 	}
 	
+	public Object findBestSeller() {
+		TypedQuery<Object> query = em.createNamedQuery("Order.getBestSeller", Object.class);
+		Object result;
+		try {
+			result = query.getResultList().get(0);
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
 }
