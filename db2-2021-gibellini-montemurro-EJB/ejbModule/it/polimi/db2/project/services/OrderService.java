@@ -7,8 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import it.polimi.db2.project.entities.Client;
-import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Order;
+import it.polimi.db2.project.entities.Subscription;
 
 @Stateless
 public class OrderService {
@@ -83,5 +83,16 @@ public class OrderService {
 			return result=null;
 		}
 		return result;
+	}
+	
+	public Order getOrderBySubscription(Subscription sub) {
+		TypedQuery<Order> query = em.createNamedQuery("Order.findBySubscription", Order.class);
+		query.setParameter("sub", sub);
+		Order result = query.getSingleResult(); 
+		return result;
+	}
+	
+	public void persistOrder(Order order) {
+		em.persist(order);
 	}
 }

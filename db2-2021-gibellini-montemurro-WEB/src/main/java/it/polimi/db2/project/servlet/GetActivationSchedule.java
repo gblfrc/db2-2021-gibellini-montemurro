@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
-import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.SubService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
-@WebServlet("/GetConfirmationPage")
-public class GetConfirmationPage extends HttpServlet {
+@WebServlet("/GetActivationSchedule")
+public class GetActivationSchedule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	TemplateEngine templateEngine;
@@ -41,22 +41,24 @@ public class GetConfirmationPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//fetch subscription object
+		//fetch subscription object and remove it from session
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
+		request.getSession().removeAttribute("subscription");
 		
-		//check the sub has a client, if not try to set it
-		Client client = sub.getUser();
-		if (client == null) {
-			client = (Client)request.getSession().getAttribute("user");
-			if (client != null) sub.setUser(client);
-		}
+		//fetch order object and remove it from session
+		Order order = (Order)request.getSession().getAttribute("order");
+		request.getSession().removeAttribute("order");
 		
-		//give access to actual home page which should show the packages
-		String path = "/WEB-INF/confirmation.html";
+		//get deactivation date (needed for template)
+		Date deactivationDate = sub.getDeactivationDate();
+			
+		//give access to actual home page which should show the activation schedule
+		String path = "/WEB-INF/activationSchedule.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("sub", sub);
-		ctx.setVariable("client", client);
+		ctx.setVariable("order", order);
+		ctx.setVariable("deactivationDate", deactivationDate);
 		templateEngine.process(path, ctx, response.getWriter());
 
 	}

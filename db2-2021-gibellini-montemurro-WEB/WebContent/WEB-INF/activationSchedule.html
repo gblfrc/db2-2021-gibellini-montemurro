@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" media="all"
 	href="../css/telco.css" th:href="@{/css/telco.css}" />
-<title>Subscription confirmation</title>
+<title>Activation schedule</title>
 </head>
 <body>
 	<h1>Subscription data</h1>
 	<div class="subData">
+		<p>
+			Order ID: <span th:text="${order.id}"> 404 </span>
+		</p>
 		<p>
 			Service package: <span th:text="${sub.package_}"> Basic </span>
 		</p>
@@ -18,8 +21,9 @@
 				03-04-1999 </span>
 		</p>
 		<p>
-			Validity period: <span th:text="${sub.validityPeriod.months}">
-				12 </span>
+			Deactivation date: <span
+				th:text="${#dates.format(deactivationDate, 'dd-MM-yyyy')}">
+				16-02-2000 </span>
 		</p>
 		<p>Optional products:
 		<ul th:remove="all-but-first">
@@ -29,20 +33,7 @@
 			<li>Product 3</li>
 		</ul>
 		<p>
-			Amount to pay: <span th:text="${sub.amount}"> 404 </span> €
-		</p>
-
-		<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null" method="POST">
-		<input type="hidden" name="fail" value="false">
-			<input type="submit" value="Buy - no failure">
-		</form>
-		<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null" method="POST">
-		<input type="hidden" name="fail" value="true">
-			<input type="submit" value="Buy but fail payment">
-		</form>
-
-		<p th:if="${client}==null">
-			<a href="GetLogin">Log in/register to purchase</a>
+			Paid amount: <span th:text="${sub.amount}"> 404 </span> €
 		</p>
 	</div>
 </body>
