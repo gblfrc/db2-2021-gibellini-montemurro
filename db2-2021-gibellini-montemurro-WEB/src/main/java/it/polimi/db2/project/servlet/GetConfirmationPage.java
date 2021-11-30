@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.entities.ValidityPeriod;
@@ -51,18 +52,23 @@ public class GetConfirmationPage extends HttpServlet {
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
-		//create deactivation date object
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(sub.getStartDate());
-		calendar.add(Calendar.MONTH, sub.getValidityperiod().getMonths());
-		Date deactivationDate = calendar.getTime();
-				
+		//get deactivation date (needed for template)
+		Date deactivationDate = sub.getDeactivationDate();
+			
+		//check the sub has a client, if not try to set it
+		Client client = sub.getUser();
+		if (client == null) {
+			client = (Client)request.getSession().getAttribute("user");
+			if (client != null) sub.setUser(client);
+		}
+		
 		//give access to actual home page which should show the packages
 		String path = "/WEB-INF/confirmation.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("sub", sub);
 		ctx.setVariable("deactivationDate", deactivationDate);
+		ctx.setVariable("client", client);
 		templateEngine.process(path, ctx, response.getWriter());
 
 	}

@@ -2,6 +2,8 @@ package it.polimi.db2.project.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -97,4 +99,11 @@ public class Subscription implements Serializable {
 		return optionalProductsSub;
 	}
 
+	public Date getDeactivationDate() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getStartDate());
+		calendar.add(Calendar.MONTH, getValidityperiod().getMonths());
+		return calendar.getTime();
+	}
+	
 }

@@ -93,16 +93,6 @@ public class CreateSubscription extends HttpServlet {
 		//save subscription in session
 		request.getSession().setAttribute("subscription", sub);
 		
-		//get user and, if null, redirect to login
-		Client client = (Client) request.getSession().getAttribute("user");
-		if(client == null) {
-			response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");
-			return;
-		}
-		
-		//user is not null; link to subscription
-		sub.setUser(client);
-		
 		//STILL NEED TO ENTER PART TO PERSIST SUBSCRIPTION OBJECT
 		
 		//redirect to get confirmation page

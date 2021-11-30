@@ -35,7 +35,7 @@ public class CheckLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// fetch user
 		// try client first
 		User user;
@@ -45,11 +45,18 @@ public class CheckLogin extends HttpServlet {
 		}
 
 		if (user != null) {
-			//save user in session
+			// save user in session
 			request.getSession().setAttribute("user", user);
 			// give actual access to result page
-			if (user.getClass().equals(Client.class))
-				response.sendRedirect(getServletContext().getContextPath() + "/GetUserHomePage");
+			if (user.getClass().equals(Client.class)) {
+				//check if the user has already tried to create a sub
+				//in that case send back to confirmation page
+				if (request.getSession().getAttribute("subscription") != null) {
+					response.sendRedirect(getServletContext().getContextPath() + "/GetConfirmationPage");
+				}
+				//if the user hasn't created a sub (i.e. he's come here from starting login) send to home page
+				else response.sendRedirect(getServletContext().getContextPath() + "/GetUserHomePage");
+			}
 			else if (user.getClass().equals(Employee.class))
 				response.sendRedirect(getServletContext().getContextPath() + "/GetEmployeeHomePage");
 			else {
@@ -60,8 +67,7 @@ public class CheckLogin extends HttpServlet {
 				ctx.setVariable("email", user.getEmail());
 				templateEngine.process(path, ctx, response.getWriter());
 			}
-		}
-		else {
+		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Non-existent user for given credentials");
 		}
 
