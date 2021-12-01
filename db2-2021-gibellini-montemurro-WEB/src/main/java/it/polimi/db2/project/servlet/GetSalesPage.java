@@ -52,7 +52,7 @@ public class GetSalesPage extends HttpServlet {
 		List<Client> insolvents= uService.findInsolvents();
 		List<Order> suspendedOrders= orderService.getSuspendedOrders();
 		Object bestSeller=orderService.findBestSeller();
-		List<Client> alerts= uService.findAlerts();
+		List<Object[]> alerts=orderService.findAlerts();
 
 		String path = "/WEB-INF/sales.html";
 		ServletContext servletContext = getServletContext();

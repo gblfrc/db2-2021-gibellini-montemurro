@@ -6,6 +6,7 @@
 	<persistence-unit name="ProjectEJB"
 		transaction-type="JTA">
 		<jta-data-source>ProjectDB</jta-data-source>
+		<class>it.polimi.db2.project.entities.AuditingTable</class>
 		<class>it.polimi.db2.project.entities.Client</class>
 		<class>it.polimi.db2.project.entities.Employee</class>
 		<class>it.polimi.db2.project.entities.OptionalProduct</class>

@@ -83,10 +83,13 @@
 		<div class="allInsolvents" th:remove="all-but-first">
 			<div class="client" th:each="alert: ${alerts}">
 				<div>
-					Username: <span th:text="${alert.username}">Uruk Hai</span>
+					Order: <span th:text="${alert[0]}">Uruk Hai</span>
 				</div>
 				<div>
-					Email: <span th:text="${alert.email}">Bilbo</span>
+					RejectionDate: <span th:text="${alert[1]}">Bilbo</span>
+				</div>
+				<div>
+					RejectionTime: <span th:text="${alert[2]}">Bilbo</span>
 				</div>
 				<br>
 			</div>

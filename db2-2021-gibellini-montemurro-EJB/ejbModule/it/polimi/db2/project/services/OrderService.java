@@ -85,6 +85,17 @@ public class OrderService {
 		return result;
 	}
 	
+	public List<Object[]> findAlerts() {
+		TypedQuery<Object[]> query = em.createNamedQuery("AuditingTable.findAlerts", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
 	public Order getOrderBySubscription(Subscription sub) {
 		TypedQuery<Order> query = em.createNamedQuery("Order.findBySubscription", Order.class);
 		query.setParameter("sub", sub);

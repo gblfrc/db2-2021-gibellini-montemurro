@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/telco.css" th:href="@{/css/telco.css}" />
 <title>Welcome in your home page</title>
 </head>
 <body>
@@ -41,6 +43,7 @@
 			<input type="submit" value="Create">
 		</form>
 	</div>
+	<br>
 	<form action="GetSalesPage" method="GET"><input type="submit" value="See sales">
 	</form>
 </body>

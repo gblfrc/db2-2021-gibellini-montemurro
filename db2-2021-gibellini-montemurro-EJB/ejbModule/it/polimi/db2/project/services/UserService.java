@@ -64,15 +64,4 @@ public class UserService {
 		return result;
 	}
 	
-	public List<Client> findAlerts() {
-		TypedQuery<Client> query = em.createNamedQuery("Client.getAlerts", Client.class);
-		List<Client> result;
-		try {
-			result = query.getResultList();
-		} catch (NoResultException e) {
-			return result=null;
-		}
-		return result;
-	}
-
 }
