@@ -10,7 +10,7 @@
 	<div>
 		<h1>Total Purchases</h1>
 		<div class="allInsolvents" th:remove="all-but-first">
-			<div class="client" th:each="sale: ${allSales}">
+			<div class="client" th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
 				</div>
@@ -25,13 +25,26 @@
 		<div class="allInsolvents" th:remove="all-but-first">
 			<div class="client" th:each="sale: ${allSalesPerValidityAndPackage}">
 				<div>
+					Id package: <span th:text="${sale.id_package}">Uruk Hai</span>
+				</div>
+				<div>
+					Validity Period: <span th:text="${sale.months}">Bilbo</span>
+				</div>
+				<div>
+					Total Number of purchases: <span th:text="${sale.totPurchase}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Total Amount per package without optional product</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="sale: ${allSalesDataPerPackage}">
+				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
 				</div>
 				<div>
-					Validity Period: <span th:text="${sale[1]}">Bilbo</span>
-				</div>
-				<div>
-					Total Number of purchases: <span th:text="${sale[2]}">Bilbo</span>
+					Total Amount: <span th:text="${sale[2]}">Bilbo</span>
 				</div>
 				<br>
 			</div>
@@ -39,12 +52,25 @@
 		<br>
 		<h1>Total Amount per package with optional product</h1>
 		<div class="allInsolvents" th:remove="all-but-first">
-			<div class="client" th:each="sale: ${salesAmountWithOpt}">
+			<div class="client" th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
 				</div>
 				<div>
-					Total Amount: <span th:text="${sale[1]}">Bilbo</span>
+					Total Amount: <span th:text="${sale[3]}">Bilbo</span>
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<h1>Average Number Of Optional Product</h1>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="sale: ${allSalesDataPerPackage}">
+				<div>
+					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
+				</div>
+				<div>
+					AvgNumberOfOpt: <span th:text="${sale[4]}/${sale[1]}">Bilbo</span>
 				</div>
 				<br>
 			</div>
@@ -83,22 +109,36 @@
 		<div class="allInsolvents" th:remove="all-but-first">
 			<div class="client" th:each="alert: ${alerts}">
 				<div>
-					Order: <span th:text="${alert[0]}">Uruk Hai</span>
+					Username: <span th:text="${alert[0]}">Uruk Hai</span>
 				</div>
 				<div>
-					RejectionDate: <span th:text="${alert[1]}">Bilbo</span>
+					Email: <span th:text="${alert[1]}">Bilbo</span>
 				</div>
 				<div>
-					RejectionTime: <span th:text="${alert[2]}">Bilbo</span>
+					Amount: <span th:text="${alert[2]}">Bilbo</span>
+				</div>
+				<div>
+					Rejection Date: <span th:text="${alert[3]}">Bilbo</span>
+				</div>
+				<div>
+					Rejection Time: <span th:text="${alert[4]}">Bilbo</span>
 				</div>
 				<br>
 			</div>
 		</div>
 		<br>
 		<h1>Best seller</h1>
-	        <div>
-				Name: <span th:text="${bestSeller}">Uruk Hai</span>
+		<div class="allInsolvents" th:remove="all-but-first">
+			<div class="client" th:each="best: ${bestSeller}">
+				<div>
+					Optional product: <span th:text="${best.id_optprod}">Uruk Hai</span>
+				</div>
+				<div>
+					Total revenue: <span th:text="${best.tot_revenue}">Bilbo</span>
+				</div>
+				<br>
 			</div>
+		</div>
 		<br>
 	</div>
 </body>

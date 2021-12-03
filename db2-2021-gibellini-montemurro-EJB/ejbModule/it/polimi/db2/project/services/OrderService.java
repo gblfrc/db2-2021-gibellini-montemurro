@@ -29,40 +29,7 @@ public class OrderService {
 		}
 		return result;
 	}
-	
-	public List<Object[]> findAllPurchasesPerPackage() {
-		TypedQuery<Object[]> query = em.createNamedQuery("Order.findPurchasesPerPackage", Object[].class);
-		List<Object[]> result;
-		try {
-			result =query.getResultList();
-		} catch (NoResultException e) {
-			return result=null;
-		}
-		return result;
-	}
-	
-	public List<Object[]> findAllPurchasesPerPackageAndValidityPeriod() {
-		TypedQuery<Object[]> query = em.createNamedQuery("Order.findPurchasesPerPackageAndValidityPeriod", Object[].class);
-		List<Object[]> result;
-		try {
-			result =query.getResultList();
-		} catch (NoResultException e) {
-			return result=null;
-		}
-		return result;
-	}
-	
-	public List<Object[]> getAmountWithOpt(){
-		TypedQuery<Object[]> query = em.createNamedQuery("Order.amountWithOptional", Object[].class);
-		List<Object[]> result;
-		try {
-			result =query.getResultList();
-		} catch (NoResultException e) {
-			return result=null;
-		}
-		return result;
-	}
-	
+
 	public List<Order> getSuspendedOrders(){
 		TypedQuery<Order> query = em.createNamedQuery("Order.suspendedOrders", Order.class);
 		List<Order> result;
@@ -70,17 +37,6 @@ public class OrderService {
 			result = query.getResultList();
 		} catch (NoResultException e) {
 			return result=new LinkedList<>();
-		}
-		return result;
-	}
-	
-	public Object findBestSeller() {
-		TypedQuery<Object> query = em.createNamedQuery("Order.getBestSeller", Object.class);
-		Object result;
-		try {
-			result = query.getResultList().get(0);
-		} catch (NoResultException e) {
-			return result=null;
 		}
 		return result;
 	}

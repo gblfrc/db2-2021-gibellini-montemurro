@@ -17,8 +17,12 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.MvOptProd;
+import it.polimi.db2.project.entities.MvPackage;
 import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.ServicePackage;
+import it.polimi.db2.project.services.MvOptProdService;
+import it.polimi.db2.project.services.MvPackageService;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.ServService;
 import it.polimi.db2.project.services.SpService;
@@ -39,32 +43,34 @@ public class GetSalesPage extends HttpServlet {
 	private SpService spService;
 	@EJB
 	private OrderService orderService;  	
+	@EJB
+	private MvPackageService mvPackageService;  
+	@EJB
+	private MvOptProdService mvOptProdService;  
 	
 	public void init() throws ServletException {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		List<ServicePackage> packages=spService.getAllPackages();
-		List<Object[]> allSales= orderService.findAllPurchasesPerPackage();
-		List<Object[]> allSalesPerValidityAndPackage= orderService.findAllPurchasesPerPackageAndValidityPeriod();
-		List<Object[]> salesAmountWithOpt=orderService.getAmountWithOpt();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {					
+		List<Object[]> allSalesDataPerPackage=mvPackageService.findAllPurchasesPerPackage();
+		List<MvPackage> allSalesPerValidityAndPackage= mvPackageService.findAllPurchasesPerPackageAndValidityPeriod();
 		List<Client> insolvents= uService.findInsolvents();
 		List<Order> suspendedOrders= orderService.getSuspendedOrders();
-		Object bestSeller=orderService.findBestSeller();
 		List<Object[]> alerts=orderService.findAlerts();
+		List<MvOptProd> bestSeller=mvOptProdService.findBestSeller();
 
 		String path = "/WEB-INF/sales.html";
 		ServletContext servletContext = getServletContext();
 		
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		ctx.setVariable("allSales", allSales);
+			
+		ctx.setVariable("allSalesDataPerPackage", allSalesDataPerPackage);
 		ctx.setVariable("allSalesPerValidityAndPackage", allSalesPerValidityAndPackage);
-		ctx.setVariable("salesAmountWithOpt", salesAmountWithOpt);
 		ctx.setVariable("insolvents", insolvents);
 		ctx.setVariable("suspendedOrders", suspendedOrders);
-		ctx.setVariable("bestSeller", bestSeller);
 		ctx.setVariable("alerts", alerts);
+		ctx.setVariable("bestSeller", bestSeller);
 
 		templateEngine.process(path, ctx, response.getWriter());
 	}

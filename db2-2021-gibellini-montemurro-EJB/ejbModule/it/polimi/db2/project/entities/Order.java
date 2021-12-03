@@ -12,12 +12,7 @@ import java.util.Date;
 	@NamedQuery(name="Order.findAllByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1"),
 	@NamedQuery(name="Order.findAllInvalidByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1 and o.validity = false"),
 	@NamedQuery(name="Order.findBySubscription", query="SELECT o FROM Order o WHERE o.subscription = :sub"),
-	@NamedQuery(name="Order.findPurchasesPerPackage", query="SELECT o.subscription.package_,count (o) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_"),
-	@NamedQuery(name="Order.findPurchasesPerPackageAndValidityPeriod", query="SELECT o.subscription.package_,o.subscription.validityperiod.months,count (o) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_,o.subscription.validityperiod.months"),
-	@NamedQuery(name="Order.amountWithOptional",query="SELECT o.subscription.package_,sum(o.subscription.amount) FROM Order o WHERE o.validity=true GROUP BY o.subscription.package_"),
 	@NamedQuery(name="Order.suspendedOrders",query="SELECT o FROM Order o WHERE o.validity=false"),
-	@NamedQuery(name="Order.getBestSeller", query="SELECT opt.name FROM Order o INNER JOIN o.subscription.optionalProductsSub opt WHERE o.validity=true GROUP BY opt.name HAVING count(o) >= ALL(SELECT count(o1) FROM Order o1 INNER JOIN o1.subscription.optionalProductsSub opt1 WHERE o1.validity=true GROUP BY opt1.name) "),
-
 })
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;

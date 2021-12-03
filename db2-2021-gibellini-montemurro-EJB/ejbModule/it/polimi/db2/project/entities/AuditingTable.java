@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "auditingtable")
-@NamedQuery(name="AuditingTable.findAlerts", query="SELECT a, o, c FROM AuditingTable a, Order o, Client c WHERE a.order=o.id AND o.subscription.user.username=c.username")
+@NamedQuery(name="AuditingTable.findAlerts", query="SELECT c.username, c.email, o.subscription.amount, a.rejectionDate, a.rejectionTime FROM AuditingTable a, Order o, Client c WHERE a.order=o.id AND o.subscription.user.username=c.username")
 public class AuditingTable {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,5 +34,15 @@ public class AuditingTable {
 	public Time getRejectionTime(){
 		return rejectionTime;
 	}
+	
+	//setters
+	public void setRejectionDate(Date date){
+		rejectionDate=date;
+	}
+	
+	public void setRejectionTime(Time time){
+		rejectionTime=time;
+	}
+	
 	
 }
