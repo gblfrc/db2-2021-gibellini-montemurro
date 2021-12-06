@@ -20,6 +20,7 @@ import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
+import it.polimi.db2.project.utils.Error;
 
 @WebServlet("/GetBuyPage")
 public class GetBuyPage extends HttpServlet {
@@ -51,6 +52,7 @@ public class GetBuyPage extends HttpServlet {
 		String path = "/WEB-INF/buy.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("error", (Error)request.getAttribute("error"));
 		ctx.setVariable("packages", packages);
 		ctx.setVariable("user", user);
 		ctx.setVariable("products", products);
@@ -59,7 +61,7 @@ public class GetBuyPage extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		doGet(request, response);
 	}
 
 }

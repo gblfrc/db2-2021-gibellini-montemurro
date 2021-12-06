@@ -79,4 +79,5 @@
 			</div>
 		</div>
 	</div>
+	<p class="error" th:if="${error}!=null" th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>

@@ -1,6 +1,7 @@
 package it.polimi.db2.project.entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class ServicePackage implements Serializable {
 	@JoinTable(name="optionalpack",
 			   joinColumns=@JoinColumn(name="Package"),
 	           inverseJoinColumns=@JoinColumn(name="Product"))
-	private List<OptionalProduct> optionalProductsSp;
+	private List<OptionalProduct> optionalProducts;
 	
 	//getters
 	public int getId() {
@@ -45,7 +46,7 @@ public class ServicePackage implements Serializable {
 	}
 	
 	public List<OptionalProduct> getOptionalProducts(){
-		return optionalProductsSp;
+		return optionalProducts;
 	}
 	
 	//setters
@@ -62,8 +63,16 @@ public class ServicePackage implements Serializable {
 	}
 	
 	public void setOptionalProducts(List<OptionalProduct> optionalProducts){
-		optionalProductsSp=optionalProducts;
+		this.optionalProducts=optionalProducts;
 	}
 	
+	public boolean hasAllProducts(List<String> productsToCheck) {
+		List<String> allProducts = new LinkedList<>();
+		for(OptionalProduct op : optionalProducts) {
+			allProducts.add(op.getName());
+		}
+		if (allProducts.containsAll(productsToCheck)) return true;
+		else return false;		
+	}
 	
 }
