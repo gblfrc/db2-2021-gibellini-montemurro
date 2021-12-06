@@ -21,4 +21,7 @@ public class SubService {
 		em.persist(sub);
 	}
 	
+	public void refreshSubscription (Subscription sub) {
+		em.refresh(sub);
+	}
 }

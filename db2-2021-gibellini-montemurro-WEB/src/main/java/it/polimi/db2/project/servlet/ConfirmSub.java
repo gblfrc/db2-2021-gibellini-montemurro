@@ -49,7 +49,7 @@ public class ConfirmSub extends HttpServlet {
 		boolean fail = Boolean.parseBoolean(request.getParameter("fail"));
 		if (fail) order.setRefusedPayments(order.getRefusedPayments()+1);
 		else order.setValidity(true);
-		os.persistOrder(order);
+		os.mergeOrder(order);
 		
 		response.sendRedirect(getServletContext().getContextPath() + "/GetActivationSchedule");
 		

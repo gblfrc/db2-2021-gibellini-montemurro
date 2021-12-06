@@ -62,4 +62,13 @@ public class OrderService {
 	public void persistOrder(Order order) {
 		em.persist(order);
 	}
+	
+	public void refreshOrder(Order order) {
+		em.refresh(order);
+	}
+	
+	public void mergeOrder(Order order) {
+		em.merge(order);
+	}
+	
 }
