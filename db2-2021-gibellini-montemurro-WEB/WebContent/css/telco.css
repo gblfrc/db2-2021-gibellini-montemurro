@@ -25,7 +25,7 @@ div.package, div.order, div.subData, form:not(.onlyButton) {
 	padding-top: 0.5em;
 }
 
-div.package, div.order{
+div.package, div.order {
 	min-width: 100px;
 	width: auto;
 	display: inline-block;
@@ -53,7 +53,7 @@ input[name="startDay"], input[name="startMonth"] {
 	width: 12%;
 }
 
-input[name="startYear"]{
+input[name="startYear"] {
 	width: 20%;
 }
 
@@ -67,4 +67,16 @@ div.user {
 	position: absolute;
 	right: 5px;
 	top: 2px;
+}
+
+p.error {
+	background-color: lightcoral;
+	border-color: crimson;
+	border-style: solid;
+	max-width: 50%;
+	display: inline-block;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }

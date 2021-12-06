@@ -62,7 +62,6 @@ public class GetActivationSchedule extends HttpServlet {
 		ctx.setVariable("order", order);
 		ctx.setVariable("deactivationDate", deactivationDate);
 		templateEngine.process(path, ctx, response.getWriter());
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

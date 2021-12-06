@@ -9,6 +9,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.utils.TemplateEngineHandler;
+import it.polimi.db2.project.utils.Error;
 
 @WebServlet("/GetLogin")
 public class GetLogin extends HttpServlet {
@@ -21,10 +22,14 @@ public class GetLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//fetch error (if present, otherwise error is null)
+		Error error = (Error)request.getAttribute("error");
+		
 		//give access to landing page (page for login or registration)
 		String path = "/WEB-INF/index.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("error", error);
 		templateEngine.process(path, ctx, response.getWriter());
 		
 	}

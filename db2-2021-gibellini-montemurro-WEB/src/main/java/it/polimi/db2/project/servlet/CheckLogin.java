@@ -14,6 +14,7 @@ import it.polimi.db2.project.entities.Employee;
 import it.polimi.db2.project.entities.User;
 import it.polimi.db2.project.services.UserService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
+import it.polimi.db2.project.utils.Error;
 
 @WebServlet("/CheckLogin")
 public class CheckLogin extends HttpServlet {
@@ -29,7 +30,11 @@ public class CheckLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		request.setAttribute("error", error);
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetLogin");
+		rd.forward(request, response);
 		// what about filters and errors?
 	}
 
@@ -68,10 +73,11 @@ public class CheckLogin extends HttpServlet {
 				templateEngine.process(path, ctx, response.getWriter());
 			}
 		} else {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Non-existent user for given credentials");
+			Error error = new Error(HttpServletResponse.SC_NOT_FOUND, "Non-existent user for given credentials");
+			request.setAttribute("error", error);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetLogin");
+			rd.forward(request, response);
 		}
-
-		// response.sendRedirect(getServletContext().getContextPath() + "/GetCourses");
 
 	}
 

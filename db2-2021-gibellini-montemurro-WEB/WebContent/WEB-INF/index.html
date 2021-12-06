@@ -24,6 +24,7 @@
 		</form>
 		<br>
 	<br>
-	<a class="noLog" href="index.html" th:href="@{/GetUserHomePage}">Enter without logging</a>
+	<a class="noLog" href="index.html" th:href="@{/GetUserHomePage}">Enter without logging</a><br>
+	<p class="error" th:if="${error}!=null" th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>
 </html>
