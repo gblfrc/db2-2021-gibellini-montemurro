@@ -32,9 +32,7 @@ public class CheckLogin extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
-		request.setAttribute("error", error);
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetLogin");
-		rd.forward(request, response);
+		error.forward("/GetLogin", this, request, response);
 		// what about filters and errors?
 	}
 
@@ -74,9 +72,7 @@ public class CheckLogin extends HttpServlet {
 			}
 		} else {
 			Error error = new Error(HttpServletResponse.SC_NOT_FOUND, "Non-existent user for given credentials");
-			request.setAttribute("error", error);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetLogin");
-			rd.forward(request, response);
+			error.forward("/GetLogin", this, request, response);
 		}
 
 	}
