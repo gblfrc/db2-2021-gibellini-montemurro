@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OptService;
@@ -56,6 +57,7 @@ public class GetActivationSchedule extends HttpServlet {
 		String path = "/WEB-INF/activationSchedule.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("user", (Client)request.getSession().getAttribute("user"));
 		ctx.setVariable("sub", sub);
 		ctx.setVariable("order", order);
 		ctx.setVariable("deactivationDate", deactivationDate);

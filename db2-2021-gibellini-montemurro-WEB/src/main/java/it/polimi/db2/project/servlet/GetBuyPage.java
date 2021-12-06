@@ -42,7 +42,7 @@ public class GetBuyPage extends HttpServlet {
 		List<ServicePackage> packages = sps.getAllPackages();
 		
 		//fetch user from session
-		Client user = (Client)request.getSession().getAttribute("User");
+		Client user = (Client)request.getSession().getAttribute("user");
 		
 		//fetch all optional products
 		List<OptionalProduct> products = ops.findAllOptProducts();

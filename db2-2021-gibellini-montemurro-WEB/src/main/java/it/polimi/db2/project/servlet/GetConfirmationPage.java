@@ -54,6 +54,7 @@ public class GetConfirmationPage extends HttpServlet {
 		String path = "/WEB-INF/confirmation.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("user", client);
 		ctx.setVariable("sub", sub);
 		ctx.setVariable("client", client);
 		templateEngine.process(path, ctx, response.getWriter());
