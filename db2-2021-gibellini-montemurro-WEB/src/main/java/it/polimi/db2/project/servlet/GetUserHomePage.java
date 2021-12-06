@@ -14,7 +14,6 @@ import org.thymeleaf.context.WebContext;
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.ServicePackage;
-import it.polimi.db2.project.entities.User;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;

@@ -1,7 +1,6 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
