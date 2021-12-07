@@ -53,6 +53,8 @@ public class GetSalesPage extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {					
+		String choice=request.getParameter("choice");
+		
 		List<Object[]> allSalesDataPerPackage=mvPackageService.findAllPurchasesPerPackage();
 		List<MvPackage> allSalesPerValidityAndPackage= mvPackageService.findAllPurchasesPerPackageAndValidityPeriod();
 		List<Client> insolvents= uService.findInsolvents();
@@ -64,7 +66,7 @@ public class GetSalesPage extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-			
+		ctx.setVariable("choice", choice);
 		ctx.setVariable("allSalesDataPerPackage", allSalesDataPerPackage);
 		ctx.setVariable("allSalesPerValidityAndPackage", allSalesPerValidityAndPackage);
 		ctx.setVariable("insolvents", insolvents);
