@@ -11,6 +11,24 @@
 		<a th:href="@{/GetEmployeeHomePage}">Back</a>
 	</div>
 	<div>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Purchase per package">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Purchase per package and validity period">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Amount without optional product">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Amount with optional product">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Average number of optional product">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Insolvent clients">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Suspended orders">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Alerts">
+	</form>
+	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Best seller">
+	</form>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package')}">
 		<h1>Total Purchases</h1>
 		<div th:remove="all-but-first">
