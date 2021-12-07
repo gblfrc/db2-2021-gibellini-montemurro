@@ -21,6 +21,7 @@ import it.polimi.db2.project.entities.MvOptProd;
 import it.polimi.db2.project.entities.MvPackage;
 import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.ServicePackage;
+import it.polimi.db2.project.services.AuditingService;
 import it.polimi.db2.project.services.MvOptProdService;
 import it.polimi.db2.project.services.MvPackageService;
 import it.polimi.db2.project.services.OrderService;
@@ -47,6 +48,8 @@ public class GetSalesPage extends HttpServlet {
 	private MvPackageService mvPackageService;  
 	@EJB
 	private MvOptProdService mvOptProdService;  
+	@EJB
+	private AuditingService auditingService; 
 	
 	public void init() throws ServletException {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
@@ -59,7 +62,7 @@ public class GetSalesPage extends HttpServlet {
 		List<MvPackage> allSalesPerValidityAndPackage= mvPackageService.findAllPurchasesPerPackageAndValidityPeriod();
 		List<Client> insolvents= uService.findInsolvents();
 		List<Order> suspendedOrders= orderService.getSuspendedOrders();
-		List<Object[]> alerts=orderService.findAlerts();
+		List<Object[]> alerts=auditingService.findAlerts();
 		List<MvOptProd> bestSeller=mvOptProdService.findBestSeller();
 
 		String path = "/WEB-INF/sales.html";
