@@ -29,9 +29,9 @@
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Best seller">
 	</form>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package')}">
+		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package')}">
 		<h1>Total Purchases</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
@@ -46,7 +46,7 @@
 		<br>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package and validity period')}">
 		<h1>Total Purchases per validity period</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="sale: ${allSalesPerValidityAndPackage}">
 				<div>
 					Id package: <span th:text="${sale.id_package}">Uruk Hai</span>
@@ -64,7 +64,7 @@
 		<br>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Amount without optional product')}">
 		<h1>Total Amount per package without optional product</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
@@ -79,7 +79,7 @@
 		<br>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Amount with optional product')}">
 		<h1>Total Amount per package with optional product</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
@@ -94,7 +94,7 @@
 		<br>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Average number of optional product')}">
 		<h1>Average Number Of Optional Product</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="sale: ${allSalesDataPerPackage}">
 				<div>
 					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
@@ -109,7 +109,7 @@
 		<br>
 		<div th:if="${#strings.equalsIgnoreCase(choice, 'Insolvent clients')}">
 		<h1>Insolvent clients</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="insolvent: ${insolvents}">
 				<div>
 					Username: <span th:text="${insolvent.username}">Uruk Hai</span>
@@ -124,7 +124,7 @@
 		<br>
 		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Suspended orders')}">
 		<h1>Suspended orders</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="order: ${suspendedOrders}">
 				<div>
 					ID: <span th:text="${order.id}">Uruk Hai</span>
@@ -142,7 +142,7 @@
 		<br>
 		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Alerts')}">
 		<h1>Clients with alerts</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="alert: ${alerts}">
 				<div>
 					Username: <span th:text="${alert[0]}">Uruk Hai</span>
@@ -166,7 +166,7 @@
 		<br>
 		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Best seller')}">
 		<h1>Best seller</h1>
-		<div th:remove="all-but-first">
+		<div class="sales" th:remove="all-but-first">
 			<div th:each="best: ${bestSeller}">
 				<div>
 					Optional product: <span th:text="${best.id_optprod}">Uruk Hai</span>
