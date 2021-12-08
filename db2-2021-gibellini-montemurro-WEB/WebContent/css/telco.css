@@ -3,10 +3,24 @@
 body {
 	background-color: teal;
 	font-family: "Lucida console";
+	position: relative;
 }
 
 form {
 	display: inline-block;
+}
+
+form>p{
+	margin-top: 0.2em;
+}
+
+p:not([class="date"])>input[type="text"], p>input[type="password"], p>select{
+	width: 65%;
+	float: right;
+}
+
+p>select[name="validityPeriod"]{
+	width: auto;
 }
 
 /* form:not(.onlyButton) is introduced to give the style to all forms
@@ -73,7 +87,7 @@ p.error {
 	background-color: lightcoral;
 	border-color: crimson;
 	border-style: solid;
-	max-width: 50%;
+	/*max-width: 50%;*/
 	display: inline-block;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;

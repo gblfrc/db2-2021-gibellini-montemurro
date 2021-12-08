@@ -10,24 +10,28 @@
 	<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
 	<h1>Buy a service package</h1>
 	<form id="buyForm" action="CreateSubscription" method="POST">
-		<label>Package: </label> <select name="package"
-			th:remove="all-but-first">
-			<option value="0" th:each="package:${packages}"
-				th:value="${package.id}" th:text=${package.name}>Basic</option>
-			<option value="1">Family</option>
-			<option value="2">All inclusive</option>
-		</select><br> <label>Validity period (months): </label> <select
-			name="validityPeriod" th:remove="all-but-first">
-			<option value="12">12</option>
-			<option value="24">24</option>
-			<option value="36">36</option>
-		</select><br>
-		<br> <label>Optional products: </label><br>
+		<p>
+			Package: <select name="package" th:remove="all-but-first">
+				<option value="0" th:each="package:${packages}"
+					th:value="${package.id}" th:text=${package.name}>Basic</option>
+				<option value="1">Family</option>
+				<option value="2">All inclusive</option>
+			</select>
+		</p>
+		<p>
+			Validity period (months): <select name="validityPeriod"
+				th:remove="all-but-first">
+				<option value="12">12</option>
+				<option value="24">24</option>
+				<option value="36">36</option>
+			</select>
+		</p>
 		<div th:remove="all-but-first">
+			Optional products:
 			<div class="checkbox" th:each="product,num : ${products}">
 				<input type="checkbox" th:value="${product.name}"
-					th:name="'optProd' + ${num.index}"> <label th:text="${product.name}" >Sample
-				product</label>
+					th:name="'optProd' + ${num.index}"> <label
+					th:text="${product.name}">Sample product</label>
 			</div>
 			<div class="checkbox">
 				<input type="checkbox"> Another sample product
@@ -36,12 +40,13 @@
 				<input type="checkbox"> Third sample product
 			</div>
 		</div>
-		<br> <br>
-		<label> Start date (dd-MM-yyyy): </label>
-		<input type="text" name="startDay" required>
-		<input type="text" name="startMonth" required>
-		<input type="text" name="startYear" required> <br><br>
-		<input type="submit" value="Buy">
+		<br>
+		<p class="date">
+			Start date (dd-MM-yyyy): <input type="text" name="startDay" required>
+			<input type="text" name="startMonth" required> <input
+				type="text" name="startYear" required> <br> <br> <input
+				type="submit" value="Buy">
+		</p>
 	</form>
 	<br>
 	<br>
@@ -79,5 +84,6 @@
 			</div>
 		</div>
 	</div>
-	<p class="error" th:if="${error}!=null" th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
+	<p class="error" th:if="${error}!=null"
+		th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>
