@@ -16,6 +16,7 @@ import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.SubService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
+import it.polimi.db2.project.utils.Error;
 
 @WebServlet("/ConfirmSub")
 public class ConfirmSub extends HttpServlet {
@@ -38,6 +39,13 @@ public class ConfirmSub extends HttpServlet {
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
+		if(sub==null) {
+			System.out.println("null sub");
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent subscription");
+			error.forward("/GetUserHomePage", this, request, response);
+			return;
+		}
+		
 		//save subscription on DB
 		sbs.persistSubscription(sub);
 		
@@ -51,13 +59,12 @@ public class ConfirmSub extends HttpServlet {
 		else order.setValidity(true);
 		os.mergeOrder(order);
 		
-		response.sendRedirect(getServletContext().getContextPath() + "/GetActivationSchedule");
-		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		error.forward("/GetUserHomePage", this, request, response);
 	}
 
 

@@ -16,6 +16,7 @@ import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.SpService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 @WebServlet("/GetUserHomePage")
@@ -34,6 +35,9 @@ public class GetUserHomePage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//fetch error (if present, otherwise error is null)
+		Error error = (Error)request.getAttribute("error");
+		
 		//get user from session --> useful to write name at the top of the page
 		Client user = (Client)request.getSession().getAttribute("user");
 		// !! NEED ERROR HANDLING !!
@@ -58,6 +62,7 @@ public class GetUserHomePage extends HttpServlet {
 		String path = "/WEB-INF/home.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("error", error);
 		ctx.setVariable("user", user);
 		ctx.setVariable("packages", packages);
 		ctx.setVariable("invOrders", refusedOrders);
@@ -66,7 +71,7 @@ public class GetUserHomePage extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		doGet(request, response);
 	}
 
 }

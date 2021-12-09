@@ -45,7 +45,7 @@
 	</div>
 	<br>
 	<form action="GetBuyPage" method="GET" class="onlyButton">
-	<input type="submit" value="Buy">
+		<input type="submit" value="Buy">
 	</form>
 	<!--  <button type="submit" formAction="/GetBuyPage"
 		formMethod="GET">Buy</button>-->
@@ -56,7 +56,8 @@
 			<div>Rejected order</div>
 			<br>
 			<div>
-				Amount: <span th:text=${order.subscription.amount}> 500</span> &#8364
+				Amount: <span th:text=${order.subscription.amount}> 500</span>
+				&#8364
 			</div>
 			<div>
 				Creation date: <span
@@ -75,5 +76,7 @@
 			<div>Creation time: 00:00</div>
 		</div>
 	</div>
+	<p class="error" th:if="${error}!=null"
+		th:text="${error.code} + ': ' + ${error.message}">404: Arma	virumque cano, Troiae qui primus ab oris</p>
 </body>
 </html>
