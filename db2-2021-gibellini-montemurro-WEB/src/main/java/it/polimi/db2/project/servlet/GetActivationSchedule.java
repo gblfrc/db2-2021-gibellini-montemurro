@@ -20,6 +20,7 @@ import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.SubService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 @WebServlet("/GetActivationSchedule")
@@ -43,11 +44,19 @@ public class GetActivationSchedule extends HttpServlet {
 			throws ServletException, IOException {
 
 		//fetch subscription object and remove it from session
-		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
-		request.getSession().removeAttribute("subscription");
+		//Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
+		//request.getSession().removeAttribute("subscription");
 		
 		//fetch order object and remove it from session
 		Order order = (Order)request.getSession().getAttribute("order");
+		
+		if(order==null) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent order");
+			error.forward("/GetUserHomePage", this, request, response);
+			return;
+		}
+		
+		Subscription sub = order.getSubscription();
 		request.getSession().removeAttribute("order");
 		
 		//get deactivation date (needed for template)
@@ -66,7 +75,7 @@ public class GetActivationSchedule extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		doGet(request, response);
 	}
 
 

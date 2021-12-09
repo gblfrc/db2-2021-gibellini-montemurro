@@ -18,6 +18,7 @@ import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.SubService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 @WebServlet("/GetConfirmationPage")
@@ -40,15 +41,24 @@ public class GetConfirmationPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("Entered GetConfirmationPage");
+		
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
 		//check the sub has a client, if not try to set it
-		Client client = sub.getUser();
-		if (client == null) {
-			client = (Client)request.getSession().getAttribute("user");
-			if (client != null) sub.setUser(client);
+		Client client = (Client)request.getSession().getAttribute("user");
+		if (sub.getUser() == null) sub.setUser(client);
+		//handle case in which the user has changed profile after receiving the page once
+		else if (!sub.getUser().getUsername().equals(client.getUsername())) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal access");
+			error.forward("/GetUserHomePage", this, request, response);
+			return;
 		}
+		
+		System.out.println(sub.getUser().getUsername());
+		System.out.println(((Client)request.getSession().getAttribute("user")).getUsername());
+
 		
 		//give access to actual home page which should show the packages
 		String path = "/WEB-INF/confirmation.html";
@@ -56,7 +66,7 @@ public class GetConfirmationPage extends HttpServlet {
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("user", client);
 		ctx.setVariable("sub", sub);
-		ctx.setVariable("client", client);
+		ctx.setVariable("client", sub.getUser());
 		templateEngine.process(path, ctx, response.getWriter());
 
 	}

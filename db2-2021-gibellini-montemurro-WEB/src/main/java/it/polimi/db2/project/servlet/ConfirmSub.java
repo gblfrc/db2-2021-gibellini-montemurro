@@ -52,6 +52,7 @@ public class ConfirmSub extends HttpServlet {
 		//get order related to subscription
 		Order order = os.getOrderBySubscription(sub);
 		request.getSession().setAttribute("order", order);
+		request.getSession().removeAttribute("subscription");
 		
 		//"call external service" (analyze fail parameter and save updated order)
 		boolean fail = Boolean.parseBoolean(request.getParameter("fail"));
