@@ -10,6 +10,7 @@
 	<div class="back">
 		<a th:href="@{/GetEmployeeHomePage}">Back</a>
 	</div>
+	<br>
 	<div>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Purchase per package">
 	</form>
@@ -17,168 +18,192 @@
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Amount without optional product">
 	</form>
+	<br>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Amount with optional product">
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Average number of optional product">
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Insolvent clients">
 	</form>
+	<br>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Suspended orders">
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Alerts">
 	</form>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" name="choice" value="Best seller">
 	</form>
-		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package')}">
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package')}">
 		<h1>Total Purchases</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="sale: ${allSalesDataPerPackage}">
-				<div>
-					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
-				</div>
-				<div>
-					Total Number of purchases: <span th:text="${sale[1]}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id package</th>
+					<th>Total Number of purchases</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
+					<td th:text="${sale[0]}">Uruk Hai</td>
+					<td th:text="${sale[1]}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package and validity period')}">
+		
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package and validity period')}">
 		<h1>Total Purchases per validity period</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="sale: ${allSalesPerValidityAndPackage}">
-				<div>
-					Id package: <span th:text="${sale.id_package}">Uruk Hai</span>
-				</div>
-				<div>
-					Validity Period: <span th:text="${sale.months}">Bilbo</span>
-				</div>
-				<div>
-					Total Number of purchases: <span th:text="${sale.totPurchase}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id package</th>
+					<th>Validity Period</th>
+					<th>Total Number of purchases</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="sale: ${allSalesPerValidityAndPackage}">
+					<td th:text="${sale.id_package}">Uruk Hai</td>
+					<td th:text="${sale.months}">Bilbo</td>
+					<td th:text="${sale.totPurchase}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Amount without optional product')}">
+				
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Amount without optional product')}">
 		<h1>Total Amount per package without optional product</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="sale: ${allSalesDataPerPackage}">
-				<div>
-					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
-				</div>
-				<div>
-					Total Amount: <span th:text="${sale[2]}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id package</th>
+					<th>Total amount</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
+					<td th:text="${sale[0]}">Uruk Hai</td>
+					<td th:text="${sale[2]}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Amount with optional product')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Amount with optional product')}">
 		<h1>Total Amount per package with optional product</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="sale: ${allSalesDataPerPackage}">
-				<div>
-					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
-				</div>
-				<div>
-					Total Amount: <span th:text="${sale[3]}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id package</th>
+					<th>Total amount</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
+					<td th:text="${sale[0]}">Uruk Hai</td>
+					<td th:text="${sale[3]}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Average number of optional product')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Average number of optional product')}">
 		<h1>Average Number Of Optional Product</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="sale: ${allSalesDataPerPackage}">
-				<div>
-					Id package: <span th:text="${sale[0]}">Uruk Hai</span>
-				</div>
-				<div>
-					AvgNumberOfOpt: <span th:text="${sale[4]}/${sale[1]}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id package</th>
+					<th>Average Number Of Optional product</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
+					<td th:text="${sale[0]}">Uruk Hai</td>
+					<td th:text="${sale[4]}/${sale[1]}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div th:if="${#strings.equalsIgnoreCase(choice, 'Insolvent clients')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Insolvent clients')}">
 		<h1>Insolvent clients</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="insolvent: ${insolvents}">
-				<div>
-					Username: <span th:text="${insolvent.username}">Uruk Hai</span>
-				</div>
-				<div>
-					Email: <span th:text="${insolvent.email}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="insolvent: ${insolvents}">
+					<td th:text="${insolvent.username}">Uruk Hai</td>
+					<td th:text="${insolvent.email}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Suspended orders')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Suspended orders')}">
 		<h1>Suspended orders</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="order: ${suspendedOrders}">
-				<div>
-					ID: <span th:text="${order.id}">Uruk Hai</span>
-				</div>
-				<div>
-					Creation date: <span th:text="${order.creationDate}">Bilbo</span>
-				</div>
-				<div>
-					Creation time: <span th:text="${order.creationTime}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Creation date</th>
+					<th>Creation time</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="order: ${suspendedOrders}">
+					<td th:text="${order.id}">Uruk Hai</td>
+					<td th:text="${order.creationDate}">Bilbo</td>
+					<td th:text="${order.creationTime}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Alerts')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Alerts')}">
 		<h1>Clients with alerts</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="alert: ${alerts}">
-				<div>
-					Username: <span th:text="${alert[0]}">Uruk Hai</span>
-				</div>
-				<div>
-					Email: <span th:text="${alert[1]}">Bilbo</span>
-				</div>
-				<div>
-					Amount: <span th:text="${alert[2]}">Bilbo</span>
-				</div>
-				<div>
-					Rejection Date: <span th:text="${alert[3]}">Bilbo</span>
-				</div>
-				<div>
-					Rejection Time: <span th:text="${alert[4]}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Amount</th>
+					<th>Rejection Date</th>
+					<th>Rejection Time</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="alert: ${alerts}">
+					<td th:text="${alert[0]}">Uruk Hai</td>
+					<td th:text="${alert[1]}">Bilbo</td>
+					<td th:text="${alert[2]}">Bilbo</td>
+					<td th:text="${alert[3]}">Bilbo</td>
+					<td th:text="${alert[4]}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>
-		<br>
-		<div  th:if="${#strings.equalsIgnoreCase(choice, 'Best seller')}">
+		
+		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Best seller')}">
 		<h1>Best seller</h1>
-		<div class="sales" th:remove="all-but-first">
-			<div th:each="best: ${bestSeller}">
-				<div>
-					Optional product: <span th:text="${best.id_optprod}">Uruk Hai</span>
-				</div>
-				<div>
-					Total revenue: <span th:text="${best.tot_revenue}">Bilbo</span>
-				</div>
-				<br>
-			</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Optional product</th>
+					<th>Total revenue</th>
+				</tr>
+			</thead>
+			<tbody th:remove="all-but-first">
+				<tr class="sales" th:each="best: ${bestSeller}">
+					<td th:text="${best.id_optprod}">Uruk Hai</td>
+					<td th:text="${best.tot_revenue}">Bilbo</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
-		</div>	
-		<br>
 	</div>
 </body>
 </html>

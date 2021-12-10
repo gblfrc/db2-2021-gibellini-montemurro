@@ -28,10 +28,15 @@ public class ServService {
 	/*
 	 * This method retrieves all the selected services 
 	 */
-	public List<Service> findServicesSelected(String[] serviceList){
+	public List<Service> findServicesSelected(String[] serviceList) throws Exception{
 		List<Service> services=new ArrayList<Service>();
+		Service serv;
 		for(int i=0;i<serviceList.length;i++) {	
-			if(serviceList[i]!=null)services.add(em.find(Service.class,Integer.parseInt(serviceList[i])));
+			if(serviceList[i]!=null) {
+				serv=em.find(Service.class,Integer.parseInt(serviceList[i]));
+				if(serv==null)throw new Exception();
+				else services.add(serv);
+			}
 		}
 		return services;
 	}

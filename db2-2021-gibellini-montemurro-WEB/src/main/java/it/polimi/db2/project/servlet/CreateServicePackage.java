@@ -1,7 +1,6 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -18,6 +17,7 @@ import it.polimi.db2.project.entities.Service;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.ServService;
 import it.polimi.db2.project.services.SpService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 /**
@@ -41,16 +41,53 @@ public class CreateServicePackage extends HttpServlet {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		error.forward("/GetEmployeeHomePage", this, request, response);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name= request.getParameter("name");
-		String[] optProdList= request.getParameterValues("typeOptional");
-		String[] serviceList= request.getParameterValues("typeService");
+		String name;
+		String[] optProdList;
+		String[] serviceList;
+		try {
+			name= request.getParameter("name");
+			optProdList= request.getParameterValues("typeOptional");
+			serviceList= request.getParameterValues("typeService");
+			if(name==""|name==null|serviceList==null)throw new Exception();
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal service package request");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
 		
-		List<OptionalProduct>optionals= optService.findProductsSelected(optProdList);
-		List<Service>services= servService.findServicesSelected(serviceList);
+		List<OptionalProduct>optionals=null;
+		try {
+			if(optProdList!=null)optionals= optService.findProductsSelected(optProdList);
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Unavailable optional product");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
+		List<Service>services;
+		try {
+			services= servService.findServicesSelected(serviceList);
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Unavailable service");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}	
 		
-		spService.addServicePackage(name,services,optionals);
+		try {
+			spService.addServicePackage(name,services,optionals);
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred, couldn't add service package");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
+		
 		response.sendRedirect("GetEmployeeHomePage");
 	}
 

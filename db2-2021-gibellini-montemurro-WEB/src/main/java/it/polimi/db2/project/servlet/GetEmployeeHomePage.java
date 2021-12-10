@@ -18,6 +18,7 @@ import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Service;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.ServService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 /**
@@ -38,6 +39,7 @@ public class GetEmployeeHomePage extends HttpServlet {
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Error error = (Error)request.getAttribute("error");
 		List<OptionalProduct> optionalProducts= optService.findAllOptProducts();
 		List<Service> services=servService.findAllServices();
 		
@@ -47,7 +49,12 @@ public class GetEmployeeHomePage extends HttpServlet {
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("optionalProducts", optionalProducts);
 		ctx.setVariable("services", services);
+		ctx.setVariable("error", error);
 		templateEngine.process(path, ctx, response.getWriter());
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

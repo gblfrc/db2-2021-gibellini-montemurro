@@ -1,9 +1,7 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -20,12 +18,10 @@ import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.MvOptProd;
 import it.polimi.db2.project.entities.MvPackage;
 import it.polimi.db2.project.entities.Order;
-import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.services.AuditingService;
 import it.polimi.db2.project.services.MvOptProdService;
 import it.polimi.db2.project.services.MvPackageService;
 import it.polimi.db2.project.services.OrderService;
-import it.polimi.db2.project.services.ServService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.UserService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
@@ -78,5 +74,9 @@ public class GetSalesPage extends HttpServlet {
 		ctx.setVariable("bestSeller", bestSeller);
 
 		templateEngine.process(path, ctx, response.getWriter());
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 }

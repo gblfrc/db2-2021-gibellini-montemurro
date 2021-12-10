@@ -37,10 +37,15 @@ public class OptService {
 	 * This method finds all the optional products selected
 	 * WHY NOT USING A LIST INSTEAD OF AN ARRAY?
 	 */
-	public List<OptionalProduct> findProductsSelected(String[] optProdList){
+	public List<OptionalProduct> findProductsSelected(String[] optProdList) throws Exception{
 		List<OptionalProduct> optionals=new ArrayList<OptionalProduct>();
+		OptionalProduct op;
 		for(int i=0;i<optProdList.length;i++) {
-			if(optProdList[i]!=null)optionals.add(em.find(OptionalProduct.class, optProdList[i]));
+			if(optProdList[i]!=null) {
+				op=em.find(OptionalProduct.class, optProdList[i]);
+				if(op==null)throw new Exception();
+				else optionals.add(op);
+			}
 		}
 		return optionals;
 	}

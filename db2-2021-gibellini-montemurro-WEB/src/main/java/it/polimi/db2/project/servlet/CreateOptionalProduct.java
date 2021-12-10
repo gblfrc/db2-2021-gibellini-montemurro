@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 
 import it.polimi.db2.project.services.OptService;
+import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 
@@ -27,16 +28,33 @@ public class CreateOptionalProduct extends HttpServlet {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		error.forward("/GetEmployeeHomePage", this, request, response);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name;
 		int monthlyFee;
+		try {
+			name = request.getParameter("name");
+			monthlyFee = Integer.parseInt(request.getParameter("monthlyFee"));
+			if(name==""||name==null)throw new Exception();
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal optional product request");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
 
-		name = request.getParameter("name");
-		monthlyFee = Integer.parseInt(request.getParameter("monthlyFee"));
-		
-
-		optService.addOptionalProduct(name,monthlyFee);
+		try {
+			optService.addOptionalProduct(name,monthlyFee);
+		}catch(Exception e) {
+			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred, couldn't add optional product");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
 		response.sendRedirect("GetEmployeeHomePage");
 	}
 }

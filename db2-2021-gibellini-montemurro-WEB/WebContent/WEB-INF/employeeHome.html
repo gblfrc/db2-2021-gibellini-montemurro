@@ -50,5 +50,7 @@
 	<br>
 	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" value="SeeSales">
 	</form>
+	<br>
+	<p class="error" th:if="${error}!=null" th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>
 </html>
