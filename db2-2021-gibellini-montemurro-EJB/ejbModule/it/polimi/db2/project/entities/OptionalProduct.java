@@ -1,11 +1,13 @@
 package it.polimi.db2.project.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "optionalproduct")
 @NamedQuery(name="OptionalProduct.findAllOptionalProducts", query="SELECT opt FROM OptionalProduct opt")
-public class OptionalProduct {
+public class OptionalProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

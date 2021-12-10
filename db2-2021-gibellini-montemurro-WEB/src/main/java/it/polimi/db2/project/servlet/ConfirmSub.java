@@ -60,6 +60,8 @@ public class ConfirmSub extends HttpServlet {
 		else order.setValidity(true);
 		os.mergeOrder(order);
 		
+		response.sendRedirect("GetActivationSchedule");
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
