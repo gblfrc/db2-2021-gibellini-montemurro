@@ -21,7 +21,8 @@
 		<p>
 			Validity period (months): <select name="validityPeriod"
 				th:remove="all-but-first">
-				<option value="12">12</option>
+				<option th:each="period:${vperiods}" value="12"
+					th:value="${period.months}" th:text="${period.months}">12</option>
 				<option value="24">24</option>
 				<option value="36">36</option>
 			</select>

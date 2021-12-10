@@ -41,8 +41,6 @@ public class GetConfirmationPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Entered GetConfirmationPage");
-		
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
@@ -55,10 +53,6 @@ public class GetConfirmationPage extends HttpServlet {
 			error.forward("/GetUserHomePage", this, request, response);
 			return;
 		}
-		
-		System.out.println(sub.getUser().getUsername());
-		System.out.println(((Client)request.getSession().getAttribute("user")).getUsername());
-
 		
 		//give access to actual home page which should show the packages
 		String path = "/WEB-INF/confirmation.html";

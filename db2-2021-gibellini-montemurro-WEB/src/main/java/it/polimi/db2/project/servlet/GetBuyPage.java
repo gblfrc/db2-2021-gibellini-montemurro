@@ -17,8 +17,10 @@ import org.thymeleaf.context.WebContext;
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.ServicePackage;
+import it.polimi.db2.project.entities.ValidityPeriod;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
+import it.polimi.db2.project.services.VPService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 import it.polimi.db2.project.utils.Error;
 
@@ -32,6 +34,8 @@ public class GetBuyPage extends HttpServlet {
 	SpService sps;
 	@EJB
 	OptService ops;
+	@EJB
+	VPService vps;
 	
 	public void init() throws ServletException {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
@@ -48,6 +52,9 @@ public class GetBuyPage extends HttpServlet {
 		//fetch all optional products
 		List<OptionalProduct> products = ops.findAllOptProducts();
 		
+		//fetch all validity periods
+		List<ValidityPeriod> periods = vps.getAllValidityPeriod();
+		
 		//give access to actual home page which should show the packages
 		String path = "/WEB-INF/buy.html";
 		ServletContext servletContext = getServletContext();
@@ -56,6 +63,7 @@ public class GetBuyPage extends HttpServlet {
 		ctx.setVariable("packages", packages);
 		ctx.setVariable("user", user);
 		ctx.setVariable("products", products);
+		ctx.setVariable("vperiods", periods);
 		templateEngine.process(path, ctx, response.getWriter());
 
 	}
