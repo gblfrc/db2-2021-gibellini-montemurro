@@ -32,15 +32,16 @@ public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username, password, email;
-
-		username = request.getParameter("username");
-		password = request.getParameter("password");
-		email = request.getParameter("email");
-		
 		try {
+			username = request.getParameter("username");
+			password = request.getParameter("password");
+			email = request.getParameter("email");
+			if(username.equals("")||username==null||password.equals("")||password==null||email.equals("")||email==null) {
+				throw new Exception();
+			}
 			uService.addClient(username, password, email);
 		}catch(Exception e) {
-			Error error=new Error(HttpServletResponse.SC_BAD_REQUEST, "Invalid credentials");
+			Error error=new Error(HttpServletResponse.SC_BAD_REQUEST, "Couldn't create account, invalid credentials");
 			error.forward("/GetLogin", this, request, response);
 		}
 		

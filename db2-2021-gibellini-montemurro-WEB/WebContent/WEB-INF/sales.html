@@ -119,7 +119,7 @@
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
 					<td th:text="${sale[0]}">Uruk Hai</td>
-					<td th:text="${sale[4]}/${sale[1]}">Bilbo</td>
+					<td th:text="${sale[1]}!=0? ${sale[4]}/${sale[1]} : '0' " >0</td>
 				</tr>
 			</tbody>
 		</table>
