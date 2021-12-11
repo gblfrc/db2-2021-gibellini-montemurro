@@ -7,7 +7,10 @@
 <title>Buy packages</title>
 </head>
 <body>
-	<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
+	<div class="user" th:if="${user}!=null">
+		<span th:text="${user.username} + ' | '"> User | </span>
+		<a th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
+	</div>
 	<h1>Buy a service package</h1>
 	<form id="buyForm" action="CreateSubscription" method="POST">
 		<p>
