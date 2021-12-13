@@ -49,6 +49,7 @@ public class GetConfirmationPage extends HttpServlet {
 		if (sub.getUser() == null) sub.setUser(client);
 		//handle case in which the user has changed profile after receiving the page once
 		else if (!sub.getUser().getUsername().equals(client.getUsername())) {
+			request.getSession().removeAttribute("subscription");
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal access");
 			error.forward("/GetUserHomePage", this, request, response);
 			return;

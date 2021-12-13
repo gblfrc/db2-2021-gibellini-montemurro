@@ -6,25 +6,18 @@ import javax.ejb.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
-import org.thymeleaf.TemplateEngine;
 
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.User;
 import it.polimi.db2.project.services.UserService;
-import it.polimi.db2.project.utils.TemplateEngineHandler;
 import it.polimi.db2.project.utils.Error;
 
 @WebServlet("/CheckLogin")
 public class CheckLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TemplateEngine templateEngine;
 
 	@EJB
 	private UserService uService;
-
-	public void init() throws ServletException {
-		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
