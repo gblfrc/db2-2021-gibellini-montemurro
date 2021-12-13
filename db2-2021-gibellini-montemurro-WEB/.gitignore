@@ -9,6 +9,8 @@
 # Other general files
 .classpath
 .project
+*.classpath
+*.project
 
 # File-based project format
 *.iws
