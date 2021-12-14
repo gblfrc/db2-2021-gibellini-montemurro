@@ -23,6 +23,12 @@ p>select[name="validityPeriod"]{
 	width: auto;
 }
 
+div.logout {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
 /* form:not(.onlyButton) is introduced to give the style to all forms
    beside the ones which only contain a button */
 div.package, div.order, div.subData, div.sales, form:not(.onlyButton) {
