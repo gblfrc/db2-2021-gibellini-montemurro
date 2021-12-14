@@ -57,11 +57,11 @@ public class GetActivationSchedule extends HttpServlet {
 		}
 		
 		Subscription sub = order.getSubscription();
-		request.getSession().removeAttribute("order");
+		//request.getSession().removeAttribute("order");
 		
 		//get deactivation date (needed for template)
 		Date deactivationDate = sub.getDeactivationDate();
-			
+		
 		//give access to actual home page which should show the activation schedule
 		String path = "/WEB-INF/activationSchedule.html";
 		ServletContext servletContext = getServletContext();

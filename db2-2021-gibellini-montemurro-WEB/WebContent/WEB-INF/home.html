@@ -8,8 +8,8 @@
 </head>
 <body>
 	<div class="user" th:if="${user}!=null">
-		<span th:text="${user.username} + ' | '"> User | </span>
-		<a th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
+		<span th:text="${user.username} + ' | '"> User | </span> <a
+			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
 	</div>
 	<h1>Service packages</h1>
 	<div class="allPackages" th:remove="all-but-first">
@@ -70,13 +70,21 @@
 			<div>
 				Creation time: <span th:text="${order.creationTime}"> 00:00</span>
 			</div>
+			<br>
+			<form action="RefetchOrder" class="onlyButton" method="GET">
+				<input type="hidden" name="orId" th:value="${order.id}"> <input
+					type="submit" value="See activation schedule">
+			</form>
 		</div>
 		<div class="order">
 			<div>Rejected order</div>
 			<br>
 			<div>Amount: 500 &#8364</div>
 			<div>Creation date: 03-04-1999</div>
-			<div>Creation time: 00:00</div>
+			<div>Creation time: 00:00</div><br>
+			<form class="onlyButton">
+				<input type="submit" value="See activation schedule">
+			</form>
 		</div>
 	</div>
 	<p class="error" th:if="${error}!=null"

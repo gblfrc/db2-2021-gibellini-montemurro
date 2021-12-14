@@ -60,4 +60,11 @@ public class OrderService {
 		em.merge(order);
 	}
 	
+	public Order findOrderById(int id) {
+		TypedQuery<Order> query = em.createNamedQuery("Order.findById", Order.class);
+		query.setParameter("id", id);
+		Order result = query.getSingleResult(); 
+		return result;
+	}
+	
 }

@@ -13,6 +13,7 @@ import java.util.Date;
 	@NamedQuery(name="Order.findAllInvalidByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1 and o.validity = false"),
 	@NamedQuery(name="Order.findBySubscription", query="SELECT o FROM Order o WHERE o.subscription = :sub"),
 	@NamedQuery(name="Order.suspendedOrders",query="SELECT o FROM Order o WHERE o.validity=false"),
+	@NamedQuery(name="Order.findById", query="SELECT o FROM Order o WHERE o.id = :id")
 })
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;

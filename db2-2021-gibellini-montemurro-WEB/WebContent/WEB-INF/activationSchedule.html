@@ -39,6 +39,16 @@
 		<p>
 			Paid amount: <span th:text="${sub.amount}"> 404 </span> &#8364
 		</p>
+		<form th:if="${order.validity}==false" action="PayOrder" class="onlyButton" method="POST">
+		<input type="hidden" name="fail" value="false">
+			<input type="submit" value="Retry - no failure">
+		</form>
+		<form th:if="${order.validity}==false" action="PayOrder" class="onlyButton" method="POST">
+		<input type="hidden" name="fail" value="true">
+			<input type="submit" value="Retry but fail payment">
+		</form>
 	</div>
+	<p class="error" th:if="${error}!=null"
+		th:text="${error.code} + ': ' + ${error.message}">404: Arma virumque cano, Troiae qui primus ab oris</p>
 </body>
 </html>

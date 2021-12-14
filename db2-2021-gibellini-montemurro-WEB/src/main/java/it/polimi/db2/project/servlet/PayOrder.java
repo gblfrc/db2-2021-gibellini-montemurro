@@ -3,7 +3,6 @@ package it.polimi.db2.project.servlet;
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,14 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 
 import it.polimi.db2.project.entities.Order;
-import it.polimi.db2.project.entities.Subscription;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.SubService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 import it.polimi.db2.project.utils.Error;
 
-@WebServlet("/ConfirmSub")
-public class ConfirmSub extends HttpServlet {
+@WebServlet("/PayOrder")
+public class PayOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	TemplateEngine templateEngine;
@@ -37,26 +35,16 @@ public class ConfirmSub extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//fetch subscription object
-		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
-		
-		if(sub==null) {
-			System.out.println("null sub");
-			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent subscription");
-			error.forward("/GetUserHomePage", this, request, response);
-			return;
-		}
-		
-		//save subscription on DB
-		sbs.persistSubscription(sub);
-		
 		//get order related to subscription
-		Order order = os.getOrderBySubscription(sub);
-		request.getSession().setAttribute("order", order);
-		request.getSession().removeAttribute("subscription");
+		Order order = (Order)request.getSession().getAttribute("order");
 		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/PayOrder");
-		rd.forward(request, response);
+		//"call external service" (analyze fail parameter and save updated order)
+		boolean fail = Boolean.parseBoolean(request.getParameter("fail"));
+		if (fail) order.setRefusedPayments(order.getRefusedPayments()+1);
+		else order.setValidity(true);
+		os.mergeOrder(order);
+		
+		response.sendRedirect("GetActivationSchedule");
 		
 	}
 
