@@ -18,8 +18,9 @@ public class Subscription implements Serializable {
 
 	private int amount;
 
-	@Column(name="Package")
-	private int package_;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="Package")
+	private ServicePackage package_;
 
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
@@ -59,11 +60,11 @@ public class Subscription implements Serializable {
 		this.amount = amount;
 	}
 
-	public int getPackage_() {
+	public ServicePackage getPackage_() {
 		return this.package_;
 	}
 
-	public void setPackage_(int package_) {
+	public void setPackage_(ServicePackage package_) {
 		this.package_ = package_;
 	}
 

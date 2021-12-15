@@ -15,6 +15,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.Employee;
 import it.polimi.db2.project.entities.MvOptProd;
 import it.polimi.db2.project.entities.MvPackage;
 import it.polimi.db2.project.entities.Order;
@@ -65,6 +66,7 @@ public class GetSalesPage extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("user", (Employee)request.getSession().getAttribute("user"));
 		ctx.setVariable("choice", choice);
 		ctx.setVariable("allSalesDataPerPackage", allSalesDataPerPackage);
 		ctx.setVariable("allSalesPerValidityAndPackage", allSalesPerValidityAndPackage);

@@ -10,8 +10,9 @@
 	<div class="back">
 		<a th:href="@{/GetEmployeeHomePage}">Back</a>
 	</div>
-	<div class="logout">
-		<a th:href="@{/Logout}">Logout</a>
+	<div class="user" th:if="${user}!=null">
+		<span th:text="${user.username} + ' | '"> User | </span> <a
+			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
 	</div>
 	<br>
 	<div>
@@ -52,8 +53,6 @@
 			</tbody>
 		</table>
 		</div>
-		
-		
 		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Purchase per package and validity period')}">
 		<h1>Total Purchases per validity period</h1>
 		<table>

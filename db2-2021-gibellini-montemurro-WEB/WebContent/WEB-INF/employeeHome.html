@@ -7,8 +7,9 @@
 <title>Welcome in your home page</title>
 </head>
 <body>
-	<div class="logout">
-		<a th:href="@{/Logout}">Logout</a>
+	<div class="user" th:if="${user}!=null">
+		<span th:text="${user.username} + ' | '"> User | </span> <a
+			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
 	</div>
 	<div>
 		<h1>Create a service package</h1>

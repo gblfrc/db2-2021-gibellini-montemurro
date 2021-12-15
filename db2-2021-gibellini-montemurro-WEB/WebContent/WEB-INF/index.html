@@ -24,11 +24,12 @@
 			Username: <input type="text" name="username" required>
 		</p>
 		<p>
-			E-mail: <input type="text" name="email" required>
+			Password: <input type="password" name="password" required>
 		</p>
 		<p>
-		Password: <input type="password" name="password" required>
+			E-mail: <input type="text" name="email" required>
 		</p>
+
 		<input type="submit" value="Register">
 	</form>
 	<br>
@@ -37,6 +38,7 @@
 		without logging</a>
 	<br>
 	<p class="error" th:if="${error}!=null"
-		th:text="${error.code} + ': ' + ${error.message}">404: Arma virumque cano, Troiae qui primus ab oris</p>
+		th:text="${error.code} + ': ' + ${error.message}">404: Arma
+		virumque cano, Troiae qui primus ab oris</p>
 </body>
 </html>

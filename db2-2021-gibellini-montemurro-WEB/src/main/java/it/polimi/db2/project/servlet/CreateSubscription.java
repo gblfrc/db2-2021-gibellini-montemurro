@@ -64,7 +64,7 @@ public class CreateSubscription extends HttpServlet {
 			//check existence of specified package
 			sp = sps.getServicePackageById(packId);
 			if (sp == null) throw new NoSuchElementException();
-			sub.setPackage_(packId);
+			sub.setPackage_(sp);
 		} catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_NOT_FOUND, "Unavailable package");
 			error.forward("/GetBuyPage", this, request, response);
