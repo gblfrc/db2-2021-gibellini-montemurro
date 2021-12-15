@@ -47,8 +47,8 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
-					<td th:text="${sale[0]}">Uruk Hai</td>
-					<td th:text="${sale[1]}">Bilbo</td>
+					<td th:text="${sale[0]}">Package</td>
+					<td th:text="${sale[1]}">5</td>
 				</tr>
 			</tbody>
 		</table>
@@ -65,9 +65,9 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesPerValidityAndPackage}">
-					<td th:text="${sale.id_package}">Uruk Hai</td>
-					<td th:text="${sale.months}">Bilbo</td>
-					<td th:text="${sale.totPurchase}">Bilbo</td>
+					<td th:text="${sale.id_package}">Package</td>
+					<td th:text="${sale.months}">12</td>
+					<td th:text="${sale.totPurchase}">5</td>
 				</tr>
 			</tbody>
 		</table>
@@ -84,8 +84,8 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
-					<td th:text="${sale[0]}">Uruk Hai</td>
-					<td th:text="${sale[2]}">Bilbo</td>
+					<td th:text="${sale[0]}">Package</td>
+					<td><span th:text="${sale[2]}">5</span> &#8364</td>
 				</tr>
 			</tbody>
 		</table>
@@ -102,13 +102,13 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
-					<td th:text="${sale[0]}">Uruk Hai</td>
-					<td th:text="${sale[3]}">Bilbo</td>
+					<td th:text="${sale[0]}">Package</td>
+					<td><span th:text="${sale[3]}">5</span> &#8364</td>
 				</tr>
 			</tbody>
 		</table>
 		</div>
-		
+
 		<div class="main" th:if="${#strings.equalsIgnoreCase(choice, 'Average number of optional product')}">
 		<h1>Average Number Of Optional Product</h1>
 		<table>
@@ -120,8 +120,8 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="sale: ${allSalesDataPerPackage}">
-					<td th:text="${sale[0]}">Uruk Hai</td>
-					<td th:text="${sale[1]}!=0? ${sale[4]}/${sale[1]} : '0' " >0</td>
+					<td th:text="${sale[0]}">Package</td>
+					<td th:text="${sale[1]}!=0? ${sale[4]}/${sale[1]} : '0' " >5</td>
 				</tr>
 			</tbody>
 		</table>
@@ -138,8 +138,8 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="insolvent: ${insolvents}">
-					<td th:text="${insolvent.username}">Uruk Hai</td>
-					<td th:text="${insolvent.email}">Bilbo</td>
+					<td th:text="${insolvent.username}">John</td>
+					<td th:text="${insolvent.email}">john.smith@email.com</td>
 				</tr>
 			</tbody>
 		</table>
@@ -157,9 +157,9 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="order: ${suspendedOrders}">
-					<td th:text="${order.id}">Uruk Hai</td>
-					<td th:text="${order.creationDate}">Bilbo</td>
-					<td th:text="${order.creationTime}">Bilbo</td>
+					<td th:text="${order.id}">Order</td>
+					<td th:text="${#dates.format(order.creationDate, 'dd-MM-yyyy')}">01-01-2022</td>
+					<td th:text="${order.creationTime}">10:22</td>
 				</tr>
 			</tbody>
 		</table>
@@ -170,6 +170,7 @@
 		<table>
 			<thead>
 				<tr>
+					<th>Order</th>
 					<th>Username</th>
 					<th>Email</th>
 					<th>Amount</th>
@@ -179,11 +180,12 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="alert: ${alerts}">
-					<td th:text="${alert[0]}">Uruk Hai</td>
-					<td th:text="${alert[1]}">Bilbo</td>
-					<td th:text="${alert[2]}">Bilbo</td>
-					<td th:text="${alert[3]}">Bilbo</td>
-					<td th:text="${alert[4]}">Bilbo</td>
+					<td th:text="${alert[0]}">404</td>
+					<td th:text="${alert[1]}">John</td>
+					<td th:text="${alert[2]}">john.smith@email.com</td>
+					<td><span th:text="${alert[3]}">100</span> &#8364</td>
+					<td th:text="${#dates.format(alert[4], 'dd-MM-yyyy')}">01-01-2022</td>
+					<td th:text="${alert[5]}">10:22</td>
 				</tr>
 			</tbody>
 		</table>
@@ -200,8 +202,8 @@
 			</thead>
 			<tbody th:remove="all-but-first">
 				<tr class="sales" th:each="best: ${bestSeller}">
-					<td th:text="${best.id_optprod}">Uruk Hai</td>
-					<td th:text="${best.tot_revenue}">Bilbo</td>
+					<td th:text="${best.id_optprod}">Product</td>
+					<td><span th:text="${best.tot_revenue}">100</span> &#8364</td>
 				</tr>
 			</tbody>
 		</table>
