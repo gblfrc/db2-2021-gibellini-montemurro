@@ -7,87 +7,94 @@
 <title>Buy packages</title>
 </head>
 <body>
-	<div class="user" th:if="${user}!=null">
-		<span th:text="${user.username} + ' | '"> User | </span>
-		<a th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
-	</div>
-	<h1>Buy a service package</h1>
-	<form id="buyForm" action="CreateSubscription" method="POST">
-		<p>
-			Package: <select name="package" th:remove="all-but-first">
-				<option value="0" th:each="package:${packages}"
-					th:value="${package.id}" th:text=${package.name}>Basic</option>
-				<option value="1">Family</option>
-				<option value="2">All inclusive</option>
-			</select>
-		</p>
-		<p>
-			Validity period (months): <select name="validityPeriod"
-				th:remove="all-but-first">
-				<option th:each="period:${vperiods}" value="12"
-					th:value="${period.months}" th:text="${period.months}">12</option>
-				<option value="24">24</option>
-				<option value="36">36</option>
-			</select>
-		</p>
-		<div th:remove="all-but-first">
-			Optional products:
-			<div class="checkbox" th:each="product,num : ${products}">
-				<input type="checkbox" th:value="${product.name}"
-					th:name="'optProd' + ${num.index}"> <label
-					th:text="${product.name}">Sample product</label>
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetBuyPage">BUY</a>
+				<li><a th:href="Logout">LOGOUT</a>
+			</ul>
+		</nav>
+		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
+	</header>
+	<div class="main">
+		<h1>Buy a service package</h1>
+		<form id="buyForm" action="CreateSubscription" method="POST">
+			<p>
+				Package: <select name="package" th:remove="all-but-first">
+					<option value="0" th:each="package:${packages}"
+						th:value="${package.id}" th:text=${package.name}>Basic</option>
+					<option value="1">Family</option>
+					<option value="2">All inclusive</option>
+				</select>
+			</p>
+			<p>
+				Validity period (months): <select name="validityPeriod"
+					th:remove="all-but-first">
+					<option th:each="period:${vperiods}" value="12"
+						th:value="${period.months}" th:text="${period.months}">12</option>
+					<option value="24">24</option>
+					<option value="36">36</option>
+				</select>
+			</p>
+			<div th:remove="all-but-first">
+				Optional products:
+				<div class="checkbox" th:each="product,num : ${products}">
+					<input type="checkbox" th:value="${product.name}"
+						th:name="'optProd' + ${num.index}"> <label
+						th:text="${product.name}">Sample product</label>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox"> Another sample product
+				</div>
+				<div class="checkbox">
+					<input type="checkbox"> Third sample product
+				</div>
 			</div>
-			<div class="checkbox">
-				<input type="checkbox"> Another sample product
-			</div>
-			<div class="checkbox">
-				<input type="checkbox"> Third sample product
+			<br>
+			<p class="date">
+				Start date (dd-MM-yyyy): <input type="text" name="startDay" required>
+				<input type="text" name="startMonth" required> <input
+					type="text" name="startYear" required> <br> <br>
+				<input type="submit" value="Confirm">
+			</p>
+		</form>
+		<br> <br>
+		<div class="allPackages" th:remove="all-but-first">
+			<div class="package" th:each="package: ${packages}">
+				<div class="packageName" th:text="${package.name}">Basic
+					package</div>
+				<br> Included services <br> <br>
+				<div class="allServices" th:remove="all-but-first">
+					<ul>
+						<li class="service" th:each="service: ${package.services}">
+							<div>
+								Type: <span th:text="${service.type}">Mobile Phone</span>
+							</div>
+							<div th:if="${service.includedGB}!=0">
+								Included GB: <span th:text="${service.includedGB}">0</span>
+							</div>
+							<div th:if="${service.includedGB}!=0">
+								Extra GB Fee: <span th:text="${service.extraGBFee}">0</span>
+							</div>
+							<div th:if="${service.includedSMS}!=0">
+								Included SMS: <span th:text="${service.includedSMS}">500</span>
+							</div>
+							<div th:if="${service.includedSMS}!=0">
+								Extra SMS Fee: <span th:text="${service.extraSMSFee}">1</span>
+							</div>
+							<div th:if="${service.includedMinutes}!=0">
+								Included Minutes: <span th:text="${service.includedMinutes}">500</span>
+							</div>
+							<div th:if="${service.includedMinutes}!=0">
+								Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">0</span>
+							</div> <br>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<br>
-		<p class="date">
-			Start date (dd-MM-yyyy): <input type="text" name="startDay" required>
-			<input type="text" name="startMonth" required> <input
-				type="text" name="startYear" required> <br> <br> <input
-				type="submit" value="Confirm">
-		</p>
-	</form>
-	<br>
-	<br>
-	<div class="allPackages" th:remove="all-but-first">
-		<div class="package" th:each="package: ${packages}">
-			<div class="packageName" th:text="${package.name}">Basic
-				package</div>
-			<br> Included services <br> <br>
-			<div class="allServices" th:remove="all-but-first">
-				<ul>
-					<li class="service" th:each="service: ${package.services}">
-						<div>
-							Type: <span th:text="${service.type}">Mobile Phone</span>
-						</div>
-						<div th:if="${service.includedGB}!=0">
-							Included GB: <span th:text="${service.includedGB}">0</span>
-						</div>
-						<div th:if="${service.includedGB}!=0">
-							Extra GB Fee: <span th:text="${service.extraGBFee}">0</span>
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Included SMS: <span th:text="${service.includedSMS}">500</span>
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}">1</span>
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">0</span>
-						</div> <br>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<p class="error" th:if="${error}!=null"
+			th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 	</div>
-	<p class="error" th:if="${error}!=null"
-		th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>

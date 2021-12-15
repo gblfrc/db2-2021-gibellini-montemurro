@@ -7,79 +7,88 @@
 <title>Subscription confirmation</title>
 </head>
 <body>
-	<div class="user" th:if="${user}!=null">
-		<span th:text="${user.username} + ' | '"> User | </span> <a
-			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
-	</div>
-	<h1>Subscription data</h1>
-	<div class="subData">
-		<p>
-			Service package: <span th:text="${sub.package_.name}"> Basic </span>
-		</p>
-		<p>Included services</p>
-		<div class="allServices" th:remove="all-but-first">
+	<header>
+		<nav>
 			<ul>
-				<li class="service" th:each="service: ${sub.package_.services}">
-					<div>
-						Type: <span th:text="${service.type}">Mobile Phone</span>
-					</div>
-					<div th:if="${service.includedGB}!=0">
-						Included GB: <span th:text="${service.includedGB}">0</span>
-					</div>
-					<div th:if="${service.includedGB}!=0">
-						Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
-						&#8364
-					</div>
-					<div th:if="${service.includedSMS}!=0">
-						Included SMS: <span th:text="${service.includedSMS}">500</span>
-					</div>
-					<div th:if="${service.includedSMS}!=0">
-						Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
-						&#8364
-					</div>
-					<div th:if="${service.includedMinutes}!=0">
-						Included Minutes: <span th:text="${service.includedMinutes}">500</span>
-					</div>
-					<div th:if="${service.includedMinutes}!=0">
-						Extra Minutes Fee: <span
-							th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
-					</div> <br>
-				</li>
+				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetBuyPage">BUY</a>
+				<li><a th:href="Logout">LOGOUT</a>
 			</ul>
+		</nav>
+		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
+	</header>
+	<div class="main">
+		<h1>Subscription data</h1>
+		<div class="subData">
+			<p>
+				Service package: <span th:text="${sub.package_.name}"> Basic
+				</span>
+			</p>
+			<p>Included services</p>
+			<div class="allServices" th:remove="all-but-first">
+				<ul>
+					<li class="service" th:each="service: ${sub.package_.services}">
+						<div>
+							Type: <span th:text="${service.type}">Mobile Phone</span>
+						</div>
+						<div th:if="${service.includedGB}!=0">
+							Included GB: <span th:text="${service.includedGB}">0</span>
+						</div>
+						<div th:if="${service.includedGB}!=0">
+							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
+							&#8364
+						</div>
+						<div th:if="${service.includedSMS}!=0">
+							Included SMS: <span th:text="${service.includedSMS}">500</span>
+						</div>
+						<div th:if="${service.includedSMS}!=0">
+							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
+							&#8364
+						</div>
+						<div th:if="${service.includedMinutes}!=0">
+							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
+						</div>
+						<div th:if="${service.includedMinutes}!=0">
+							Extra Minutes Fee: <span
+								th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
+						</div> <br>
+					</li>
+				</ul>
+			</div>
+			<p>
+				Activation date: <span
+					th:text="${#dates.format(sub.startDate, 'dd-MM-yyyy')}">
+					03-04-1999 </span>
+			</p>
+			<p>
+				Validity period: <span th:text="${sub.validityPeriod.months}">
+					12 </span>
+			</p>
+			<p th:if="not ${#lists.isEmpty(sub.optionalProductsSub)}">Optional
+				products:
+			<ul th:remove="all-but-first">
+				<li th:each="product: ${sub.optionalProductsSub}"
+					th:text="${product.name}">Product 1</li>
+				<li>Product 2</li>
+				<li>Product 3</li>
+			</ul>
+			<p>
+				Amount to pay: <span th:text="${sub.amount}"> 404 </span> &#8364
+			</p>
+			<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
+				method="POST">
+				<input type="hidden" name="fail" value="false"> <input
+					type="submit" value="Buy - no failure">
+			</form>
+			<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
+				method="POST">
+				<input type="hidden" name="fail" value="true"> <input
+					type="submit" value="Buy but fail payment">
+			</form>
 		</div>
-		<p>
-			Activation date: <span
-				th:text="${#dates.format(sub.startDate, 'dd-MM-yyyy')}">
-				03-04-1999 </span>
+		<p th:if="${client}==null">
+			<a href="GetLogin">Log in/register to purchase</a>
 		</p>
-		<p>
-			Validity period: <span th:text="${sub.validityPeriod.months}">
-				12 </span>
-		</p>
-		<p th:if="not ${#lists.isEmpty(sub.optionalProductsSub)}">Optional
-			products:
-		<ul th:remove="all-but-first">
-			<li th:each="product: ${sub.optionalProductsSub}"
-				th:text="${product.name}">Product 1</li>
-			<li>Product 2</li>
-			<li>Product 3</li>
-		</ul>
-		<p>
-			Amount to pay: <span th:text="${sub.amount}"> 404 </span> &#8364
-		</p>
-		<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
-			method="POST">
-			<input type="hidden" name="fail" value="false"> <input
-				type="submit" value="Buy - no failure">
-		</form>
-		<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
-			method="POST">
-			<input type="hidden" name="fail" value="true"> <input
-				type="submit" value="Buy but fail payment">
-		</form>
 	</div>
-	<p th:if="${client}==null">
-		<a href="GetLogin">Log in/register to purchase</a>
-	</p>
 </body>
 </html>

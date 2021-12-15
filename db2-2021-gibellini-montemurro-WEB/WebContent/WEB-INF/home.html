@@ -7,88 +7,99 @@
 <title>Home</title>
 </head>
 <body>
-	<div class="user" th:if="${user}!=null">
-		<span th:text="${user.username} + ' | '"> User | </span> <a
-			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
-	</div>
-	<h1>Service packages</h1>
-	<div class="allPackages" th:remove="all-but-first">
-		<div class="package" th:each="package: ${packages}">
-			<div class="packageName" th:text="${package.name}">Simple
-				package</div>
-			<br> Included services <br> <br>
-			<div class="allServices" th:remove="all-but-first">
-				<ul>
-					<li class="service" th:each="service: ${package.services}">
-						<div>
-							Type: <span th:text="${service.type}">Mobile Phone</span>
-						</div>
-						<div th:if="${service.includedGB}!=0">
-							Included GB: <span th:text="${service.includedGB}">0</span>
-						</div>
-						<div th:if="${service.includedGB}!=0">
-							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span> &#8364
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Included SMS: <span th:text="${service.includedSMS}">500</span>
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span> &#8364
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
-						</div> <br>
-					</li>
-				</ul>
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetBuyPage">BUY</a>
+				<li><a th:href="Logout">LOGOUT</a>
+			</ul>
+		</nav>
+		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
+	</header>
+	<div class="main">
+		<h1>Service packages</h1>
+		<div class="allPackages" th:remove="all-but-first">
+			<div class="package" th:each="package: ${packages}">
+				<div class="packageName" th:text="${package.name}">Simple
+					package</div>
+				<br> Included services: <br> <br>
+				<div class="allServices" th:remove="all-but-first">
+					<ol>
+						<li class="service" th:each="service: ${package.services}">
+							<div>
+								Type: <span th:text="${service.type}">Mobile Phone</span>
+							</div>
+							<div th:if="${service.includedGB}!=0">
+								Included GB: <span th:text="${service.includedGB}">0</span>
+							</div>
+							<div th:if="${service.includedGB}!=0">
+								Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
+								&#8364
+							</div>
+							<div th:if="${service.includedSMS}!=0">
+								Included SMS: <span th:text="${service.includedSMS}">500</span>
+							</div>
+							<div th:if="${service.includedSMS}!=0">
+								Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
+								&#8364
+							</div>
+							<div th:if="${service.includedMinutes}!=0">
+								Included Minutes: <span th:text="${service.includedMinutes}">500</span>
+							</div>
+							<div th:if="${service.includedMinutes}!=0">
+								Extra Minutes Fee: <span
+									th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
+							</div> <br>
+						</li>
+					</ol>
+				</div>
 			</div>
 		</div>
-	</div>
-	<br>
-	<form action="GetBuyPage" method="GET" class="onlyButton">
-		<input type="submit" value="Buy">
-	</form>
-	<!--  <button type="submit" formAction="/GetBuyPage"
+		<br>
+		<form action="GetBuyPage" method="GET" class="onlyButton">
+			<input type="submit" value="Buy">
+		</form>
+		<!--  <button type="submit" formAction="/GetBuyPage"
 		formMethod="GET">Buy</button>-->
-	<br>
-	<br>
-	<div class="allInvalidOrders" th:remove="all-but-first">
-		<div class="order" th:each="order: ${invOrders}">
-			<div>Rejected order</div>
-			<br>
-			<div>
-				Amount: <span th:text=${order.subscription.amount}> 500</span>
-				&#8364
+		<br> <br>
+		<div class="allInvalidOrders" th:remove="all-but-first">
+			<div class="order" th:each="order: ${invOrders}">
+				<div>Rejected order</div>
+				<br>
+				<div>
+					Amount: <span th:text=${order.subscription.amount}> 500</span>
+					&#8364
+				</div>
+				<div>
+					Creation date: <span
+						th:text="${#dates.format(order.creationDate, 'dd-MM-yyyy')}">
+						16-02-2000</span>
+				</div>
+				<div>
+					Creation time: <span th:text="${order.creationTime}"> 00:00</span>
+				</div>
+				<br>
+				<form action="RefetchOrder" class="onlyButton" method="GET">
+					<input type="hidden" name="orId" th:value="${order.id}"> <input
+						type="submit" value="See activation schedule">
+				</form>
 			</div>
-			<div>
-				Creation date: <span
-					th:text="${#dates.format(order.creationDate, 'dd-MM-yyyy')}">
-					16-02-2000</span>
+			<div class="order">
+				<div>Rejected order</div>
+				<br>
+				<div>Amount: 500 &#8364</div>
+				<div>Creation date: 03-04-1999</div>
+				<div>Creation time: 00:00</div>
+				<br>
+				<form class="onlyButton">
+					<input type="submit" value="See activation schedule">
+				</form>
 			</div>
-			<div>
-				Creation time: <span th:text="${order.creationTime}"> 00:00</span>
-			</div>
-			<br>
-			<form action="RefetchOrder" class="onlyButton" method="GET">
-				<input type="hidden" name="orId" th:value="${order.id}"> <input
-					type="submit" value="See activation schedule">
-			</form>
 		</div>
-		<div class="order">
-			<div>Rejected order</div>
-			<br>
-			<div>Amount: 500 &#8364</div>
-			<div>Creation date: 03-04-1999</div>
-			<div>Creation time: 00:00</div><br>
-			<form class="onlyButton">
-				<input type="submit" value="See activation schedule">
-			</form>
-		</div>
+		<p class="error" th:if="${error}!=null"
+			th:text="${error.code} + ': ' + ${error.message}">404: Arma
+			virumque cano, Troiae qui primus ab oris</p>
 	</div>
-	<p class="error" th:if="${error}!=null"
-		th:text="${error.code} + ': ' + ${error.message}">404: Arma
-		virumque cano, Troiae qui primus ab oris</p>
 </body>
 </html>

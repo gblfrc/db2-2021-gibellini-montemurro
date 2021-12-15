@@ -1,28 +1,83 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
+
+@import	url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/*
+COLOR PALETTE:
+lightest blue: #8ecae6
+light blue: #219ebc
+blue: #023047
+dark blue: #061539
+yellow: #ffb703
+orange: #fb8500
+*/
 
 body {
-	background-color: teal;
-	font-family: "Lucida console";
+	background-color: #023047;
+	font-family: "Montserrat", sans-serif;
 	position: relative;
+}
+
+body, header * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	display: flex;
+	background-color: #061539;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+header ul li, header div {
+	display: inline-block;
+	padding: 1em 1em;
+	text-align: center;
+}
+
+header ul li {
+	width: 120px;
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+}
+
+header ul li:hover{
+	background-color: #05112e;
+}
+
+div.main {
+	margin: 1em 1.5em;
+	padding: auto;
+}
+
+h1 {
+	color: white;
+}
+
+ul {
+	list-style: none;
 }
 
 form {
 	display: inline-block;
 }
 
-form>p{
+form>p {
 	margin-top: 0.2em;
 }
 
-p:not([class="date"])>input[type="text"], p>input[type="password"], p>select{
+p:not([class="date"])>input[type="text"], p>input[type="password"], p>select {
 	width: 65%;
 	float: right;
 }
 
-p>select[name="validityPeriod"]{
+p>select[name="validityPeriod"] {
 	width: auto;
 }
 
+/*may be useless*/
 div.logout {
 	position: absolute;
 	right: 0px;
@@ -32,17 +87,14 @@ div.logout {
 /* form:not(.onlyButton) is introduced to give the style to all forms
    beside the ones which only contain a button */
 div.package, div.order, div.subData, div.sales, form:not(.onlyButton) {
-	background-color: coral;
+	background-color: #219ebc;
 	width: 40%;
 	margin: 10 px;
-	border-style: inset;
-	border-color: orange;
-	border-radius: 10px;
-	padding-top: 0.5em;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-	padding-bottom: 0.5em;
-	padding-top: 0.5em;
+	color: white;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #ffb703;
+	padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 div.package, div.order {
@@ -60,10 +112,10 @@ div.package>* {
 }
 
 input[type="submit"], button {
-	background-color: orange;
-	border-style: outset;
-	border-color: orange;
-	border-radius: 5px;
+	background-color: #ffb703;
+	border-style: solid;
+	border-color: #ffb703;
+	/*border-radius: 5px;*/
 	padding-top: 3px;
 	padding-bottom: 3px;
 	cursor: pointer;
@@ -78,15 +130,15 @@ input[name="startYear"] {
 }
 
 a {
-	color: orange;
+	color: #ffb703;
 }
 
 div.user {
 	text-align: right;
-	color: orange;
+	color: #ffb703;
 	position: absolute;
-	right: 5px;
-	top: 2px;
+	top: 0px;
+	right: 0px;
 }
 
 p.error {
@@ -100,7 +152,7 @@ p.error {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 }
-
+/*
 div.main {
 	background-color: #ff9751;
 	border-style: inset;
@@ -118,7 +170,7 @@ div.main>* {
 	margin-left: 15px;
 	margin-right: 15px;
 	margin-bottom: 15px;
-}
+}*/
 
 table {
 	border-color: #ff8040;
