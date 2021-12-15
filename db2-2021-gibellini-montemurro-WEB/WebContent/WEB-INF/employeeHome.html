@@ -7,18 +7,27 @@
 <title>Welcome in your home page</title>
 </head>
 <body>
-	<div class="user" th:if="${user}!=null">
-		<span th:text="${user.username} + ' | '"> User | </span> <a
-			th:href="Logout" href="Logout" th:text="Logout"> Logout</a>
-	</div>
-	<div>
-		<h1>Create a service package</h1>
-		<form action="CreateServicePackage" method="POST">
-			<p> Name: <input type="text" name="name" required></p> 
-			<h2>Choose services to add</h2>
-			<div class="allServices" th:remove="all-but-first">
-				<div class="service" th:each="service: ${services}">
-				<input type="checkbox" name="typeService" th:value="${service.id}"> 
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetSalesPage">SALES</a>
+				<li><a th:href="Logout">LOGOUT</a>
+			</ul>
+		</nav>
+		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
+	</header>
+	<div class="main">
+		<div>
+			<h1>Create a service package</h1>
+			<form action="CreateServicePackage" method="POST">
+				<p>
+					Name: <input type="text" name="name" required>
+				</p>
+				<h2>Choose services to add</h2>
+				<div class="allServices" th:remove="all-but-first">
+					<div class="service" th:each="service: ${services}">
+						<input type="checkbox" name="typeService" th:value="${service.id}">
 						<div>
 							Type: <span th:text="${service.type}">Mobile Phone</span>
 						</div>
@@ -26,49 +35,65 @@
 							Included GB: <span th:text="${service.includedGB}">0</span>
 						</div>
 						<div th:if="${service.includedGB}!=0">
-							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span> &#8364
+							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
+							&#8364
 						</div>
 						<div th:if="${service.includedSMS}!=0">
 							Included SMS: <span th:text="${service.includedSMS}">500</span>
 						</div>
 						<div th:if="${service.includedSMS}!=0">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span> &#8364
+							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
+							&#8364
 						</div>
 						<div th:if="${service.includedMinutes}!=0">
 							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
 						</div>
 						<div th:if="${service.includedMinutes}!=0">
-							Extra Minutes Fee: <span th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
-						</div> <br>
+							Extra Minutes Fee: <span
+								th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
+						</div>
+						<br>
+					</div>
 				</div>
-			</div> <br>
-			<h2>Choose optional products to add</h2>
-			<div class="allOptionalProducts" th:remove="all-but-first">
-				<div class="optionalProduct" th:each="optionalProduct: ${optionalProducts}">
-					<input type="checkbox" name="typeOptional" th:value="${optionalProduct.name}"> 
-					<div> Name: <span th:text="${optionalProduct.name}">Product</span> </div>
-					<div> MonthlyFee: <span th:text="${optionalProduct.monthlyFee}">5</span> &#8364</div><br> 
+				<br>
+				<h2>Choose optional products to add</h2>
+				<div class="allOptionalProducts" th:remove="all-but-first">
+					<div class="optionalProduct"
+						th:each="optionalProduct: ${optionalProducts}">
+						<input type="checkbox" name="typeOptional"
+							th:value="${optionalProduct.name}">
+						<div>
+							Name: <span th:text="${optionalProduct.name}">Product</span>
+						</div>
+						<div>
+							MonthlyFee: <span th:text="${optionalProduct.monthlyFee}">5</span>
+							&#8364
+						</div>
+						<br>
+					</div>
 				</div>
-			</div>
-			<input type="submit" value="Create">
+				<input type="submit" value="Create">
+			</form>
+		</div>
+		<div>
+			<h1>Create an optional product</h1>
+			<form action="CreateOptionalProduct" method="POST">
+				<p>
+					Name: <input type="text" name="name" required>
+				</p>
+				<p>
+					MonthlyFee: <input type="text" name="monthlyFee" required>
+				</p>
+				<input type="submit" value="Create">
+			</form>
+		</div>
+		<br>
+		<form class="onlyButton" action="GetSalesPage" method="GET">
+			<input type="submit" value="SeeSales">
 		</form>
+		<br>
+		<p class="error" th:if="${error}!=null"
+			th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 	</div>
-	<div>
-		<h1>Create an optional product</h1>
-		<form action="CreateOptionalProduct" method="POST">
-			<p>
-				Name: <input type="text" name="name" required>
-			</p>
-			<p>
-				MonthlyFee: <input type="text" name="monthlyFee" required>
-			</p>
-			<input type="submit" value="Create">
-		</form>
-	</div>
-	<br>
-	<form class="onlyButton" action="GetSalesPage" method="GET"><input type="submit" value="SeeSales">
-	</form>
-	<br>
-	<p class="error" th:if="${error}!=null" th:text="${error.code} + ': ' + ${error.message}">404: Not found</p>
 </body>
 </html>
