@@ -10,7 +10,7 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetEmployeeHomePage">HOME</a>
 				<li><a th:href="GetSalesPage">SALES</a>
 				<li><a th:href="Logout">LOGOUT</a>
 			</ul>
@@ -27,49 +27,54 @@
 				<h2>Choose services to add</h2>
 				<div class="allServices" th:remove="all-but-first">
 					<div class="service" th:each="service: ${services}">
-						<input type="checkbox" name="typeService" th:value="${service.id}">
-						<div>
-							Type: <span th:text="${service.type}">Mobile Phone</span>
+						<div class="checkbox">
+							<input type="checkbox" name="typeService"
+								th:value="${service.id}">
+							<div class="label">
+								<div>
+									Type: <span th:text="${service.type}">Mobile Phone</span>
+								</div>
+								<div th:if="${service.includedGB}!=0">
+									Included GB: <span th:text="${service.includedGB}">0</span>
+								</div>
+								<div th:if="${service.includedGB}!=0">
+									Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
+									&#8364
+								</div>
+								<div th:if="${service.includedSMS}!=0">
+									Included SMS: <span th:text="${service.includedSMS}">500</span>
+								</div>
+								<div th:if="${service.includedSMS}!=0">
+									Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
+									&#8364
+								</div>
+								<div th:if="${service.includedMinutes}!=0">
+									Included Minutes: <span th:text="${service.includedMinutes}">500</span>
+								</div>
+								<div th:if="${service.includedMinutes}!=0">
+									Extra Minutes Fee: <span
+										th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
+								</div>
+							</div>
 						</div>
-						<div th:if="${service.includedGB}!=0">
-							Included GB: <span th:text="${service.includedGB}">0</span>
-						</div>
-						<div th:if="${service.includedGB}!=0">
-							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
-							&#8364
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Included SMS: <span th:text="${service.includedSMS}">500</span>
-						</div>
-						<div th:if="${service.includedSMS}!=0">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
-							&#8364
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Included Minutes: <span th:text="${service.includedMinutes}">500</span>
-						</div>
-						<div th:if="${service.includedMinutes}!=0">
-							Extra Minutes Fee: <span
-								th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
-						</div>
-						<br>
 					</div>
 				</div>
-				<br>
 				<h2>Choose optional products to add</h2>
 				<div class="allOptionalProducts" th:remove="all-but-first">
 					<div class="optionalProduct"
 						th:each="optionalProduct: ${optionalProducts}">
 						<input type="checkbox" name="typeOptional"
 							th:value="${optionalProduct.name}">
+							<div class="label">
 						<div>
 							Name: <span th:text="${optionalProduct.name}">Product</span>
 						</div>
 						<div>
-							MonthlyFee: <span th:text="${optionalProduct.monthlyFee}">5</span>
+							Monthly fee: <span th:text="${optionalProduct.monthlyFee}">5</span>
 							&#8364
 						</div>
-						<br>
+						</div>
+						<br><br>
 					</div>
 				</div>
 				<input type="submit" value="Create">
@@ -82,7 +87,7 @@
 					Name: <input type="text" name="name" required>
 				</p>
 				<p>
-					MonthlyFee: <input type="text" name="monthlyFee" required>
+					Monthly fee: <input type="text" name="monthlyFee" required>
 				</p>
 				<input type="submit" value="Create">
 			</form>
