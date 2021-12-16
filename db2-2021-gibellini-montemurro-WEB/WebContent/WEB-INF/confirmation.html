@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" media="all"
 	href="../css/telco.css" th:href="@{/css/telco.css}" />
-<title>Subscription confirmation</title>
+<!-- ORDER==NULL => confirmation page -->
+<!-- ORDER!=NULL => activation schedule -->
+<title th:if="${order==null}">Subscription confirmation</title>
+<title th:if="${order!=null}">Activation schedule</title>
 </head>
 <body>
 	<header>
 		<nav>
 			<ul>
-				<li><a th:href="Home">HOME</a>
+				<li><a th:href="GetUserHomePage">HOME</a>
 				<li><a th:href="GetBuyPage">BUY</a>
 				<li><a th:href="Logout">LOGOUT</a>
 			</ul>
@@ -18,8 +21,12 @@
 		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
 	</header>
 	<div class="main">
-		<h1>Subscription data</h1>
+		<h1 th:if="${order==null}">Subscription data</h1>
+		<h1 th:if="${order!=null}">Activation schedule</h1>
 		<div class="subData">
+			<p th:if="${order!=null}">
+				Order ID: <span th:text="${order.id}"> 404 </span>
+			</p>
 			<p>
 				Service package: <span th:text="${sub.package_.name}"> Basic
 				</span>
@@ -60,7 +67,12 @@
 					th:text="${#dates.format(sub.startDate, 'dd-MM-yyyy')}">
 					03-04-1999 </span>
 			</p>
-			<p>
+			<p th:if="${order!=null}">
+				Deactivation date: <span
+					th:text="${#dates.format(deactivationDate, 'dd-MM-yyyy')}">
+					16-02-2000 </span>
+			</p>
+			<p th:if="${order==null}">
 				Validity period: <span th:text="${sub.validityPeriod.months}">
 					12 </span>
 			</p>
@@ -72,21 +84,38 @@
 				<li>Product 2</li>
 				<li>Product 3</li>
 			</ul>
-			<p>
+			<p th:if="${order==null} or ${order.validity}==false">
 				Amount to pay: <span th:text="${sub.amount}"> 404 </span> &#8364
 			</p>
-			<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
-				method="POST">
-				<input type="hidden" name="fail" value="false"> <input
-					type="submit" value="Buy - no failure">
-			</form>
-			<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
-				method="POST">
-				<input type="hidden" name="fail" value="true"> <input
-					type="submit" value="Buy but fail payment">
-			</form>
+			<p th:if="${order!=null} and ${order.validity}==true">
+				Paid amount: <span th:text="${sub.amount}"> 404 </span> &#8364
+			</p>
+			<div th:if="${order==null}">
+				<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
+					method="POST">
+					<input type="hidden" name="fail" value="false"> <input
+						type="submit" value="Buy - no failure">
+				</form>
+				<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"
+					method="POST">
+					<input type="hidden" name="fail" value="true"> <input
+						type="submit" value="Buy but fail payment">
+				</form>
+			</div>
+			<div th:if="${order!=null}">
+				<form th:if="${order.validity}==false" action="PayOrder"
+					class="onlyButton" method="POST">
+					<input type="hidden" name="fail" value="false"> <input
+						type="submit" value="Retry - no failure">
+				</form>
+				<form th:if="${order.validity}==false" action="PayOrder"
+					class="onlyButton" method="POST">
+					<input type="hidden" name="fail" value="true"> <input
+						type="submit" value="Retry but fail payment">
+				</form>
+			</div>
 		</div>
-		<p th:if="${client}==null">
+		<p th:if="${client}==null and ${order}==null">
 			<a href="GetLogin">Log in/register to purchase</a>
 		</p>
 	</div>

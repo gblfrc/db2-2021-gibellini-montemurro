@@ -60,6 +60,7 @@ public class GetConfirmationPage extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("user", client);
+		ctx.setVariable("order", null);
 		ctx.setVariable("sub", sub);
 		ctx.setVariable("client", sub.getUser());
 		templateEngine.process(path, ctx, response.getWriter());

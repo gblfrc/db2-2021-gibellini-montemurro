@@ -63,7 +63,7 @@ public class GetActivationSchedule extends HttpServlet {
 		Date deactivationDate = sub.getDeactivationDate();
 		
 		//give access to actual home page which should show the activation schedule
-		String path = "/WEB-INF/activationSchedule.html";
+		String path = "/WEB-INF/confirmation.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("user", (Client)request.getSession().getAttribute("user"));
