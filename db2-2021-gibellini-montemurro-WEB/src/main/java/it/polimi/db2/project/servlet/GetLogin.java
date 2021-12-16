@@ -22,7 +22,9 @@ public class GetLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//fetch error (if present, otherwise error is null)
+		//fetch error and success (if present, otherwise error is null)
+		Error success = (Error)request.getSession().getAttribute("sucReg");
+		request.getSession().removeAttribute("sucReg");
 		Error error = (Error)request.getAttribute("error");
 		
 		//give access to landing page (page for login or registration)
@@ -30,6 +32,7 @@ public class GetLogin extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("error", error);
+		ctx.setVariable("success", success);	
 		templateEngine.process(path, ctx, response.getWriter());
 		
 	}

@@ -141,7 +141,7 @@ div.user {
 	right: 0px;
 }
 
-p.error {
+p.error, p.success {
 	background-color: lightcoral;
 	border-color: crimson;
 	border-style: solid;
@@ -151,6 +151,11 @@ p.error {
 	padding-bottom: 0.5em;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
+}
+
+p.success{
+	background-color: lightgreen;
+	border-color: green;
 }
 /*
 div.main {

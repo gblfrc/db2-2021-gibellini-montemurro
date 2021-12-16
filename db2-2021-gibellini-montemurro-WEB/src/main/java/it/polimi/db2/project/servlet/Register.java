@@ -33,8 +33,12 @@ public class Register extends HttpServlet {
 		}catch(Exception e) {
 			Error error=new Error(HttpServletResponse.SC_BAD_REQUEST, "Couldn't create account, invalid credentials");
 			error.forward("/GetLogin", this, request, response);
+			return;
 		}
-		
+
+		Error success=new Error(HttpServletResponse.SC_OK, "Successful registration");
+		request.getSession().setAttribute("sucReg", success);
+
 		response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");
 	}
 

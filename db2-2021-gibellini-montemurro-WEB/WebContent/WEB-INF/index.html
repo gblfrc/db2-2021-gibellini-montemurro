@@ -22,7 +22,7 @@
 		<form action="Register" method="POST">
 			<p>
 				Username: <input type="text" name="username" required>
-			</p> 
+			</p>
 			<p>
 				Password: <input type="password" name="password" required>
 			</p>
@@ -37,6 +37,10 @@
 		<p class="error" th:if="${error}!=null"
 			th:text="${error.code} + ': ' + ${error.message}">404: Arma
 			virumque cano, Troiae qui primus ab oris</p>
+		<p class="success" th:if="${success}!=null"
+			th:text="${${success.code} + ': ' + success.message}">200: Arma
+			virumque cano, Troiae qui primus ab oris</p>
+
 	</div>
 </body>
 </html>
