@@ -19,7 +19,7 @@
 	function SalesPerPackage() {
 		this.element = document.querySelector("div[class='purchasePerPackage']");
 		this.salesPerPackage = document.querySelector("div[class='purchasePerPackage']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -52,7 +52,7 @@
 	function SalesPerPackageAndValidity() {
 		this.element = document.querySelector("div[class='purchasePerPackageAndValidity']");
 		this.salesPerPackageAndValidity = document.querySelector("div[class='purchasePerPackageAndValidity']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -88,7 +88,7 @@
 	function AmountWithoutOptional() {
 		this.element = document.querySelector("div[class='amountWithoutOptionalProduct']");
 		this.amountWithoutOptional = document.querySelector("div[class='amountWithoutOptionalProduct']>table>tbody");
-		// function to hide appeals table
+	
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -121,7 +121,7 @@
 	function AmountWithOptional() {
 		this.element = document.querySelector("div[class='amountWithOptionalProduct']");
 		this.amountWithOptional = document.querySelector("div[class='amountWithOptionalProduct']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -153,7 +153,7 @@
 	function AverageNumberOfOptional() {
 		this.element = document.querySelector("div[class='averageNumberOfOptionalProduct']");
 		this.averageNumberOfOptional = document.querySelector("div[class='averageNumberOfOptionalProduct']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -189,7 +189,7 @@
 	function InsolventClients() {
 		this.element = document.querySelector("div[class='insolventClients']");
 		this.insolventClients = document.querySelector("div[class='insolventClients']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -222,7 +222,7 @@
 	function SuspendedOrders() {
 		this.element = document.querySelector("div[class='suspendedOrders']");
 		this.suspendedOrders = document.querySelector("div[class='suspendedOrders']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -258,7 +258,7 @@
 	function Alerts() {
 		this.element = document.querySelector("div[class='alerts']");
 		this.alerts = document.querySelector("div[class='alerts']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -303,7 +303,7 @@
 	function BestSeller() {
 		this.element = document.querySelector("div[class='bestSeller']");
 		this.bestSeller = document.querySelector("div[class='bestSeller']>table>tbody");
-		// function to hide appeals table
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -344,11 +344,13 @@
 		this.alertsButton = document.getElementById("alertsButton");
 		this.bestSellerButton = document.getElementById("bestSellerButton");
 		let firstCallDone = 0;
+		let firstChoice;
 		
 		this.purchasePerPackageButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=salesPerPackage;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				salesPerPackage.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -358,9 +360,10 @@
 		})
 
 		this.purchasePerPackageAndValidityPeriodButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=salesPerPackageAndValidity;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				salesPerPackageAndValidity.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -370,9 +373,10 @@
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=amountWithoutOptional;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				amountWithoutOptional.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -382,9 +386,10 @@
 		})
 		
 		this.amountWithOptionalButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=amountWithOptional;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				amountWithOptional.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -394,9 +399,10 @@
 		})
 		
 		this.averageNumberButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=averageNumberOfOptional;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				averageNumberOfOptional.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -406,9 +412,10 @@
 		})
 		
 		this.insolventClientsButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=insolventClients;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				insolventClients.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -418,9 +425,10 @@
 		}) 
 		
 		this.suspendedOrdersButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=suspendedOrders;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				suspendedOrders.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -430,9 +438,10 @@
 		}) 
 		
 		this.alertsButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=alerts;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				alerts.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -442,9 +451,10 @@
 		}) 
 		
 		this.bestSellerButton.addEventListener('click', (e) => {
+			e.preventDefault();
 			if (firstCallDone === 0) {
+				firstChoice=bestSeller;
 				makeCall("GET", "GetSalesPage", null, this.update);
-				bestSeller.show();
 				firstCallDone = 1;
 			}
 			else {
@@ -485,6 +495,7 @@
 					suspendedList = JSON.parse(objResponse[3] + "]]");
 					alertList= JSON.parse(objResponse[4] + "]]");
 					bestSellerList= JSON.parse(objResponse[5] + "}]");
+					firstChoice.show();
 				}
 			}
 		}
