@@ -479,9 +479,9 @@
 			suspendedOrders.hide();
 			suspendedOrders.clear();
 			alerts.hide();
-			alerts.hide();
+			alerts.clear();
 			bestSeller.hide();
-			bestSeller.hide();
+			bestSeller.clear();
 		}
 		this.update = function update(req) {
 			if (req.readyState === 4) {
