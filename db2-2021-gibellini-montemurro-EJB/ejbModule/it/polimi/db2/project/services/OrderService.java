@@ -30,13 +30,13 @@ public class OrderService {
 		return result;
 	}
 
-	public List<Order> getSuspendedOrders(){
-		TypedQuery<Order> query = em.createNamedQuery("Order.suspendedOrders", Order.class);
-		List<Order> result;
+	public List<Object[]> getSuspendedOrders(){
+		TypedQuery<Object[]> query = em.createNamedQuery("Order.suspendedOrders", Object[].class);
+		List<Object[]> result;
 		try {
-			result = query.getResultList();
+			result =query.getResultList();
 		} catch (NoResultException e) {
-			return result=new LinkedList<>();
+			return result=null;
 		}
 		return result;
 	}

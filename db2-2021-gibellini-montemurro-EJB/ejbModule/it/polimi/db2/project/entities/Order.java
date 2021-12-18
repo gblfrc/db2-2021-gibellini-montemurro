@@ -12,7 +12,7 @@ import java.util.Date;
 	@NamedQuery(name="Order.findAllByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1"),
 	@NamedQuery(name="Order.findAllInvalidByUser", query="SELECT o FROM Order o WHERE o.subscription.user = ?1 and o.validity = false"),
 	@NamedQuery(name="Order.findBySubscription", query="SELECT o FROM Order o WHERE o.subscription = :sub"),
-	@NamedQuery(name="Order.suspendedOrders",query="SELECT o FROM Order o WHERE o.validity=false"),
+	@NamedQuery(name="Order.suspendedOrders",query="SELECT o.id, o.creationDate, o.creationTime FROM Order o WHERE o.validity=false"),
 	@NamedQuery(name="Order.findById", query="SELECT o FROM Order o WHERE o.id = :id")
 })
 public class Order implements Serializable {

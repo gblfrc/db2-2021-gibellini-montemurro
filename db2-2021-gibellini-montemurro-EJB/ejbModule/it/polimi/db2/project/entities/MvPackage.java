@@ -1,5 +1,7 @@
 package it.polimi.db2.project.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="MvPackage.findPurchasesPerPackageAndValidityPeriod", query="SELECT mv FROM MvPackage mv"),
 	@NamedQuery(name="MvPackage.findDataPurchasePerPackage", query="SELECT mv.id_package, sum(mv.totPurchase), sum(mv.totRevenueWoOpt), sum(mv.totRevenueWOpt), sum(mv.totOptProd) FROM MvPackage mv GROUP BY mv.id_package")
 })
-public class MvPackage {
+public class MvPackage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id

@@ -4,6 +4,8 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" media="all"
 	href="../css/telco.css" th:href="@{/css/telco.css}" />
+<script src="utils.js" defer></script>
+<script src="employee.js" defer></script>
 <title>Welcome in your home page</title>
 </head>
 <body>
@@ -93,8 +95,8 @@
 			</form>
 		</div>
 		<br>
-		<form class="onlyButton" action="GetSalesPage" method="GET">
-			<input type="submit" value="SeeSales">
+		<form class="onlyButton" action="#">
+			<input id="seeSalesButton" type="submit" value="SeeSales">
 		</form>
 		<br>
 		<p class="error" th:if="${error}!=null"

@@ -1,5 +1,7 @@
 package it.polimi.db2.project.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mv_optprod")
 @NamedQuery(name="MvOptProd.findBestSeller", query="SELECT mv FROM MvOptProd mv WHERE mv.tot_revenue= (SELECT max(mv.tot_revenue) FROM MvOptProd mv)")
-public class MvOptProd {
+public class MvOptProd implements Serializable{
 	@Id
 	String id_optprod;
 	
