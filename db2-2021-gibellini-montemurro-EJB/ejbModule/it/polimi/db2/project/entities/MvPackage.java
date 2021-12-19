@@ -15,7 +15,10 @@ import javax.persistence.Table;
 @Table(name = "mv_package")
 @NamedQueries({
 	@NamedQuery(name="MvPackage.findPurchasesPerPackageAndValidityPeriod", query="SELECT mv FROM MvPackage mv"),
-	@NamedQuery(name="MvPackage.findDataPurchasePerPackage", query="SELECT mv.id_package, sum(mv.totPurchase), sum(mv.totRevenueWoOpt), sum(mv.totRevenueWOpt), sum(mv.totOptProd) FROM MvPackage mv GROUP BY mv.id_package")
+	@NamedQuery(name="MvPackage.findTotPurchase", query="SELECT mv.id_package, sum(mv.totPurchase) FROM MvPackage mv GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.revWoOpt", query="SELECT mv.id_package, sum(mv.totRevenueWoOpt) FROM MvPackage mv GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.revWOpt", query="SELECT mv.id_package, sum(mv.totRevenueWOpt) FROM MvPackage mv GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.avgOpt", query="SELECT mv.id_package, sum(mv.totPurchase), sum(mv.totOptProd) FROM MvPackage mv GROUP BY mv.id_package")
 })
 public class MvPackage implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -27,8 +27,41 @@ public class MvPackageService {
 		return result;
 	}
 	
-	public List<Object[]> findAllPurchasesPerPackage() {
-		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.findDataPurchasePerPackage", Object[].class);
+	public List<Object[]> findTotPurchase() {
+		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.findTotPurchase", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Object[]> findTotRevWoOpt() {
+		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.revWoOpt", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Object[]> findTotRevWOpt() {
+		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.revWOpt", Object[].class);
+		List<Object[]> result;
+		try {
+			result =query.getResultList();
+		} catch (NoResultException e) {
+			return result=null;
+		}
+		return result;
+	}
+	
+	public List<Object[]> findAvgOpt() {
+		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.avgOpt", Object[].class);
 		List<Object[]> result;
 		try {
 			result =query.getResultList();

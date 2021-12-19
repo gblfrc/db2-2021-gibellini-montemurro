@@ -1,7 +1,7 @@
 (function() {
 	var buttons, salesPerPackage, salesPerPackageAndValidity, amountWithoutOptional, amountWithOptional,
 		averageNumberOfOptional, insolventClients, suspendedOrders, alerts, bestSeller, 
-		dataPerPackage, dataPerPackageAndValidity, insolventList, suspendedList, alertList, bestSellerList;
+		dataPerPackage, user;
 
 	window.addEventListener("load", () => {
 		buttons = new Button();
@@ -65,16 +65,16 @@
 
 		this.show = function show() {
 			let i = 0;
-			for (i = 0; i < dataPerPackageAndValidity.length; i++) {
+			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackageAndValidity[i].id_package;
+				packageCell.textContent = dataPerPackage[i].id_package;
 				newRow.appendChild(packageCell);
 				let validityCell = document.createElement("td");
-				validityCell.textContent = dataPerPackageAndValidity[i].months;
+				validityCell.textContent = dataPerPackage[i].months;
 				newRow.appendChild(validityCell);
 				let totPurchaseCell = document.createElement("td");
-				totPurchaseCell.textContent = dataPerPackageAndValidity[i].totPurchase;
+				totPurchaseCell.textContent = dataPerPackage[i].totPurchase;
 				newRow.appendChild(totPurchaseCell);
 				salesPerPackageAndValidity.salesPerPackageAndValidity.appendChild(newRow);
 			}
@@ -107,7 +107,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
-				totAmountCell.textContent = dataPerPackage[i][2] + '\u20ac';
+				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithoutOptional.amountWithoutOptional.appendChild(newRow);
 			}
@@ -140,7 +140,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
-				totAmountCell.textContent = dataPerPackage[i][3] + '\u20ac';
+				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithOptional.amountWithOptional.appendChild(newRow);
 			}
@@ -173,7 +173,7 @@
 				newRow.appendChild(packageCell);
 				let avgCell = document.createElement("td");
 				if(dataPerPackage[i][1]!=0){
-					avgCell.textContent = dataPerPackage[i][4]/dataPerPackage[i][1];
+					avgCell.textContent = dataPerPackage[i][2]/dataPerPackage[i][1];
 				}else{
 					avgCell.textContent ="0";
 				}
@@ -202,13 +202,13 @@
 		
 		this.show = function show() {
 			let i = 0;
-			for (i = 0; i < insolventList.length; i++) {
+			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let usernameCell = document.createElement("td");
-				usernameCell.textContent = insolventList[i].username;
+				usernameCell.textContent = dataPerPackage[i].username;
 				newRow.appendChild(usernameCell);
 				let emailCell = document.createElement("td");
-				emailCell.textContent = insolventList[i].email;
+				emailCell.textContent = dataPerPackage[i].email;
 				newRow.appendChild(emailCell);
 				insolventClients.insolventClients.appendChild(newRow);
 			}
@@ -235,16 +235,16 @@
 		
 		this.show = function show() {
 			let i = 0;
-			for (i = 0; i < suspendedList.length; i++) {
+			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let orderCell = document.createElement("td");
-				orderCell.textContent = suspendedList[i][0];
+				orderCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(orderCell);
 				let dateCell = document.createElement("td");
-				dateCell.textContent = suspendedList[i][1];
+				dateCell.textContent = dataPerPackage[i][1];
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
-				timeCell.textContent = suspendedList[i][2];
+				timeCell.textContent = dataPerPackage[i][2];
 				newRow.appendChild(timeCell);
 				suspendedOrders.suspendedOrders.appendChild(newRow);
 			}
@@ -271,25 +271,25 @@
 		
 		this.show = function show() {
 			let i = 0;
-			for (i = 0; i < alertList.length; i++) {
+			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let orderCell = document.createElement("td");
-				orderCell.textContent = alertList[i][0];
+				orderCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(orderCell);
 				let usernameCell = document.createElement("td");
-				usernameCell.textContent = alertList[i][1];
+				usernameCell.textContent = dataPerPackage[i][1];
 				newRow.appendChild(usernameCell);
 				let emailCell = document.createElement("td");
-				emailCell.textContent = alertList[i][2];
+				emailCell.textContent = dataPerPackage[i][2];
 				newRow.appendChild(emailCell);
 				let amountCell = document.createElement("td");
-				amountCell.textContent = alertList[i][3] + '\u20ac';
+				amountCell.textContent = dataPerPackage[i][3] + '\u20ac';
 				newRow.appendChild(amountCell);
 				let dateCell = document.createElement("td");
-				dateCell.textContent = alertList[i][4];
+				dateCell.textContent = dataPerPackage[i][4];
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
-				timeCell.textContent = alertList[i][5];
+				timeCell.textContent = dataPerPackage[i][5];
 				newRow.appendChild(timeCell);
 				alerts.alerts.appendChild(newRow);
 			}
@@ -316,13 +316,13 @@
 		
 		this.show = function show() {
 			let i = 0;
-			for (i = 0; i < bestSellerList.length; i++) {
+			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let optionalProductCell = document.createElement("td");
-				optionalProductCell.textContent = bestSellerList[i].id_optprod;
+				optionalProductCell.textContent = dataPerPackage[i].id_optprod;
 				newRow.appendChild(optionalProductCell);
 				let revenueCell = document.createElement("td");
-				revenueCell.textContent = bestSellerList[i].tot_revenue + '\u20ac';
+				revenueCell.textContent = dataPerPackage[i].tot_revenue + '\u20ac';
 				newRow.appendChild(revenueCell);
 				bestSeller.bestSeller.appendChild(newRow);
 			}
@@ -343,124 +343,69 @@
 		this.suspendedOrdersButton = document.getElementById("suspendedOrdersButton");
 		this.alertsButton = document.getElementById("alertsButton");
 		this.bestSellerButton = document.getElementById("bestSellerButton");
-		let firstCallDone = 0;
-		let firstChoice;
+		let choice;
 		
 		this.purchasePerPackageButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=salesPerPackage;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				salesPerPackage.show();
-			}
+				choice=salesPerPackage;
+				makeCall("GET", "GetPurchaseData?selected=perPackage", this.updateObj);
 		})
 
 		this.purchasePerPackageAndValidityPeriodButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=salesPerPackageAndValidity;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				salesPerPackageAndValidity.show();
-			}
+				choice=salesPerPackageAndValidity;
+				makeCall("GET", "GetPurchaseData?selected=perValidity", this.updateCl);
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=amountWithoutOptional;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				amountWithoutOptional.show();
-			}
+				choice=amountWithoutOptional;
+				makeCall("GET", "GetPurchaseData?selected=withoutOpt", this.updateObj);
 		})
 		
 		this.amountWithOptionalButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=amountWithOptional;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				amountWithOptional.show();
-			}
+				choice=amountWithOptional;
+				makeCall("GET", "GetPurchaseData?selected=withOpt", this.updateObj);
 		})
 		
 		this.averageNumberButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=averageNumberOfOptional;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				averageNumberOfOptional.show();
-			}
+				choice=averageNumberOfOptional;
+				makeCall("GET", "GetPurchaseData?selected=average", this.updateObj);
 		})
 		
 		this.insolventClientsButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=insolventClients;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				insolventClients.show();
-			}
+				choice=insolventClients;
+				makeCall("GET", "GetPurchaseData?selected=insolvent",this.updateCl);
 		}) 
 		
 		this.suspendedOrdersButton.addEventListener('click', (e) => {
-			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=suspendedOrders;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
+				e.preventDefault();
 				this.clear();
-				suspendedOrders.show();
-			}
+				choice=suspendedOrders;
+				makeCall("GET", "GetPurchaseData?selected=suspended", this.updateObj);
 		}) 
 		
 		this.alertsButton.addEventListener('click', (e) => {
 			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=alerts;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
-				this.clear();
-				alerts.show();
-			}
+			this.clear();
+			choice=alerts;
+			makeCall("GET", "GetPurchaseData?selected=alerts", this.updateObj);
 		}) 
 		
 		this.bestSellerButton.addEventListener('click', (e) => {
 			e.preventDefault();
-			if (firstCallDone === 0) {
-				firstChoice=bestSeller;
-				makeCall("GET", "GetSalesPage", null, this.update);
-				firstCallDone = 1;
-			}
-			else {
-				this.clear();
-				bestSeller.show();
-			}
+			this.clear();
+			choice=bestSeller;
+			makeCall("GET", "GetPurchaseData?selected=best", this.updateCl);
 		}) 
 		
 		this.clear = function clear() {
@@ -483,19 +428,30 @@
 			bestSeller.hide();
 			bestSeller.clear();
 		}
-		this.update = function update(req) {
+		this.updateObj = function update(req) {
 			if (req.readyState === 4) {
 				if (req.status === 200) {
 					let replaced = req.responseText.replaceAll("}]", "]]");
 					let objResponse = replaced.split("]]");
-
-					dataPerPackage = JSON.parse(objResponse[0] + "]]");
-					dataPerPackageAndValidity = JSON.parse(objResponse[1] + "}]");
-					insolventList= JSON.parse(objResponse[2] + "}]");
-					suspendedList = JSON.parse(objResponse[3] + "]]");
-					alertList= JSON.parse(objResponse[4] + "]]");
-					bestSellerList= JSON.parse(objResponse[5] + "}]");
-					firstChoice.show();
+					
+					dataPerPackage = JSON.parse(objResponse[0]+"]]");
+					user = JSON.parse(objResponse[1]);
+					document.querySelector("div.user").textContent = user.username;
+					choice.show();
+				}
+			}
+		}
+		
+		this.updateCl = function update(req) {
+			if (req.readyState === 4) {
+				if (req.status === 200) {
+					let replaced = req.responseText.replaceAll("}]", "]]");
+					let objResponse = replaced.split("]]");
+					
+					dataPerPackage = JSON.parse(objResponse[0]+"}]");
+					user = JSON.parse(objResponse[1]);
+					document.querySelector("div.user").textContent = user.username;
+					choice.show();
 				}
 			}
 		}
