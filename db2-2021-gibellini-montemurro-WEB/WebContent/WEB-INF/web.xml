@@ -9,27 +9,33 @@
 	</welcome-file-list>
 	<filter>
 		<filter-name>EmployeeFilter</filter-name>
-		<filter-class>it.polimi.db2.project.filters.EmployeeFilter</filter-class>
+		<filter-class>it.polimi.db2.project.filters.EmployeeFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>EmployeeFilter</filter-name>
 		<url-pattern>/CreateOptionalProduct</url-pattern>
+		<url-pattern>/CreateService</url-pattern>
 		<url-pattern>/CreateServicePackage</url-pattern>
 		<url-pattern>/GetEmployeeHomePage</url-pattern>
 		<url-pattern>/GetSalesPage</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>ClientFilter</filter-name>
-		<filter-class>it.polimi.db2.project.filters.ClientFilter</filter-class>
+		<filter-class>it.polimi.db2.project.filters.ClientFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ClientFilter</filter-name>
 		<url-pattern>/ConfirmSub</url-pattern>
 		<url-pattern>/GetActivationSchedule</url-pattern>
+		<url-pattern>/PayOrder</url-pattern>
+		<url-pattern>/RefetchOrder</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>ClientOrNullFilter</filter-name>
-		<filter-class>it.polimi.db2.project.filters.ClientOrNullFilter</filter-class>
+		<filter-class>it.polimi.db2.project.filters.ClientOrNullFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ClientOrNullFilter</filter-name>

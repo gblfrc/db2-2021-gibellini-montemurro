@@ -6,6 +6,7 @@
 	href="../css/telco.css" th:href="@{/css/telco.css}" />
 <script src="utils.js" defer></script>
 <script src="employee.js" defer></script>
+<script src="service.js" defer></script>
 <title>Welcome in your home page</title>
 </head>
 <body>
@@ -27,8 +28,8 @@
 					Name: <input type="text" name="name" required>
 				</p>
 				<h2>Choose services to add</h2>
-				<div class="allServices" th:remove="all-but-first">
-					<div class="service" th:each="service: ${services}">
+				<div class="allServices">
+					<div class="service" th:each="service: ${services}" th:remove="all-but-first">
 						<div class="checkbox">
 							<input type="checkbox" name="typeService"
 								th:value="${service.id}">
@@ -36,24 +37,24 @@
 								<div>
 									Type: <span th:text="${service.type}">Mobile Phone</span>
 								</div>
-								<div th:if="${service.includedGB}!=0">
+								<div th:if="${service.includedGB}!=null">
 									Included GB: <span th:text="${service.includedGB}">0</span>
 								</div>
-								<div th:if="${service.includedGB}!=0">
+								<div th:if="${service.includedGB}!=null">
 									Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
 									&#8364
 								</div>
-								<div th:if="${service.includedSMS}!=0">
+								<div th:if="${service.includedSMS}!=null">
 									Included SMS: <span th:text="${service.includedSMS}">500</span>
 								</div>
-								<div th:if="${service.includedSMS}!=0">
+								<div th:if="${service.includedSMS}!=null">
 									Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
 									&#8364
 								</div>
-								<div th:if="${service.includedMinutes}!=0">
+								<div th:if="${service.includedMinutes}!=null">
 									Included Minutes: <span th:text="${service.includedMinutes}">500</span>
 								</div>
-								<div th:if="${service.includedMinutes}!=0">
+								<div th:if="${service.includedMinutes}!=null">
 									Extra Minutes Fee: <span
 										th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
 								</div>
@@ -102,6 +103,38 @@
 				</p>
 				<p>
 					Monthly fee: <input type="text" name="monthlyFee" required>
+				</p>
+				<input type="submit" value="Create">
+			</form>
+		</div>
+		<div>
+			<h1>Create service</h1>
+			<form action="CreateService" method="POST">
+				<p>
+					Type: <select name="type">
+						<option value="Fixed phone">Fixed phone</option>
+						<option value="Mobile phone">Mobile phone</option>
+						<option value="Fixed internet">Fixed internet</option>
+						<option value="Mobile internet">Mobile internet</option>
+					</select>
+				</p>
+				<p id="igbp">
+					Included GB:<input type="text" name="igb">
+				</p>
+				<p id="egbfp">
+					Extra GB Fee:<input type="text" name="egbf">
+				</p>
+				<p id="ismsp">
+					Included SMS:<input type="text" name="isms">
+				</p>
+				<p id="esmsfp">
+					Extra SMS Fee:<input type="text" name="esmsf">
+				</p>
+				<p id="imp">
+					Included Minutes:<input type="text" name="im">
+				</p>
+				<p id="emfp">
+					Extra Minutes Fee:<input type="text" name="emf">
 				</p>
 				<input type="submit" value="Create">
 			</form>

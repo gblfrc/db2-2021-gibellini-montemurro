@@ -40,4 +40,11 @@ public class ServService {
 		}
 		return services;
 	}
+	
+	/*
+	 * This method persists a service object 
+	 */
+	public void persistService(Service service) {
+		em.persist(service);
+	}
 }

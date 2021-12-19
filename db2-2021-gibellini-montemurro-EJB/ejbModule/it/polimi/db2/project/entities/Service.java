@@ -18,12 +18,12 @@ public class Service implements Serializable {
 	private int id;
 	
 	private String type;
-	private int includedGB;
-	private int extraGBFee;
-	private int includedMinutes;
-	private int extraMinutesFee;
-	private int includedSMS;
-	private int extraSMSFee;
+	private Integer includedGB;
+	private Integer extraGBFee;
+	private Integer includedMinutes;
+	private Integer extraMinutesFee;
+	private Integer includedSMS;
+	private Integer extraSMSFee;
 	
 	//may be useless
 	@ManyToMany(mappedBy="services", fetch=FetchType.LAZY)
@@ -38,31 +38,31 @@ public class Service implements Serializable {
 		return type;
 	}
 
-	public int getIncludedGB() {
+	public Integer getIncludedGB() {
 		return includedGB;
 	}
 
-	public int getExtraGBFee() {
+	public Integer getExtraGBFee() {
 		return extraGBFee;
 	}
 
-	public int getIncludedMinutes() {
+	public Integer getIncludedMinutes() {
 		return includedMinutes;
 	}
 
-	public void setIncludedGB(int includedGB) {
+	public void setIncludedGB(Integer includedGB) {
 		this.includedGB = includedGB;
 	}
 
-	public int getExtraMinutesFee() {
+	public Integer getExtraMinutesFee() {
 		return extraMinutesFee;
 	}
 	
-	public int getIncludedSMS() {
+	public Integer getIncludedSMS() {
 		return includedSMS;
 	}
 
-	public int getExtraSMSFee() {
+	public Integer getExtraSMSFee() {
 		return extraSMSFee;
 	}
 	
@@ -71,23 +71,23 @@ public class Service implements Serializable {
 		this.type = type;
 	}
 
-	public void setExtraGBFee(int extraGBFee) {
+	public void setExtraGBFee(Integer extraGBFee) {
 		this.extraGBFee = extraGBFee;
 	}
 
-	public void setIncludedMinutes(int includedMinutes) {
+	public void setIncludedMinutes(Integer includedMinutes) {
 		this.includedMinutes = includedMinutes;
 	}
 
-	public void setExtraMinutesFee(int extraMinutesFee) {
+	public void setExtraMinutesFee(Integer extraMinutesFee) {
 		this.extraMinutesFee = extraMinutesFee;
 	}
 
-	public void setIncludedSMS(int includedSMS) {
+	public void setIncludedSMS(Integer includedSMS) {
 		this.includedSMS = includedSMS;
 	}
 
-	public void setExtraSMSFee(int extraSMSFee) {
+	public void setExtraSMSFee(Integer extraSMSFee) {
 		this.extraSMSFee = extraSMSFee;
 	}
 	
