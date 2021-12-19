@@ -113,7 +113,11 @@ div.package, div.order {
 }
 
 div.checkbox {
-	display: inline-block;
+	display: block;
+}
+
+div.service div.checkbox {
+	padding: 5px 0;
 }
 
 div.label {

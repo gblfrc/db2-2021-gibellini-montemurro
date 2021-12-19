@@ -59,6 +59,18 @@
 								</div>
 							</div>
 						</div>
+						<div class="checkbox">
+							<input type="checkbox" name="typeService">
+							<div class="label">
+								<div>Type: Mobile Phone</div>
+								<div>Included GB: 0</div>
+								<div>Extra GB Fee: 0 &#8364</div>
+								<div>Included SMS: 500</div>
+								<div>Extra SMS Fee: 1 &#8364</div>
+								<div>Included Minutes: 500</div>
+								<div>Extra Minutes Fee: 0 &#8364</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<h2>Choose optional products to add</h2>
@@ -67,16 +79,16 @@
 						th:each="optionalProduct: ${optionalProducts}">
 						<input type="checkbox" name="typeOptional"
 							th:value="${optionalProduct.name}">
-							<div class="label">
-						<div>
-							Name: <span th:text="${optionalProduct.name}">Product</span>
+						<div class="label">
+							<div>
+								Name: <span th:text="${optionalProduct.name}">Product</span>
+							</div>
+							<div>
+								Monthly fee: <span th:text="${optionalProduct.monthlyFee}">5</span>
+								&#8364
+							</div>
 						</div>
-						<div>
-							Monthly fee: <span th:text="${optionalProduct.monthlyFee}">5</span>
-							&#8364
-						</div>
-						</div>
-						<br><br>
+						<br> <br>
 					</div>
 				</div>
 				<input type="submit" value="Create">
