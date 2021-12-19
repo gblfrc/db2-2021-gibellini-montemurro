@@ -4,6 +4,8 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" media="all"
 	href="../css/telco.css" th:href="@{/css/telco.css}" />
+<script src="optprod.js" defer></script>
+<script src="utils.js" defer></script>
 <title>Buy packages</title>
 </head>
 <body>
@@ -37,7 +39,7 @@
 					<option value="36">36</option>
 				</select>
 			</p>
-			<div th:remove="all-but-first">
+			<div id="opList" th:remove="all-but-first">
 				Optional products:
 				<div class="checkbox" th:each="product,num : ${products}">
 					<input type="checkbox" th:value="${product.name}"
@@ -51,7 +53,6 @@
 					<input type="checkbox"> Third sample product
 				</div>
 			</div>
-			<br>
 			<p class="date">
 				Start date (dd-MM-yyyy): <input type="text" name="startDay" required>
 				<input type="text" name="startMonth" required> <input
@@ -66,7 +67,7 @@
 					package</div>
 				<br> Included services <br> <br>
 				<div class="allServices" th:remove="all-but-first">
-					<ul>
+					<ol>
 						<li class="service" th:each="service: ${package.services}">
 							<div>
 								Type: <span th:text="${service.type}">Mobile Phone</span>
@@ -90,7 +91,7 @@
 								Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">0</span>
 							</div> <br>
 						</li>
-					</ul>
+					</ol>
 				</div>
 			</div>
 		</div>

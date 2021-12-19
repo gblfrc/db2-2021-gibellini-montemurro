@@ -15,10 +15,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
-import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.entities.ValidityPeriod;
-import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.VPService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
@@ -32,8 +30,6 @@ public class GetBuyPage extends HttpServlet {
 	
 	@EJB
 	SpService sps;
-	@EJB
-	OptService ops;
 	@EJB
 	VPService vps;
 	
@@ -49,9 +45,6 @@ public class GetBuyPage extends HttpServlet {
 		//fetch user from session
 		Client user = (Client)request.getSession().getAttribute("user");
 		
-		//fetch all optional products
-		List<OptionalProduct> products = ops.findAllOptProducts();
-		
 		//fetch all validity periods
 		List<ValidityPeriod> periods = vps.getAllValidityPeriod();
 		
@@ -62,7 +55,6 @@ public class GetBuyPage extends HttpServlet {
 		ctx.setVariable("error", (Error)request.getAttribute("error"));
 		ctx.setVariable("packages", packages);
 		ctx.setVariable("user", user);
-		ctx.setVariable("products", products);
 		ctx.setVariable("vperiods", periods);
 		templateEngine.process(path, ctx, response.getWriter());
 
