@@ -361,63 +361,63 @@
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackage;
-				makeCall("GET", "GetPurchaseData?selected=perPackage", this.updateObj);
+				makeCall("GET", "JSONProvider?table=perPackage", this.updateObj);
 		})
 
 		this.purchasePerPackageAndValidityPeriodButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackageAndValidity;
-				makeCall("GET", "GetPurchaseData?selected=perValidity", this.updateObj);
+				makeCall("GET", "JSONProvider?table=perValidity", this.updateObj);
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithoutOptional;
-				makeCall("GET", "GetPurchaseData?selected=withoutOpt", this.updateObj);
+				makeCall("GET", "JSONProvider?table=withoutOpt", this.updateObj);
 		})
 		
 		this.amountWithOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithOptional;
-				makeCall("GET", "GetPurchaseData?selected=withOpt", this.updateObj);
+				makeCall("GET", "JSONProvider?table=withOpt", this.updateObj);
 		})
 		
 		this.averageNumberButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=averageNumberOfOptional;
-				makeCall("GET", "GetPurchaseData?selected=average", this.updateObj);
+				makeCall("GET", "JSONProvider?table=average", this.updateObj);
 		})
 		
 		this.insolventClientsButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=insolventClients;
-				makeCall("GET", "GetPurchaseData?selected=insolvent",this.updateCl);
+				makeCall("GET", "JSONProvider?table=insolvent",this.updateCl);
 		}) 
 		
 		this.suspendedOrdersButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=suspendedOrders;
-				makeCall("GET", "GetPurchaseData?selected=suspended", this.updateObj);
+				makeCall("GET", "JSONProvider?table=suspended", this.updateObj);
 		}) 
 		
 		this.alertsButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=alerts;
-			makeCall("GET", "GetPurchaseData?selected=alerts", this.updateObj);
+			makeCall("GET", "JSONProvider?table=alerts", this.updateObj);
 		}) 
 		
 		this.bestSellerButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=bestSeller;
-			makeCall("GET", "GetPurchaseData?selected=best", this.updateCl);
+			makeCall("GET", "JSONProvider?table=best", this.updateCl);
 		}) 
 		
 		this.clear = function clear() {
