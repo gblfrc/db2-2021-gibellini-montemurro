@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.db2.project.entities.Client;
-import it.polimi.db2.project.entities.Employee;
 import it.polimi.db2.project.entities.MvOptProd;
 import it.polimi.db2.project.entities.MvPackage;
 import it.polimi.db2.project.services.AuditingService;
@@ -48,7 +47,7 @@ public class GetPurchaseData extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		List<Object[]> allSalesPerPackage;
-		List<MvPackage> allSalesPerValidityAndPackage;
+		List<Object[]> allSalesPerValidityAndPackage;
 		List<Object[]> revWoOpt;
 		List<Object[]> revWOpt;
 		List<Object[]> avgOpt;
@@ -97,10 +96,7 @@ public class GetPurchaseData extends HttpServlet {
 				break;
 		}
 		
-		Employee user=(Employee)request.getSession().getAttribute("user");
-		String json2 = gson.toJson(user);
 		response.getWriter().write(json1);
-		response.getWriter().write(json2);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

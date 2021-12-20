@@ -16,13 +16,13 @@ public class MvPackageService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
-	public List<MvPackage> findAllPurchasesPerPackageAndValidityPeriod() {
-		TypedQuery<MvPackage> query = em.createNamedQuery("MvPackage.findPurchasesPerPackageAndValidityPeriod", MvPackage.class);
-		List<MvPackage> result;
+	public List<Object[]> findAllPurchasesPerPackageAndValidityPeriod() {
+		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.findPurchasesPerPackageAndValidityPeriod",  Object[].class);
+		List<Object[]> result;
 		try {
 			result =query.getResultList();
 		} catch (NoResultException e) {
-			return result=new LinkedList<>();
+			return result=null;
 		}
 		return result;
 	}

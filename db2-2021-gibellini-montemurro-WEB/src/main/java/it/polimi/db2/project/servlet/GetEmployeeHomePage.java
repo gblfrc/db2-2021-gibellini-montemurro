@@ -53,7 +53,6 @@ public class GetEmployeeHomePage extends HttpServlet {
 		ctx.setVariable("services", services);
 		ctx.setVariable("error", error);
 		templateEngine.process(path, ctx, response.getWriter());
-		for(Service s: services) System.out.println(s.getId());
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

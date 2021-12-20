@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import it.polimi.db2.project.entities.Employee;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 /**
@@ -31,6 +32,7 @@ public class GetSalesPage extends HttpServlet {
 		String path = "/WEB-INF/sales.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("user", (Employee)request.getSession().getAttribute("user"));
 		templateEngine.process(path, ctx, response.getWriter());
 	}
 	

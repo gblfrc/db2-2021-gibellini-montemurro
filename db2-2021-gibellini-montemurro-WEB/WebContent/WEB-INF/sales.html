@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" media="all" href="css/telco.css" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/telco.css" th:href="@{/css/telco.css}" />
 <script src="utils.js" defer></script>
 <script src="sales.js" defer></script>
 <title>Welcome in sales page</title>
@@ -11,12 +12,12 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="GetEmployeeHomePage">HOME</a>
-				<li><a href="GetSalesPage">SALES</a>
-				<li><a href="Logout">LOGOUT</a>
+				<li><a th:href="GetEmployeeHomePage">HOME</a>
+				<li><a th:href="GetSalesPage">SALES</a>
+				<li><a th:href="Logout">LOGOUT</a>
 			</ul>
 		</nav>
-	<div class="user"></div>
+	<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>
 	</header>
 	<div class="main">
 		<div class="Buttons">
@@ -52,92 +53,92 @@
 				<input id="alertsButton" type="submit" value="Alerts">
 			</form>
 			<form class="onlyButton" action="#">
-				<input id="bestSellerButton" type="submit" value="Best seller">
+				<input id="bestSellerButton" type="submit" value="Best selling optional product">
 			</form>
 		</div>
 		<div class="purchasePerPackage">
-			<h1>Total Purchases</h1>
+			<h1>Total purchases</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Id package</th>
-						<th>Total Number of purchases</th>
+						<th>Package</th>
+						<th>Purchases</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Package</td>
-						<td>5</td>
+						<td class="number">5</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="purchasePerPackageAndValidity">
-			<h1>Total Purchases per validity period</h1>
+			<h1>Total purchases per validity period</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Id package</th>
-						<th>Validity Period</th>
-						<th>Total Number of purchases</th>
+						<th>Package</th>
+						<th>Months</th>
+						<th>Purchases</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Package</td>
-						<td>12</td>
-						<td>5</td>
+						<td class="number">12</td>
+						<td class="number">5</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="amountWithoutOptionalProduct">
-			<h1>Total Amount per package without optional product</h1>
+			<h1>Total amount per package without optional product</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Id package</th>
-						<th>Total amount</th>
+						<th>Package</th>
+						<th>Amount</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Package</td>
-						<td><span>5</span> &#8364</td>
+						<td class="number"><span>5</span> &#8364</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="amountWithOptionalProduct">
-			<h1>Total Amount per package with optional product</h1>
+			<h1>Total amount per package with optional product</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Id package</th>
-						<th>Total amount</th>
+						<th>Package</th>
+						<th>Amount</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Package</td>
-						<td><span>5</span> &#8364</td>
+						<td class="number"><span>5</span> &#8364</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="averageNumberOfOptionalProduct">
-			<h1>Average Number Of Optional Product</h1>
+			<h1>Average number of optional product</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Id package</th>
-						<th>Average Number Of Optional product</th>
+						<th>Package</th>
+						<th>Average</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Package</td>
-						<td>5</td>
+						<td class="number">5</td>
 					</tr>
 				</tbody>
 			</table>
@@ -172,8 +173,8 @@
 				<tbody>
 					<tr>
 						<td>Order</td>
-						<td>01-01-2022</td>
-						<td>10:22</td>
+						<td class="number">01-01-2022</td>
+						<td class="number">10:22</td>
 					</tr>
 				</tbody>
 			</table>
@@ -196,26 +197,26 @@
 						<td>404</td>
 						<td>John</td>
 						<td>john.smith@email.com</td>
-						<td><span>100</span> &#8364</td>
-						<td>01-01-2022</td>
-						<td>10:22</td>
+						<td class="number"><span>100</span> &#8364</td>
+						<td class="number">01-01-2022</td>
+						<td class="number">10:22</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="bestSeller">
-			<h1>Best seller</h1>
+			<h1>Best selling optional product</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Optional product</th>
-						<th>Total revenue</th>
+						<th>Product</th>
+						<th>Revenue</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Product</td>
-						<td><span>100</span> &#8364</td>
+						<td class="number"><span>100</span> &#8364</td>
 					</tr>
 				</tbody>
 			</table>

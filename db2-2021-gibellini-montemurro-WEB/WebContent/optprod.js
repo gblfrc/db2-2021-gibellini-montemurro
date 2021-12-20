@@ -68,7 +68,7 @@
 		this.element.addEventListener("change", () => {
 			let selectedIndex = this.element.selectedIndex;
 			let id = this.element.children[selectedIndex].value;
-			makeCall("GET", "JSONProvider?package=" + id, null, opList.updateAndShow)
+			makeCall("GET", "JSONProvider?package=" + id, opList.updateAndShow)
 		})
 	}
 

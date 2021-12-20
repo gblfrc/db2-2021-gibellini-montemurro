@@ -1,7 +1,7 @@
 (function() {
 	var buttons, salesPerPackage, salesPerPackageAndValidity, amountWithoutOptional, amountWithOptional,
 		averageNumberOfOptional, insolventClients, suspendedOrders, alerts, bestSeller, 
-		dataPerPackage, user;
+		dataPerPackage;
 
 	window.addEventListener("load", () => {
 		buttons = new Button();
@@ -38,6 +38,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let totPurchaseCell = document.createElement("td");
+				totPurchaseCell.setAttribute("class", "number");
 				totPurchaseCell.textContent = dataPerPackage[i][1];
 				newRow.appendChild(totPurchaseCell);
 				salesPerPackage.salesPerPackage.appendChild(newRow);
@@ -68,13 +69,15 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i].id_package;
+				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let validityCell = document.createElement("td");
-				validityCell.textContent = dataPerPackage[i].months;
+				validityCell.setAttribute("class", "number");
+				validityCell.textContent = dataPerPackage[i][1];
 				newRow.appendChild(validityCell);
 				let totPurchaseCell = document.createElement("td");
-				totPurchaseCell.textContent = dataPerPackage[i].totPurchase;
+				totPurchaseCell.setAttribute("class", "number");
+				totPurchaseCell.textContent = dataPerPackage[i][2];
 				newRow.appendChild(totPurchaseCell);
 				salesPerPackageAndValidity.salesPerPackageAndValidity.appendChild(newRow);
 			}
@@ -107,6 +110,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
+				totAmountCell.setAttribute("class", "number");
 				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithoutOptional.amountWithoutOptional.appendChild(newRow);
@@ -140,6 +144,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
+				totAmountCell.setAttribute("class", "number");
 				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithOptional.amountWithOptional.appendChild(newRow);
@@ -172,6 +177,7 @@
 				packageCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(packageCell);
 				let avgCell = document.createElement("td");
+				avgCell.setAttribute("class", "number");
 				if(dataPerPackage[i][1]!=0){
 					avgCell.textContent = dataPerPackage[i][2]/dataPerPackage[i][1];
 				}else{
@@ -241,9 +247,11 @@
 				orderCell.textContent = dataPerPackage[i][0];
 				newRow.appendChild(orderCell);
 				let dateCell = document.createElement("td");
+				dateCell.setAttribute("class", "number");
 				dateCell.textContent = dataPerPackage[i][1];
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
+				timeCell.setAttribute("class", "number");
 				timeCell.textContent = dataPerPackage[i][2];
 				newRow.appendChild(timeCell);
 				suspendedOrders.suspendedOrders.appendChild(newRow);
@@ -283,12 +291,15 @@
 				emailCell.textContent = dataPerPackage[i][2];
 				newRow.appendChild(emailCell);
 				let amountCell = document.createElement("td");
+				amountCell.setAttribute("class", "number");
 				amountCell.textContent = dataPerPackage[i][3] + '\u20ac';
 				newRow.appendChild(amountCell);
 				let dateCell = document.createElement("td");
+				dateCell.setAttribute("class", "number");
 				dateCell.textContent = dataPerPackage[i][4];
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
+				timeCell.setAttribute("class", "number");
 				timeCell.textContent = dataPerPackage[i][5];
 				newRow.appendChild(timeCell);
 				alerts.alerts.appendChild(newRow);
@@ -322,6 +333,7 @@
 				optionalProductCell.textContent = dataPerPackage[i].id_optprod;
 				newRow.appendChild(optionalProductCell);
 				let revenueCell = document.createElement("td");
+				revenueCell.setAttribute("class", "number");
 				revenueCell.textContent = dataPerPackage[i].tot_revenue + '\u20ac';
 				newRow.appendChild(revenueCell);
 				bestSeller.bestSeller.appendChild(newRow);
@@ -356,7 +368,7 @@
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackageAndValidity;
-				makeCall("GET", "GetPurchaseData?selected=perValidity", this.updateCl);
+				makeCall("GET", "GetPurchaseData?selected=perValidity", this.updateObj);
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
@@ -435,8 +447,6 @@
 					let objResponse = replaced.split("]]");
 					
 					dataPerPackage = JSON.parse(objResponse[0]+"]]");
-					user = JSON.parse(objResponse[1]);
-					document.querySelector("div.user").textContent = user.username;
 					choice.show();
 				}
 			}
@@ -449,8 +459,6 @@
 					let objResponse = replaced.split("]]");
 					
 					dataPerPackage = JSON.parse(objResponse[0]+"}]");
-					user = JSON.parse(objResponse[1]);
-					document.querySelector("div.user").textContent = user.username;
 					choice.show();
 				}
 			}

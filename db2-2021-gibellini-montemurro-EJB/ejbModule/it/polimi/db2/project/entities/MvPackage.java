@@ -2,7 +2,6 @@ package it.polimi.db2.project.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -14,11 +13,11 @@ import javax.persistence.Table;
 @IdClass(MvPackageId.class)
 @Table(name = "mv_package")
 @NamedQueries({
-	@NamedQuery(name="MvPackage.findPurchasesPerPackageAndValidityPeriod", query="SELECT mv FROM MvPackage mv"),
-	@NamedQuery(name="MvPackage.findTotPurchase", query="SELECT mv.id_package, sum(mv.totPurchase) FROM MvPackage mv GROUP BY mv.id_package"),
-	@NamedQuery(name="MvPackage.revWoOpt", query="SELECT mv.id_package, sum(mv.totRevenueWoOpt) FROM MvPackage mv GROUP BY mv.id_package"),
-	@NamedQuery(name="MvPackage.revWOpt", query="SELECT mv.id_package, sum(mv.totRevenueWOpt) FROM MvPackage mv GROUP BY mv.id_package"),
-	@NamedQuery(name="MvPackage.avgOpt", query="SELECT mv.id_package, sum(mv.totPurchase), sum(mv.totOptProd) FROM MvPackage mv GROUP BY mv.id_package")
+	@NamedQuery(name="MvPackage.findPurchasesPerPackageAndValidityPeriod", query="SELECT p.name, mv.months, mv.totPurchase FROM MvPackage mv, ServicePackage p WHERE mv.id_package=p.id"),
+	@NamedQuery(name="MvPackage.findTotPurchase", query="SELECT p.name, sum(mv.totPurchase) FROM MvPackage mv, ServicePackage p WHERE mv.id_package=p.id GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.revWoOpt", query="SELECT p.name, sum(mv.totRevenueWoOpt) FROM MvPackage mv, ServicePackage p WHERE mv.id_package=p.id GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.revWOpt", query="SELECT p.name, sum(mv.totRevenueWOpt) FROM MvPackage mv, ServicePackage p WHERE mv.id_package=p.id GROUP BY mv.id_package"),
+	@NamedQuery(name="MvPackage.avgOpt", query="SELECT p.name, sum(mv.totPurchase), sum(mv.totOptProd) FROM MvPackage mv, ServicePackage p WHERE mv.id_package=p.id GROUP BY mv.id_package")
 })
 public class MvPackage implements Serializable{
 	private static final long serialVersionUID = 1L;

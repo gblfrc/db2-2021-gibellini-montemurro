@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import it.polimi.db2.project.entities.MvOptProd;
-import it.polimi.db2.project.entities.MvPackage;
 
 @Stateless
 public class MvOptProdService {
