@@ -24,6 +24,7 @@ import it.polimi.db2.project.services.MvPackageService;
 import it.polimi.db2.project.services.OrderService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.UserService;
+import it.polimi.db2.project.utils.JSONConverter;
 
 @WebServlet("/JSONProvider")
 public class JSONProvider extends HttpServlet {
@@ -70,24 +71,24 @@ public class JSONProvider extends HttpServlet {
 			switch (param.toLowerCase()) {
 			case "perpackage":
 				List<Object[]> allSalesPerPackage = mvPackageService.findTotPurchase();
-				toSend = gson.toJson(allSalesPerPackage);
+				toSend = gson.toJson(JSONConverter.converter(allSalesPerPackage));
 				break;
 			case "pervalidity":
 				List<Object[]> allSalesPerValidityAndPackage = mvPackageService
 						.findAllPurchasesPerPackageAndValidityPeriod();
-				toSend = gson.toJson(allSalesPerValidityAndPackage);
+				toSend = gson.toJson(JSONConverter.converter(allSalesPerValidityAndPackage));
 				break;
 			case "withoutopt":
 				List<Object[]> revWoOpt = mvPackageService.findTotRevWoOpt();
-				toSend = gson.toJson(revWoOpt);
+				toSend = gson.toJson(JSONConverter.converter(revWoOpt));
 				break;
 			case "withopt":
 				List<Object[]> revWOpt = mvPackageService.findTotRevWOpt();
-				toSend = gson.toJson(revWOpt);
+				toSend = gson.toJson(JSONConverter.converter(revWOpt));
 				break;
 			case "average":
 				List<Object[]> avgOpt = mvPackageService.findAvgOpt();
-				toSend = gson.toJson(avgOpt);
+				toSend = gson.toJson(JSONConverter.converter(avgOpt));
 				break;
 			case "insolvent":
 				List<Client> insolvents = uService.findInsolvents();
@@ -95,11 +96,11 @@ public class JSONProvider extends HttpServlet {
 				break;
 			case "suspended":
 				List<Object[]> suspendedOrders = orderService.getSuspendedOrders();
-				toSend = gson.toJson(suspendedOrders);
+				toSend = gson.toJson(JSONConverter.converter(suspendedOrders));
 				break;
 			case "alerts":
 				List<Object[]> alerts = auditingService.findAlerts();
-				toSend = gson.toJson(alerts);
+				toSend = gson.toJson(JSONConverter.converter(alerts));
 				break;
 			case "best":
 				List<MvOptProd> bestSeller = mvOptProdService.findBestSeller();

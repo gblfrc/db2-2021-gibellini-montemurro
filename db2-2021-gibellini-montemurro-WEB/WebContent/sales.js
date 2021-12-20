@@ -32,14 +32,15 @@
 
 		this.show = function show() {
 			let i = 0;
+			console.log(dataPerPackage);
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i][0];
+				packageCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(packageCell);
 				let totPurchaseCell = document.createElement("td");
 				totPurchaseCell.setAttribute("class", "number");
-				totPurchaseCell.textContent = dataPerPackage[i][1];
+				totPurchaseCell.textContent = dataPerPackage[i].property1;
 				newRow.appendChild(totPurchaseCell);
 				salesPerPackage.salesPerPackage.appendChild(newRow);
 			}
@@ -69,15 +70,15 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i][0];
+				packageCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(packageCell);
 				let validityCell = document.createElement("td");
 				validityCell.setAttribute("class", "number");
-				validityCell.textContent = dataPerPackage[i][1];
+				validityCell.textContent = dataPerPackage[i].property1;
 				newRow.appendChild(validityCell);
 				let totPurchaseCell = document.createElement("td");
 				totPurchaseCell.setAttribute("class", "number");
-				totPurchaseCell.textContent = dataPerPackage[i][2];
+				totPurchaseCell.textContent = dataPerPackage[i].property2;
 				newRow.appendChild(totPurchaseCell);
 				salesPerPackageAndValidity.salesPerPackageAndValidity.appendChild(newRow);
 			}
@@ -107,11 +108,11 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i][0];
+				packageCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
 				totAmountCell.setAttribute("class", "number");
-				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
+				totAmountCell.textContent = dataPerPackage[i].property1 + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithoutOptional.amountWithoutOptional.appendChild(newRow);
 			}
@@ -141,11 +142,11 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i][0];
+				packageCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(packageCell);
 				let totAmountCell = document.createElement("td");
 				totAmountCell.setAttribute("class", "number");
-				totAmountCell.textContent = dataPerPackage[i][1] + '\u20ac';
+				totAmountCell.textContent = dataPerPackage[i].property1 + '\u20ac';
 				newRow.appendChild(totAmountCell);
 				amountWithOptional.amountWithOptional.appendChild(newRow);
 			}
@@ -174,12 +175,12 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
-				packageCell.textContent = dataPerPackage[i][0];
+				packageCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(packageCell);
 				let avgCell = document.createElement("td");
 				avgCell.setAttribute("class", "number");
-				if(dataPerPackage[i][1]!=0){
-					avgCell.textContent = dataPerPackage[i][2]/dataPerPackage[i][1];
+				if(dataPerPackage[i].property1!=0){
+					avgCell.textContent = dataPerPackage[i].property2/dataPerPackage[i].property1;
 				}else{
 					avgCell.textContent ="0";
 				}
@@ -244,15 +245,15 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let orderCell = document.createElement("td");
-				orderCell.textContent = dataPerPackage[i][0];
+				orderCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(orderCell);
 				let dateCell = document.createElement("td");
 				dateCell.setAttribute("class", "number");
-				dateCell.textContent = dataPerPackage[i][1];
+				dateCell.textContent = dataPerPackage[i].property1;
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
 				timeCell.setAttribute("class", "number");
-				timeCell.textContent = dataPerPackage[i][2];
+				timeCell.textContent = dataPerPackage[i].property2;
 				newRow.appendChild(timeCell);
 				suspendedOrders.suspendedOrders.appendChild(newRow);
 			}
@@ -282,25 +283,25 @@
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let orderCell = document.createElement("td");
-				orderCell.textContent = dataPerPackage[i][0];
+				orderCell.textContent = dataPerPackage[i].property0;
 				newRow.appendChild(orderCell);
 				let usernameCell = document.createElement("td");
-				usernameCell.textContent = dataPerPackage[i][1];
+				usernameCell.textContent = dataPerPackage[i].property1;
 				newRow.appendChild(usernameCell);
 				let emailCell = document.createElement("td");
-				emailCell.textContent = dataPerPackage[i][2];
+				emailCell.textContent = dataPerPackage[i].property2;
 				newRow.appendChild(emailCell);
 				let amountCell = document.createElement("td");
 				amountCell.setAttribute("class", "number");
-				amountCell.textContent = dataPerPackage[i][3] + '\u20ac';
+				amountCell.textContent = dataPerPackage[i].property3 + '\u20ac';
 				newRow.appendChild(amountCell);
 				let dateCell = document.createElement("td");
 				dateCell.setAttribute("class", "number");
-				dateCell.textContent = dataPerPackage[i][4];
+				dateCell.textContent = dataPerPackage[i].property4;
 				newRow.appendChild(dateCell);
 				let timeCell = document.createElement("td");
 				timeCell.setAttribute("class", "number");
-				timeCell.textContent = dataPerPackage[i][5];
+				timeCell.textContent = dataPerPackage[i].property5;
 				newRow.appendChild(timeCell);
 				alerts.alerts.appendChild(newRow);
 			}
@@ -361,63 +362,63 @@
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackage;
-				makeCall("GET", "JSONProvider?table=perPackage", this.updateObj);
+				makeCall("GET", "JSONProvider?table=perPackage", this.update);
 		})
 
 		this.purchasePerPackageAndValidityPeriodButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackageAndValidity;
-				makeCall("GET", "JSONProvider?table=perValidity", this.updateObj);
+				makeCall("GET", "JSONProvider?table=perValidity", this.update);
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithoutOptional;
-				makeCall("GET", "JSONProvider?table=withoutOpt", this.updateObj);
+				makeCall("GET", "JSONProvider?table=withoutOpt", this.update);
 		})
 		
 		this.amountWithOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithOptional;
-				makeCall("GET", "JSONProvider?table=withOpt", this.updateObj);
+				makeCall("GET", "JSONProvider?table=withOpt", this.update);
 		})
 		
 		this.averageNumberButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=averageNumberOfOptional;
-				makeCall("GET", "JSONProvider?table=average", this.updateObj);
+				makeCall("GET", "JSONProvider?table=average", this.update);
 		})
 		
 		this.insolventClientsButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=insolventClients;
-				makeCall("GET", "JSONProvider?table=insolvent",this.updateCl);
+				makeCall("GET", "JSONProvider?table=insolvent",this.update);
 		}) 
 		
 		this.suspendedOrdersButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=suspendedOrders;
-				makeCall("GET", "JSONProvider?table=suspended", this.updateObj);
+				makeCall("GET", "JSONProvider?table=suspended", this.update);
 		}) 
 		
 		this.alertsButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=alerts;
-			makeCall("GET", "JSONProvider?table=alerts", this.updateObj);
+			makeCall("GET", "JSONProvider?table=alerts", this.update);
 		}) 
 		
 		this.bestSellerButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=bestSeller;
-			makeCall("GET", "JSONProvider?table=best", this.updateCl);
+			makeCall("GET", "JSONProvider?table=best", this.update);
 		}) 
 		
 		this.clear = function clear() {
@@ -440,25 +441,12 @@
 			bestSeller.hide();
 			bestSeller.clear();
 		}
-		this.updateObj = function update(req) {
-			if (req.readyState === 4) {
-				if (req.status === 200) {
-					let replaced = req.responseText.replaceAll("}]", "]]");
-					let objResponse = replaced.split("]]");
-					
-					dataPerPackage = JSON.parse(objResponse[0]+"]]");
-					choice.show();
-				}
-			}
-		}
 		
-		this.updateCl = function update(req) {
+		this.update = function update(req) {
 			if (req.readyState === 4) {
-				if (req.status === 200) {
-					let replaced = req.responseText.replaceAll("}]", "]]");
-					let objResponse = replaced.split("]]");
-					
-					dataPerPackage = JSON.parse(objResponse[0]+"}]");
+				if (req.status === 200) {			
+					dataPerPackage = JSON.parse(req.responseText);
+					console.log(dataPerPackage);
 					choice.show();
 				}
 			}
