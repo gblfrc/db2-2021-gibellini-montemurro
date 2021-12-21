@@ -39,20 +39,21 @@ public class CreateService extends HttpServlet {
 		}
 
 		// fetch parameters
-		Integer igb, egbf, isms, esmsf, im, emf;
+		Integer igb, isms, im;
+		Double egbf, esmsf, emf;
 		try {
 			String temp = request.getParameter("igb");
 			igb = temp.equals("") ?  null : Integer.valueOf(temp);
 			temp = request.getParameter("egbf");
-			egbf = temp.equals("") ?  null : Integer.valueOf(temp);
+			egbf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
 			temp = request.getParameter("isms");
 			isms = temp.equals("") ?  null : Integer.valueOf(temp);
 			temp = request.getParameter("esmsf");
-			esmsf = temp.equals("") ?  null : Integer.valueOf(temp);
+			esmsf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
 			temp = request.getParameter("im");
 			im = temp.equals("") ?  null : Integer.valueOf(temp);
 			temp = request.getParameter("emf");
-			emf = temp.equals("") ?  null : Integer.valueOf(temp);
+			emf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal value passed: enter only numbers");
 			error.forward("/GetEmployeeHomePage", this, request, response);

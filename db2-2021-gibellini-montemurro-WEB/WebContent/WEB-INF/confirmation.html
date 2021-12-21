@@ -31,9 +31,9 @@
 				Service package: <span th:text="${sub.package_.name}"> Basic
 				</span>
 			</p>
-			<p>Included services</p>
+			<p>Included services: </p>
 			<div class="allServices" th:remove="all-but-first">
-				<ul>
+				<ol>
 					<li class="service" th:each="service: ${sub.package_.services}">
 						<div>
 							Type: <span th:text="${service.type}">Mobile Phone</span>
@@ -42,14 +42,14 @@
 							Included GB: <span th:text="${service.includedGB}">0</span>
 						</div>
 						<div th:if="${service.includedGB}!=null">
-							Extra GB Fee: <span th:text="${service.extraGBFee}*0.01">0</span>
+							Extra GB Fee: <span th:text="${#numbers.formatDecimal(service.extraGbFee, 1, 2, 'POINT')}">0</span>
 							&#8364
 						</div>
 						<div th:if="${service.includedSMS}!=null">
 							Included SMS: <span th:text="${service.includedSMS}">500</span>
 						</div>
 						<div th:if="${service.includedSMS}!=null">
-							Extra SMS Fee: <span th:text="${service.extraSMSFee}*0.01">1</span>
+							Extra SMS Fee: <span th:text="${#numbers.formatDecimal(service.extraSMSFee, 1, 2, 'POINT')}">1</span>
 							&#8364
 						</div>
 						<div th:if="${service.includedMinutes}!=null">
@@ -57,10 +57,10 @@
 						</div>
 						<div th:if="${service.includedMinutes}!=null">
 							Extra Minutes Fee: <span
-								th:text="${service.extraMinutesFee}*0.01 ">0</span> &#8364
+								th:text="${#numbers.formatDecimal(service.extraMinutesFee, 1, 2, 'POINT')}">0</span> &#8364
 						</div> <br>
 					</li>
-				</ul>
+				</ol>
 			</div>
 			<p>
 				Activation date: <span
@@ -78,12 +78,12 @@
 			</p>
 			<p th:if="not ${#lists.isEmpty(sub.optionalProductsSub)}">Optional
 				products:
-			<ul th:remove="all-but-first">
+			<ol th:remove="all-but-first">
 				<li th:each="product: ${sub.optionalProductsSub}"
 					th:text="${product.name}">Product 1</li>
 				<li>Product 2</li>
 				<li>Product 3</li>
-			</ul>
+			</ol>
 			<p th:if="${order==null} or ${order.validity}==false">
 				Amount to pay: <span th:text="${sub.amount}"> 404 </span> &#8364
 			</p>

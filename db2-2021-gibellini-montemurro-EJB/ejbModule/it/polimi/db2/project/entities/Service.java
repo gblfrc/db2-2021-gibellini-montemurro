@@ -19,11 +19,11 @@ public class Service implements Serializable {
 	
 	private String type;
 	private Integer includedGB;
-	private Integer extraGBFee;
+	private Double extraGBFee;
 	private Integer includedMinutes;
-	private Integer extraMinutesFee;
+	private Double extraMinutesFee;
 	private Integer includedSMS;
-	private Integer extraSMSFee;
+	private Double extraSMSFee;
 	
 	//may be useless
 	@ManyToMany(mappedBy="services", fetch=FetchType.LAZY)
@@ -42,7 +42,7 @@ public class Service implements Serializable {
 		return includedGB;
 	}
 
-	public Integer getExtraGBFee() {
+	public Double getExtraGBFee() {
 		return extraGBFee;
 	}
 
@@ -54,7 +54,7 @@ public class Service implements Serializable {
 		this.includedGB = includedGB;
 	}
 
-	public Integer getExtraMinutesFee() {
+	public Double getExtraMinutesFee() {
 		return extraMinutesFee;
 	}
 	
@@ -62,7 +62,7 @@ public class Service implements Serializable {
 		return includedSMS;
 	}
 
-	public Integer getExtraSMSFee() {
+	public Double getExtraSMSFee() {
 		return extraSMSFee;
 	}
 	
@@ -71,7 +71,7 @@ public class Service implements Serializable {
 		this.type = type;
 	}
 
-	public void setExtraGBFee(Integer extraGBFee) {
+	public void setExtraGBFee(Double extraGBFee) {
 		this.extraGBFee = extraGBFee;
 	}
 
@@ -79,7 +79,7 @@ public class Service implements Serializable {
 		this.includedMinutes = includedMinutes;
 	}
 
-	public void setExtraMinutesFee(Integer extraMinutesFee) {
+	public void setExtraMinutesFee(Double extraMinutesFee) {
 		this.extraMinutesFee = extraMinutesFee;
 	}
 
@@ -87,7 +87,7 @@ public class Service implements Serializable {
 		this.includedSMS = includedSMS;
 	}
 
-	public void setExtraSMSFee(Integer extraSMSFee) {
+	public void setExtraSMSFee(Double extraSMSFee) {
 		this.extraSMSFee = extraSMSFee;
 	}
 	

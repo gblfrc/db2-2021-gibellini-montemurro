@@ -76,19 +76,19 @@
 								Included GB: <span th:text="${service.includedGB}">0</span>
 							</div>
 							<div th:if="${service.includedGB}!=null">
-								Extra GB Fee: <span th:text="${service.extraGBFee}">0</span>
+								Extra GB Fee: <span th:text="${#numbers.formatDecimal(service.extraGbFee, 1, 2, 'POINT')}">0</span> &#8364
 							</div>
 							<div th:if="${service.includedSMS}!=null">
 								Included SMS: <span th:text="${service.includedSMS}">500</span>
 							</div>
 							<div th:if="${service.includedSMS}!=null">
-								Extra SMS Fee: <span th:text="${service.extraSMSFee}">1</span>
+								Extra SMS Fee: <span th:text="${#numbers.formatDecimal(service.extraSMSFee, 1, 2, 'POINT')}">1</span> &#8364
 							</div>
 							<div th:if="${service.includedMinutes}!=null">
 								Included Minutes: <span th:text="${service.includedMinutes}">500</span>
 							</div>
 							<div th:if="${service.includedMinutes}!=null">
-								Extra Minutes Fee: <span th:text="${service.extraMinutesFee}">0</span>
+								Extra Minutes Fee: <span th:text="${#numbers.formatDecimal(service.extraMinutesFee, 1, 2, 'POINT')}">0</span> &#8364
 							</div> <br>
 						</li>
 					</ol>

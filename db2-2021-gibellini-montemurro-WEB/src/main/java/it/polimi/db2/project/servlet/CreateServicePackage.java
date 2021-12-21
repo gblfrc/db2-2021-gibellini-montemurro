@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.thymeleaf.TemplateEngine;
-
 import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.Service;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.ServService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.utils.Error;
-import it.polimi.db2.project.utils.TemplateEngineHandler;
 
 /**
  * Servlet implementation class CreateServicePackage
@@ -26,7 +23,6 @@ import it.polimi.db2.project.utils.TemplateEngineHandler;
 @WebServlet("/CreateServicePackage")
 public class CreateServicePackage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private TemplateEngine templateEngine;
        
 	@EJB
 	private SpService spService;
@@ -36,10 +32,6 @@ public class CreateServicePackage extends HttpServlet {
 	
 	@EJB
 	private ServService servService;
-	
-	public void init() throws ServletException {
-		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
-	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
