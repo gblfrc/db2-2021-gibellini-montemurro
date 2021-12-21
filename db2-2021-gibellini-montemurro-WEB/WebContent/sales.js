@@ -32,7 +32,6 @@
 
 		this.show = function show() {
 			let i = 0;
-			console.log(dataPerPackage);
 			for (i = 0; i < dataPerPackage.length; i++) {
 				let newRow = document.createElement("tr");
 				let packageCell = document.createElement("td");
@@ -446,7 +445,6 @@
 			if (req.readyState === 4) {
 				if (req.status === 200) {			
 					dataPerPackage = JSON.parse(req.responseText);
-					console.log(dataPerPackage);
 					choice.show();
 				}
 			}

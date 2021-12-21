@@ -48,9 +48,10 @@ public class JSONProvider extends HttpServlet {
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
 		String toSend = null;
-
+		boolean entered=false;
 		String param = request.getParameter("package");
 		if (param != null && !param.equals("")) {
+			entered=true;
 			// retrieve package id
 			int packId = Integer.parseInt(param);
 			// retrieve package given id
@@ -66,8 +67,9 @@ public class JSONProvider extends HttpServlet {
 		}
 
 		param = request.getParameter("table");
+	
 		if (param != null && !param.equals("")) {
-			
+			entered=true;
 			switch (param.toLowerCase()) {
 			case "perpackage":
 				List<Object[]> allSalesPerPackage = mvPackageService.findTotPurchase();
@@ -106,9 +108,17 @@ public class JSONProvider extends HttpServlet {
 				List<MvOptProd> bestSeller = mvOptProdService.findBestSeller();
 				toSend = gson.toJson(bestSeller);
 				break;
+			default:
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				toSend="Illegal request";
+				break;
 			}
 		}
-
+		
+		if(entered==false) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			toSend="Illegal request";
+		}
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(toSend);
