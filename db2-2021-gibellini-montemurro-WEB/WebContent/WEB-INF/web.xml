@@ -19,6 +19,7 @@
 		<url-pattern>/CreateServicePackage</url-pattern>
 		<url-pattern>/GetEmployeeHomePage</url-pattern>
 		<url-pattern>/GetSalesPage</url-pattern>
+		<url-pattern>/JSONTable</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>ClientFilter</filter-name>
@@ -43,6 +44,7 @@
 		<url-pattern>/GetBuyPage</url-pattern>
 		<url-pattern>/GetConfirmationPage</url-pattern>
 		<url-pattern>/GetUserHomePage</url-pattern>
+		<url-pattern>/JSONPackage</url-pattern>
 		<url-pattern>/Register</url-pattern>
 	</filter-mapping>
 </web-app>

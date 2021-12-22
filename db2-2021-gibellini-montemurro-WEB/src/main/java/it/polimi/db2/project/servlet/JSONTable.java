@@ -12,12 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.MvOptProd;
-import it.polimi.db2.project.entities.OptionalProduct;
-import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.services.AuditingService;
 import it.polimi.db2.project.services.MvOptProdService;
 import it.polimi.db2.project.services.MvPackageService;
@@ -26,8 +23,8 @@ import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.UserService;
 import it.polimi.db2.project.utils.JSONConverter;
 
-@WebServlet("/JSONProvider")
-public class JSONProvider extends HttpServlet {
+@WebServlet("/JSONTable")
+public class JSONTable extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -48,28 +45,10 @@ public class JSONProvider extends HttpServlet {
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
 		String toSend = null;
-		boolean entered=false;
-		String param = request.getParameter("package");
+		
+		String param = request.getParameter("table");
+		
 		if (param != null && !param.equals("")) {
-			entered=true;
-			// retrieve package id
-			int packId = Integer.parseInt(param);
-			// retrieve package given id
-			ServicePackage sp = spService.getServicePackageById(packId);
-			// create array of JSON objects to contain strings
-			JsonArray prods = new JsonArray();
-			// build array
-			for (OptionalProduct op : sp.getOptionalProducts()) {
-				prods.add(op.getName());
-			}
-			//convert to string
-			toSend=gson.toJson(prods);
-		}
-
-		param = request.getParameter("table");
-	
-		if (param != null && !param.equals("")) {
-			entered=true;
 			switch (param.toLowerCase()) {
 			case "perpackage":
 				List<Object[]> allSalesPerPackage = mvPackageService.findTotPurchase();
@@ -114,8 +93,7 @@ public class JSONProvider extends HttpServlet {
 				break;
 			}
 		}
-		
-		if(entered==false) {
+		else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			toSend="Illegal request";
 		}

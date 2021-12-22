@@ -1,7 +1,7 @@
 (function() {
 	var buttons, salesPerPackage, salesPerPackageAndValidity, amountWithoutOptional, amountWithOptional,
 		averageNumberOfOptional, insolventClients, suspendedOrders, alerts, bestSeller, 
-		dataPerPackage;
+		dataPerPackage, emptyMessage;
 
 	window.addEventListener("load", () => {
 		buttons = new Button();
@@ -14,12 +14,13 @@
 		suspendedOrders = new SuspendedOrders();
 		alerts = new Alerts();
 		bestSeller = new BestSeller();
+		emptyMessage=new EmptyMessage();
 	});
 
 	function SalesPerPackage() {
 		this.element = document.querySelector("div[class='purchasePerPackage']");
 		this.salesPerPackage = document.querySelector("div[class='purchasePerPackage']>table>tbody");
-		this.message = document.getElementById("perPackMessage");
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -45,12 +46,12 @@
 					salesPerPackage.salesPerPackage.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='purchasePerPackage']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No package found");
 				document.querySelector("div[class='purchasePerPackage']>table").style.display="none";
 			}
 		}
@@ -62,7 +63,7 @@
 	function SalesPerPackageAndValidity() {
 		this.element = document.querySelector("div[class='purchasePerPackageAndValidity']");
 		this.salesPerPackageAndValidity = document.querySelector("div[class='purchasePerPackageAndValidity']>table>tbody");
-		this.message = document.getElementById("perValMessage");
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -92,12 +93,12 @@
 					salesPerPackageAndValidity.salesPerPackageAndValidity.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='purchasePerPackageAndValidity']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No package found");
 				document.querySelector("div[class='purchasePerPackageAndValidity']>table").style.display="none";
 			}
 		}
@@ -109,7 +110,7 @@
 	function AmountWithoutOptional() {
 		this.element = document.querySelector("div[class='amountWithoutOptionalProduct']");
 		this.amountWithoutOptional = document.querySelector("div[class='amountWithoutOptionalProduct']>table>tbody");
-		this.message = document.getElementById("withoutOptMessage");
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -135,12 +136,12 @@
 					amountWithoutOptional.amountWithoutOptional.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='amountWithoutOptionalProduct']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No package found");
 				document.querySelector("div[class='amountWithoutOptionalProduct']>table").style.display="none";
 			}
 		}
@@ -152,7 +153,7 @@
 	function AmountWithOptional() {
 		this.element = document.querySelector("div[class='amountWithOptionalProduct']");
 		this.amountWithOptional = document.querySelector("div[class='amountWithOptionalProduct']>table>tbody");
-		this.message = document.getElementById("withOptMessage");
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -178,12 +179,12 @@
 					amountWithOptional.amountWithOptional.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='amountWithOptionalProduct']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No package found");
 				document.querySelector("div[class='amountWithOptionalProduct']>table").style.display="none";
 			}
 		}
@@ -194,7 +195,7 @@
 	function AverageNumberOfOptional() {
 		this.element = document.querySelector("div[class='averageNumberOfOptionalProduct']");
 		this.averageNumberOfOptional = document.querySelector("div[class='averageNumberOfOptionalProduct']>table>tbody");
-		this.message = document.getElementById("avgMessage");
+	
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -224,12 +225,12 @@
 					averageNumberOfOptional.averageNumberOfOptional.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='averageNumberOfOptionalProduct']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No package found");
 				document.querySelector("div[class='averageNumberOfOptionalProduct']>table").style.display="none";
 			}
 		}
@@ -240,7 +241,6 @@
 	function InsolventClients() {
 		this.element = document.querySelector("div[class='insolventClients']");
 		this.insolventClients = document.querySelector("div[class='insolventClients']>table>tbody");
-		this.message = document.getElementById("insMessage");
 		
 		this.hide = function hide() {
 			this.element.style.display = "none";
@@ -266,12 +266,12 @@
 					insolventClients.insolventClients.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='insolventClients']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No insolvent client found");
 				document.querySelector("div[class='insolventClients']>table").style.display="none";
 			}
 		}
@@ -283,7 +283,7 @@
 	function SuspendedOrders() {
 		this.element = document.querySelector("div[class='suspendedOrders']");
 		this.suspendedOrders = document.querySelector("div[class='suspendedOrders']>table>tbody");
-		this.message = document.getElementById("ordMessage");
+		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -313,12 +313,12 @@
 					suspendedOrders.suspendedOrders.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='suspendedOrders']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No suspended order found");
 				document.querySelector("div[class='suspendedOrders']>table").style.display="none";
 			}
 		}
@@ -330,7 +330,7 @@
 	function Alerts() {
 		this.element = document.querySelector("div[class='alerts']");
 		this.alerts = document.querySelector("div[class='alerts']>table>tbody");
-		this.message = document.getElementById("alertsMessage");
+		
 		
 		this.hide = function hide() {
 			this.element.style.display = "none";
@@ -371,12 +371,12 @@
 					alerts.alerts.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='alerts']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No alert found");
 				document.querySelector("div[class='alerts']>table").style.display="none";
 			}
 		}
@@ -388,7 +388,6 @@
 	function BestSeller() {
 		this.element = document.querySelector("div[class='bestSeller']");
 		this.bestSeller = document.querySelector("div[class='bestSeller']>table>tbody");
-		this.message = document.getElementById("bestMessage");
 		
 		this.hide = function hide() {
 			this.element.style.display = "none";
@@ -415,12 +414,12 @@
 					bestSeller.bestSeller.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");
-				this.message.style.display="none";
+				emptyMessage.hide();
 				document.querySelector("div[class='bestSeller']>table").removeAttribute("style");
 			}
 			else{
 				this.element.removeAttribute("style");
-				this.message.removeAttribute("style");
+				emptyMessage.show("No optional product found");
 				document.querySelector("div[class='bestSeller']>table").style.display="none";
 			}
 		}
@@ -445,63 +444,63 @@
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackage;
-				makeCall("GET", "JSONProvider?table=perPackage", this.update);
+				makeCall("GET", "JSONTable?table=perPackage", this.update);
 		})
 
 		this.purchasePerPackageAndValidityPeriodButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=salesPerPackageAndValidity;
-				makeCall("GET", "JSONProvider?table=perValidity", this.update);
+				makeCall("GET", "JSONTable?table=perValidity", this.update);
 		})
 
 		this.amountWithoutOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithoutOptional;
-				makeCall("GET", "JSONProvider?table=withoutOpt", this.update);
+				makeCall("GET", "JSONTable?table=withoutOpt", this.update);
 		})
 		
 		this.amountWithOptionalButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=amountWithOptional;
-				makeCall("GET", "JSONProvider?table=withOpt", this.update);
+				makeCall("GET", "JSONTable?table=withOpt", this.update);
 		})
 		
 		this.averageNumberButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=averageNumberOfOptional;
-				makeCall("GET", "JSONProvider?table=average", this.update);
+				makeCall("GET", "JSONTable?table=average", this.update);
 		})
 		
 		this.insolventClientsButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=insolventClients;
-				makeCall("GET", "JSONProvider?table=insolvent",this.update);
+				makeCall("GET", "JSONTable?table=insolvent",this.update);
 		}) 
 		
 		this.suspendedOrdersButton.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.clear();
 				choice=suspendedOrders;
-				makeCall("GET", "JSONProvider?table=suspended", this.update);
+				makeCall("GET", "JSONTable?table=suspended", this.update);
 		}) 
 		
 		this.alertsButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=alerts;
-			makeCall("GET", "JSONProvider?table=alerts", this.update);
+			makeCall("GET", "JSONTable?table=alerts", this.update);
 		}) 
 		
 		this.bestSellerButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			this.clear();
 			choice=bestSeller;
-			makeCall("GET", "JSONProvider?table=best", this.update);
+			makeCall("GET", "JSONTable?table=best", this.update);
 		}) 
 		
 		this.clear = function clear() {
@@ -532,6 +531,20 @@
 					choice.show();
 				}
 			}
+		}
+	}
+	
+	function EmptyMessage(){
+		this.element=document.getElementById("emptyMessage");
+		
+		this.hide=function hide(){
+			this.element.style.display="none";
+			this.element.textContent="";
+		}
+		
+		this.show= function show(str){
+			this.element.removeAttribute("style");
+			this.element.textContent=str;
 		}
 	}
 }())

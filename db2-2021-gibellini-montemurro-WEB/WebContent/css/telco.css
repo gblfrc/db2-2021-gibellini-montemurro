@@ -55,7 +55,7 @@ div.main {
 	padding: auto;
 }
 
-h1 {
+h1, h3 {
 	color: white;
 }
 
@@ -101,13 +101,17 @@ div.logout {
 div.package, div.order, div.subData, div.sales, form:not(.onlyButton) {
 	background-color: #219ebc;
 	width: 40%;
-	margin: 10 px;
+	margin-right: 3px;
 	color: white;
 	border-style: solid;
 	border-width: 2px;
 	border-color: #ffb703;
 	padding: 0.5em 0.5em 0.5em 0.5em;
 	vertical-align: top;
+}
+
+div.package{
+	margin-bottom: 8px
 }
 
 form.onlyButton {
