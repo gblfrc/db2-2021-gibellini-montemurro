@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Time;
 
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.util.Date;
 
 @Entity
@@ -15,7 +18,7 @@ import java.util.Date;
 	@NamedQuery(name="Order.suspendedOrders",query="SELECT o.id, o.creationDate, o.creationTime FROM Order o WHERE o.validity=false"),
 	@NamedQuery(name="Order.findById", query="SELECT o FROM Order o WHERE o.id = :id")
 })
-public class Order implements Serializable {
+public @Data class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,48 +37,12 @@ public class Order implements Serializable {
 	@JoinColumn(name="subscription")
 	private Subscription subscription;
 	
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	private int amount;
+	
+	//necessary to have a getter for validity
+	//lombok creates isValidity but thymeleaf requires getValidity
 	public boolean getValidity() {
 		return validity;
-	}
-
-	public void setValidity(boolean validity) {
-		this.validity = validity;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	public Time getCreationTime() {
-		return creationTime;
-	}
-
-	public void setCreationTime(Time creationTime) {
-		this.creationTime = creationTime;
-	}
-
-	public int getRefusedPayments() {
-		return refusedPayments;
-	}
-
-	public void setRefusedPayments(int refusedPayments) {
-		this.refusedPayments = refusedPayments;
-	}
-	
-	public Subscription getSubscription() {
-		return this.subscription;
 	}
 
 }

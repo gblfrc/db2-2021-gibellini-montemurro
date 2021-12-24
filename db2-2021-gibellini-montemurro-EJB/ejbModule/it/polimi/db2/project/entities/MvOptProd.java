@@ -11,6 +11,9 @@ import javax.persistence.Table;
 @Table(name = "mv_optprod")
 @NamedQuery(name="MvOptProd.findBestSeller", query="SELECT mv FROM MvOptProd mv WHERE mv.tot_revenue= (SELECT max(mv.tot_revenue) FROM MvOptProd mv)")
 public class MvOptProd implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	String id_optprod;
 	

@@ -79,7 +79,7 @@ public class CreateSubscription extends HttpServlet {
 			validityPeriod = sbs.getValidityPeriod(valPer);
 			//check existence of specified validity period
 			if (validityPeriod==null) throw new NoSuchElementException();
-			sub.setValidityperiod(validityPeriod);
+			sub.setValidityPeriod(validityPeriod);
 		} catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_NOT_FOUND, "Unavailable validity period");
 			error.forward("/GetBuyPage", this, request, response);
@@ -129,13 +129,6 @@ public class CreateSubscription extends HttpServlet {
 			error.forward("/GetBuyPage", this, request, response);
 			return;
 		}
-		
-		//calculate and set amount
-		int amount = validityPeriod.getMonthlyFee()*valPer;
-		for(OptionalProduct op: products) {
-			amount = amount + op.getMonthlyFee()*valPer;
-		}
-		sub.setAmount(amount);
 		
 		//save subscription in session
 		request.getSession().setAttribute("subscription", sub);

@@ -48,7 +48,7 @@ public class RefetchOrder extends HttpServlet {
 		//check user has the rights to fetch specified order
 		try {
 			Client user = (Client)request.getSession().getAttribute("user");
-			if(!user.getUsername().equals(order.getSubscription().getUser().getUsername())) throw new IllegalArgumentException();
+			if(!user.getUsername().equals(order.getSubscription().getUser())) throw new IllegalArgumentException();
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized resource access");
 			error.forward("/GetUserHomePage", this, request, response);

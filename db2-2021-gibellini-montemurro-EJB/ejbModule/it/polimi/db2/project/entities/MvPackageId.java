@@ -6,6 +6,10 @@ import java.util.Objects;
 import javax.persistence.Id;
 
 public class MvPackageId implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private int id_package;
 	private int months;
 	

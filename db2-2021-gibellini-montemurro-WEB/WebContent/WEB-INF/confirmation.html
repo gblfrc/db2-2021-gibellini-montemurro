@@ -88,7 +88,7 @@
 				Amount to pay: <span th:text="${sub.amount}"> 404 </span> &#8364
 			</p>
 			<p th:if="${order!=null} and ${order.validity}==true">
-				Paid amount: <span th:text="${sub.amount}"> 404 </span> &#8364
+				Paid amount: <span th:text="${order.amount}"> 404 </span> &#8364
 			</p>
 			<div th:if="${order==null}">
 				<form action="ConfirmSub" class="onlyButton" th:if="${client}!=null"

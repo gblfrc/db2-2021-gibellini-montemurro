@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import it.polimi.db2.project.entities.AuditingTable;
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.MvOptProd;
 import it.polimi.db2.project.services.AuditingService;
@@ -80,8 +81,8 @@ public class JSONTable extends HttpServlet {
 				toSend = gson.toJson(JSONConverter.converter(suspendedOrders));
 				break;
 			case "alerts":
-				List<Object[]> alerts = auditingService.findAlerts();
-				toSend = gson.toJson(JSONConverter.converter(alerts));
+				List<AuditingTable> alerts = auditingService.findAlerts();
+				toSend = gson.toJson(alerts);
 				break;
 			case "best":
 				List<MvOptProd> bestSeller = mvOptProdService.findBestSeller();

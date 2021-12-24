@@ -8,14 +8,16 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import it.polimi.db2.project.entities.AuditingTable;
+
 @Stateless
 public class AuditingService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
-	public List<Object[]> findAlerts() {
-		TypedQuery<Object[]> query = em.createNamedQuery("AuditingTable.findAlerts", Object[].class);
-		List<Object[]> result;
+	public List<AuditingTable> findAlerts() {
+		TypedQuery<AuditingTable> query = em.createNamedQuery("AuditingTable.findAlerts", AuditingTable.class);
+		List<AuditingTable> result;
 		try {
 			result =query.getResultList();
 		} catch (NoResultException e) {

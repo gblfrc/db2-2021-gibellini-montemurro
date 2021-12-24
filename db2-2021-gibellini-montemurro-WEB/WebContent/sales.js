@@ -331,7 +331,6 @@
 		this.element = document.querySelector("div[class='alerts']");
 		this.alerts = document.querySelector("div[class='alerts']>table>tbody");
 		
-		
 		this.hide = function hide() {
 			this.element.style.display = "none";
 		}
@@ -347,26 +346,26 @@
 			if(dataPerPackage.length>0){
 				for (i = 0; i < dataPerPackage.length; i++) {
 					let newRow = document.createElement("tr");
-					let orderCell = document.createElement("td");
+					/*let orderCell = document.createElement("td");
 					orderCell.textContent = dataPerPackage[i].property0;
-					newRow.appendChild(orderCell);
+					newRow.appendChild(orderCell);*/
 					let usernameCell = document.createElement("td");
-					usernameCell.textContent = dataPerPackage[i].property1;
+					usernameCell.textContent = dataPerPackage[i].username;
 					newRow.appendChild(usernameCell);
 					let emailCell = document.createElement("td");
-					emailCell.textContent = dataPerPackage[i].property2;
+					emailCell.textContent = dataPerPackage[i].email;
 					newRow.appendChild(emailCell);
 					let amountCell = document.createElement("td");
 					amountCell.setAttribute("class", "number");
-					amountCell.textContent = dataPerPackage[i].property3 + '\u20ac';
+					amountCell.textContent = dataPerPackage[i].amount + '\u20ac';
 					newRow.appendChild(amountCell);
 					let dateCell = document.createElement("td");
 					dateCell.setAttribute("class", "number");
-					dateCell.textContent = dataPerPackage[i].property4;
+					dateCell.textContent = dataPerPackage[i].rejectionDate;
 					newRow.appendChild(dateCell);
 					let timeCell = document.createElement("td");
 					timeCell.setAttribute("class", "number");
-					timeCell.textContent = dataPerPackage[i].property5;
+					timeCell.textContent = dataPerPackage[i].rejectionTime;
 					newRow.appendChild(timeCell);
 					alerts.alerts.appendChild(newRow);
 				}
