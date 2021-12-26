@@ -51,7 +51,7 @@ public class PayOrder extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
-		error.forward("/GetUserHomePage", this, request, response);
+		error.forward("/GetClientHomePage", this, request, response);
 	}
 
 

@@ -49,7 +49,7 @@ public class CheckLogin extends HttpServlet {
 					response.sendRedirect(getServletContext().getContextPath() + "/GetConfirmationPage");
 				}
 				//if the user hasn't created a sub (i.e. he's come here from starting login) send to home page
-				else response.sendRedirect(getServletContext().getContextPath() + "/GetUserHomePage");
+				else response.sendRedirect(getServletContext().getContextPath() + "/GetClientHomePage");
 			}
 			else {
 				response.sendRedirect(getServletContext().getContextPath() + "/GetEmployeeHomePage");

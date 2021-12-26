@@ -41,7 +41,7 @@ public class RefetchOrder extends HttpServlet {
 		order = os.findOrderById(orId);
 		} catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal parameter passed");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		
@@ -51,14 +51,14 @@ public class RefetchOrder extends HttpServlet {
 			if(!user.getUsername().equals(order.getSubscription().getUser())) throw new IllegalArgumentException();
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized resource access");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		
 		//check the order is actually to refetch
 		if(order.getValidity()) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		

@@ -43,7 +43,7 @@ public class ConfirmSub extends HttpServlet {
 		if(sub==null) {
 			System.out.println("null sub");
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent subscription");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		
@@ -63,7 +63,7 @@ public class ConfirmSub extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
-		error.forward("/GetUserHomePage", this, request, response);
+		error.forward("/GetClientrHomePage", this, request, response);
 	}
 
 

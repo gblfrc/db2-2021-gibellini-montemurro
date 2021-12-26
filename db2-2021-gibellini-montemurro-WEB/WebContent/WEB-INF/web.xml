@@ -43,7 +43,7 @@
 		<url-pattern>/CreateSubscription</url-pattern>
 		<url-pattern>/GetBuyPage</url-pattern>
 		<url-pattern>/GetConfirmationPage</url-pattern>
-		<url-pattern>/GetUserHomePage</url-pattern>
+		<url-pattern>/GetClientHomePage</url-pattern>
 		<url-pattern>/JSONPackage</url-pattern>
 		<url-pattern>/Register</url-pattern>
 	</filter-mapping>

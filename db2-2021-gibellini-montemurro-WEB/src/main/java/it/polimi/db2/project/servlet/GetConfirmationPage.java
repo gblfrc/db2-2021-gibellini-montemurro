@@ -51,7 +51,7 @@ public class GetConfirmationPage extends HttpServlet {
 		else if (!sub.getUser().equals(client.getUsername())) {
 			request.getSession().removeAttribute("subscription");
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal access");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		

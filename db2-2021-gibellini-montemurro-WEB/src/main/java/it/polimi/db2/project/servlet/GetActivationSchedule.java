@@ -52,7 +52,7 @@ public class GetActivationSchedule extends HttpServlet {
 		
 		if(order==null) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent order");
-			error.forward("/GetUserHomePage", this, request, response);
+			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		

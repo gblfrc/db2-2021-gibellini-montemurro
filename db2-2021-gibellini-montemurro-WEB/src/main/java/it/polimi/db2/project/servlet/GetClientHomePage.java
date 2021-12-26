@@ -19,8 +19,8 @@ import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.utils.Error;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 
-@WebServlet("/GetUserHomePage")
-public class GetUserHomePage extends HttpServlet {
+@WebServlet("/GetClientHomePage")
+public class GetClientHomePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
 
