@@ -346,9 +346,6 @@
 			if(dataPerPackage.length>0){
 				for (i = 0; i < dataPerPackage.length; i++) {
 					let newRow = document.createElement("tr");
-					/*let orderCell = document.createElement("td");
-					orderCell.textContent = dataPerPackage[i].property0;
-					newRow.appendChild(orderCell);*/
 					let usernameCell = document.createElement("td");
 					usernameCell.textContent = dataPerPackage[i].username;
 					newRow.appendChild(usernameCell);
