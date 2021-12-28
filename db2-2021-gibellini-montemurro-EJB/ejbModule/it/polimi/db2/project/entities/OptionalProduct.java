@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "optionalproduct")
 @NamedQuery(name="OptionalProduct.findAllOptionalProducts", query="SELECT opt FROM OptionalProduct opt")
-public class OptionalProduct implements Serializable {
+public @Data class OptionalProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -16,21 +18,4 @@ public class OptionalProduct implements Serializable {
 	
 	private int monthlyFee;
 	
-	//getters
-	public String getName() {
-		return name;
-	}
-	
-	public int getMonthlyFee(){
-		return monthlyFee;
-	}
-	
-	//setters
-	public void setName(String name) {
-		this.name=name;
-	}
-	
-	public void setMonthlyFee(int monthlyFee) {
-		this.monthlyFee=monthlyFee;
-	}
 }

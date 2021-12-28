@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "package")
 @NamedQuery(name="ServicePackage.findAll", query="SELECT sp FROM ServicePackage sp")
-public class ServicePackage implements Serializable {
+public @Data class ServicePackage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,41 +33,7 @@ public class ServicePackage implements Serializable {
 			   joinColumns=@JoinColumn(name="Package"),
 	           inverseJoinColumns=@JoinColumn(name="Product"))
 	private List<OptionalProduct> optionalProducts;
-	
-	//getters
-	public int getId() {
-		return id;
-	}
-	
-	public String name() {
-		return name;
-	}
-	
-	public List<Service> getServices(){
-		return services;
-	}
-	
-	public List<OptionalProduct> getOptionalProducts(){
-		return optionalProducts;
-	}
-	
-	//setters
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setServices(List<Service> services){
-		this.services=services;
-	}
-	
-	public void setOptionalProducts(List<OptionalProduct> optionalProducts){
-		this.optionalProducts=optionalProducts;
-	}
-	
+		
 	public boolean hasAllProducts(List<String> productsToCheck) {
 		List<String> allProducts = new LinkedList<>();
 		for(OptionalProduct op : optionalProducts) {

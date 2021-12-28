@@ -9,6 +9,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @IdClass(MvPackageId.class)
 @Table(name = "mv_package")
@@ -19,7 +21,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="MvPackage.revWOpt", query="SELECT mv.packName, sum(mv.totRevenueWOpt) FROM MvPackage mv GROUP BY mv.id_package"),
 	@NamedQuery(name="MvPackage.avgOpt", query="SELECT mv.packName, sum(mv.totPurchase), sum(mv.totOptProd) FROM MvPackage mv GROUP BY mv.id_package")
 })
-public class MvPackage implements Serializable{
+public @Data class MvPackage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -32,61 +34,4 @@ public class MvPackage implements Serializable{
 	int totRevenueWOpt;
 	int totOptProd;
 	
-	//getters
-	public int getId_package() {
-		return id_package;
-	}
-	
-	public int getMonths() {
-		return months;
-	}
-	
-	public String getPackName() {
-		return packName;
-	}
-	
-	public int getTotPurchase() {
-		return totPurchase;
-	}
-	
-	public int getTotRevenueWoOpt() {
-		return totRevenueWoOpt;
-	}
-	
-	public int getTotRevenueWOpt() {
-		return totRevenueWOpt;
-	}
-	
-	public int getTotOptProd() {
-		return totOptProd;
-	}
-	
-	//setters
-	public void setId_package(int id_package) {
-		this.id_package=id_package;
-	}
-	
-	public void setMonths(int months) {
-		this.months=months;
-	}
-	
-	public void setPackName(String packName) {
-		this.packName=packName;
-	}
-	
-	public void setTotPurchase(int totPurchase) {
-		this.totPurchase=totPurchase;
-	}
-	
-	public void setTotRevenueWoOpt(int totRevenueWoOpt) {
-		this.totRevenueWoOpt=totRevenueWoOpt;
-	}
-	
-	public void getTotRevenueWOpt(int totRevenueWOpt) {
-		this.totRevenueWOpt=totRevenueWOpt;
-	}
-	
-	public void setTotOptProd(int totOptProd) {
-		this.totOptProd=totOptProd;
-	}
 }
