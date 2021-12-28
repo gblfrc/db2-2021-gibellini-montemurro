@@ -32,12 +32,17 @@ public class CheckLogin extends HttpServlet {
 
 		// fetch user
 		// try client first
-		User user;
-		user = uService.getClient(request.getParameter("username"), request.getParameter("password"));
-		if (user == null) {
-			user = uService.getEmployee(request.getParameter("username"), request.getParameter("password"));
+		User user=null;
+		if(request.getSession().getAttribute("user")==null) {
+			user = uService.getClient(request.getParameter("username"), request.getParameter("password"));
+			if (user == null) {
+				user = uService.getEmployee(request.getParameter("username"), request.getParameter("password"));
+			}
+		}else {
+			response.sendRedirect(getServletContext().getContextPath() + "/Logout");
+			return;
 		}
-
+		
 		if (user != null) {
 			// save user in session
 			request.getSession().setAttribute("user", user);
