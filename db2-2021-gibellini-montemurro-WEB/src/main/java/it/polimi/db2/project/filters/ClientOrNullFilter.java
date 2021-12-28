@@ -25,6 +25,7 @@ public class ClientOrNullFilter implements Filter{
 		User user=(User)s.getAttribute("user");
 		if(user!=null && !user.getClass().equals(Client.class)) {
 			//add error
+			System.out.println(req.getRequestURI());
 			res.sendRedirect(req.getServletContext().getContextPath() + "/GetLogin");
 			return;
 		}

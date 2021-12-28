@@ -1,6 +1,8 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -38,28 +40,38 @@ public class CreateService extends HttpServlet {
 			return;
 		}
 
+		// check all parameters have been passed
+		List<String> parameters = Collections.list(request.getParameterNames());
+		System.out.println(parameters);
+		if (!parameters.contains("igb") || !parameters.contains("egbf") || !parameters.contains("isms")
+				|| !parameters.contains("esmsf") || !parameters.contains("im") || !parameters.contains("emf")) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal parameter passing");
+			error.forward("/GetEmployeeHomePage", this, request, response);
+			return;
+		}
+
 		// fetch parameters
 		Integer igb, isms, im;
 		Double egbf, esmsf, emf;
 		try {
 			String temp = request.getParameter("igb");
-			igb = temp.equals("") ?  null : Integer.valueOf(temp);
+			igb = temp.equals("") ? null : Integer.valueOf(temp);
 			temp = request.getParameter("egbf");
-			egbf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
+			egbf = temp.equals("") ? null : Double.valueOf(temp.replaceAll(",", "."));
 			temp = request.getParameter("isms");
-			isms = temp.equals("") ?  null : Integer.valueOf(temp);
+			isms = temp.equals("") ? null : Integer.valueOf(temp);
 			temp = request.getParameter("esmsf");
-			esmsf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
+			esmsf = temp.equals("") ? null : Double.valueOf(temp.replaceAll(",", "."));
 			temp = request.getParameter("im");
-			im = temp.equals("") ?  null : Integer.valueOf(temp);
+			im = temp.equals("") ? null : Integer.valueOf(temp);
 			temp = request.getParameter("emf");
-			emf = temp.equals("") ?  null : Double.valueOf(temp.replaceAll(",","."));
+			emf = temp.equals("") ? null : Double.valueOf(temp.replaceAll(",", "."));
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal value passed: enter only numbers");
 			error.forward("/GetEmployeeHomePage", this, request, response);
 			return;
 		}
-		
+
 		// check validity of parameters
 		try {
 			if (type.equals("Fixed phone")

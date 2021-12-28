@@ -47,7 +47,8 @@ public class CreateSubscription extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		error.forward("/GetBuyPage", this, request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

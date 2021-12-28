@@ -3,6 +3,7 @@ package it.polimi.db2.project.servlet;
 import java.io.IOException;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,12 +36,17 @@ public class RefetchOrder extends HttpServlet {
 
 		Order order = null;
 		
-		//try to get order
+		//try to fetch order
 		try {
 		int orId = Integer.parseInt(request.getParameter("orId"));
+		System.out.println("Parsed integer");
 		order = os.findOrderById(orId);
-		} catch(Exception e) {
+		} catch(NumberFormatException cce) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal parameter passed");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		} catch (EJBException e) {
+			Error error = new Error(HttpServletResponse.SC_NOT_FOUND, "Order not found");
 			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}

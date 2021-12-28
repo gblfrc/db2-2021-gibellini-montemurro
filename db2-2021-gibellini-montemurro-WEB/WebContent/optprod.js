@@ -5,10 +5,6 @@
 	window.addEventListener("load", () => {
 		opList = new OptProdList();
 		packageSelector = new PackageSelector();
-		//fire fake event to get first list of products 
-		let e = document.createEvent("HTMLEvents");
-		e.initEvent("change", false, true);
-		packageSelector.element.dispatchEvent(e);
 	})
 
 
@@ -57,8 +53,7 @@
 			}
 		}
 
-		this.hide();
-		this.clear();
+		this.show();
 	}
 
 	function PackageSelector() {

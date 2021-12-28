@@ -1,6 +1,7 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,6 +16,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import it.polimi.db2.project.entities.Client;
+import it.polimi.db2.project.entities.OptionalProduct;
 import it.polimi.db2.project.entities.ServicePackage;
 import it.polimi.db2.project.entities.ValidityPeriod;
 import it.polimi.db2.project.services.SpService;
@@ -48,6 +50,14 @@ public class GetBuyPage extends HttpServlet {
 		//fetch all validity periods
 		List<ValidityPeriod> periods = vps.getAllValidityPeriod();
 		
+		//fetch products for first package or create empty list
+		List<OptionalProduct> products = null;
+		try {
+			products = packages.get(0).getOptionalProducts();
+		} catch (Exception e) {
+			products = new LinkedList<>();
+		}
+		
 		//give access to actual home page which should show the packages
 		String path = "/WEB-INF/buy.html";
 		ServletContext servletContext = getServletContext();
@@ -56,6 +66,7 @@ public class GetBuyPage extends HttpServlet {
 		ctx.setVariable("packages", packages);
 		ctx.setVariable("user", user);
 		ctx.setVariable("vperiods", periods);
+		ctx.setVariable("products", products);
 		templateEngine.process(path, ctx, response.getWriter());
 
 	}
