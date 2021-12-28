@@ -33,7 +33,7 @@ public class CreateOptionalProduct extends HttpServlet {
 		try {
 			name = request.getParameter("name");
 			monthlyFee = Integer.parseInt(request.getParameter("monthlyFee"));
-			if(name.equals("")||name==null)throw new Exception();
+			if(name.equals("")||name==null||name.substring(0,1).equals(" "))throw new Exception();
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal optional product request");
 			error.forward("/GetEmployeeHomePage", this, request, response);

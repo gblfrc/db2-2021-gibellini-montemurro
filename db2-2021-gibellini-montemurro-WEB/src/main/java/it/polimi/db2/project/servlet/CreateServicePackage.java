@@ -48,7 +48,7 @@ public class CreateServicePackage extends HttpServlet {
 			name= request.getParameter("name");
 			optProdList= request.getParameterValues("typeOptional");
 			serviceList= request.getParameterValues("typeService");
-			if(name.equals("")||name==null||serviceList==null)throw new Exception();
+			if(name.equals("")||name==null||name.substring(0,1).equals(" ")||serviceList==null)throw new Exception();
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal service package request");
 			error.forward("/GetEmployeeHomePage", this, request, response);
