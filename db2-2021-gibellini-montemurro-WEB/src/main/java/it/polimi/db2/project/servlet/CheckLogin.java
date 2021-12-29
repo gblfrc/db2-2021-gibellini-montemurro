@@ -38,8 +38,14 @@ public class CheckLogin extends HttpServlet {
 			if (user == null) {
 				user = uService.getEmployee(request.getParameter("username"), request.getParameter("password"));
 			}
-		}else {
-			response.sendRedirect(getServletContext().getContextPath() + "/Logout");
+		} else {
+			Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unathorized login request; user logged out");
+			//log out user and destroy other parameters (sub, order)
+			request.getSession().removeAttribute("user");
+			request.getSession().removeAttribute("subscription");
+			request.getSession().removeAttribute("order");
+			request.getSession().setAttribute("logError", error);
+			response.sendRedirect(request.getServletContext().getContextPath() + "/GetLogin");
 			return;
 		}
 		

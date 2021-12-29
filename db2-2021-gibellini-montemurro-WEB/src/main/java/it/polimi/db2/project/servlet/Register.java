@@ -26,18 +26,20 @@ public class Register extends HttpServlet {
 			username = request.getParameter("username");
 			password = request.getParameter("password");
 			email = request.getParameter("email");
-			if(username.equals("")||username==null||password.equals("")||password==null||email.equals("")||email==null) {
+			if (username == null || username.equals("") || username.substring(0, 1).equals(" ") ||
+					password == null || password.equals("")	|| password.substring(0, 1).equals(" ") ||
+					email == null|| email.equals("") || password.substring(0, 1).equals(" ") || email.contains(" ")) {
 				throw new Exception();
 			}
 			uService.addClient(username, password, email);
-		}catch(Exception e) {
-			Error error=new Error(HttpServletResponse.SC_BAD_REQUEST, "Couldn't create account, invalid credentials");
+		} catch (Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Couldn't create account, invalid credentials");
 			error.forward("/GetLogin", this, request, response);
 			return;
 		}
 
-		Error success=new Error(HttpServletResponse.SC_OK, "Successful registration");
-		request.getSession().setAttribute("sucReg", success);
+		Error success = new Error(HttpServletResponse.SC_OK, "Successful registration");
+		request.getSession().setAttribute("success", success);
 
 		response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");
 	}

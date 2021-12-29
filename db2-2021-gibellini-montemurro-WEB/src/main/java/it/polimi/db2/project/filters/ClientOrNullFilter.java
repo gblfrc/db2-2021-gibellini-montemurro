@@ -33,8 +33,10 @@ public class ClientOrNullFilter implements Filter{
 			else {
 				//create error
 				Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unathorized resource access; user logged out");
-				//log out user
+				//log out user and destroy other parameters (sub, order)
 				req.getSession().removeAttribute("user");
+				req.getSession().removeAttribute("subscription");
+				req.getSession().removeAttribute("order");
 				//save error in session to display in login page
 				req.getSession().setAttribute("logError", error);
 				//redirect to login page

@@ -9,14 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.polimi.db2.project.utils.Error;
+
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		if (session != null) {
-			session.invalidate();
+			session.removeAttribute("user");
+			session.removeAttribute("subscription");
+			session.removeAttribute("order");
+			Error success = new Error(HttpServletResponse.SC_OK, "Successful logout");
+			session.setAttribute("success", success);
 		}
 		response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");
 	}

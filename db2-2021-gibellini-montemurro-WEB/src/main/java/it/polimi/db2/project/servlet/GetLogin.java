@@ -23,8 +23,8 @@ public class GetLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//fetch error and success (if present, otherwise error is null)
-		Error success = (Error)request.getSession().getAttribute("sucReg");
-		request.getSession().removeAttribute("sucReg");
+		Error success = (Error)request.getSession().getAttribute("success");
+		request.getSession().removeAttribute("success");
 		Error error = (Error)request.getSession().getAttribute("logError");	
 		if (error!=null) request.getSession().removeAttribute("logError");
 		else error = (Error)request.getAttribute("error");

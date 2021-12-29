@@ -44,6 +44,13 @@ public class GetConfirmationPage extends HttpServlet {
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
+		//check subscription isn't null
+		if(sub==null) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent subscription");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
+		
 		//check the sub has a client, if not try to set it
 		Client client = (Client)request.getSession().getAttribute("user");
 		if (client!=null) {

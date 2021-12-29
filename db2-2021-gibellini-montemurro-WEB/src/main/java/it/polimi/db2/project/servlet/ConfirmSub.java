@@ -40,9 +40,16 @@ public class ConfirmSub extends HttpServlet {
 		//fetch subscription object
 		Subscription sub = (Subscription)request.getSession().getAttribute("subscription");
 		
+		//check subscription isn't null
 		if(sub==null) {
-			System.out.println("null sub");
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent subscription");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
+		
+		//check user has requested payment
+		if(request.getAttribute("fail")==null) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-requested payment");
 			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}

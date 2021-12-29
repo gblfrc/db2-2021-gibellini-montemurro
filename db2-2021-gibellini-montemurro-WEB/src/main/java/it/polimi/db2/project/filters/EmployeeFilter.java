@@ -35,8 +35,10 @@ public class EmployeeFilter implements Filter{
 				Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unathorized resource access; user logged out");
 				//change message if user hasn't logged yet
 				if (user==null) error.setMessage("Unathorized resource access");
-				// log out user
+				//log out user and destroy other parameters (sub, order)
 				req.getSession().removeAttribute("user");
+				req.getSession().removeAttribute("subscription");
+				req.getSession().removeAttribute("order");
 				//save error in session to display in login page
 				req.getSession().setAttribute("logError", error);
 				//redirect to login page
