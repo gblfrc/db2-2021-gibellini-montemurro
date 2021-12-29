@@ -46,13 +46,15 @@ public class GetConfirmationPage extends HttpServlet {
 		
 		//check the sub has a client, if not try to set it
 		Client client = (Client)request.getSession().getAttribute("user");
-		if (sub.getUser() == null) sub.setUser(client.getUsername());
-		//handle case in which the user has changed profile after receiving the page once
-		else if (!sub.getUser().equals(client.getUsername())) {
-			request.getSession().removeAttribute("subscription");
-			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal access");
-			error.forward("/GetClientHomePage", this, request, response);
-			return;
+		if (client!=null) {
+			if (sub.getUser() == null) sub.setUser(client.getUsername());
+			//handle case in which the user has changed profile after receiving the page once
+			else if (!sub.getUser().equals(client.getUsername())) {
+				request.getSession().removeAttribute("subscription");
+				Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal access");
+				error.forward("/GetClientHomePage", this, request, response);
+				return;
+			}
 		}
 		
 		//give access to actual home page which should show the packages

@@ -13,18 +13,27 @@ import javax.servlet.http.HttpSession;
 
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.User;
+import it.polimi.db2.project.utils.Error;
 
-public class ClientFilter implements Filter{
+public class ClientFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.print("Checking client's access rights ...\n");
+		System.out.println("Checking client's access rights ...");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		// check if the logged user is a client
 		HttpSession s = req.getSession();
-		User user=(User)s.getAttribute("user");
-		if(user==null || !user.getClass().equals(Client.class)) {
-			//add error
+		User user = (User) s.getAttribute("user");
+		if (user == null || !user.getClass().equals(Client.class)) {
+			//create error
+			Error error = new Error(HttpServletResponse.SC_UNAUTHORIZED, "Unathorized resource access; user logged out");
+			//change message if user hasn't logged yet
+			if (user==null) error.setMessage("Unathorized resource access");
+			// log out user
+			req.getSession().removeAttribute("user");
+			// save error in session to display in login page
+			req.getSession().setAttribute("logError", error);
+			// redirect to login page
 			res.sendRedirect(req.getServletContext().getContextPath() + "/GetLogin");
 			return;
 		}

@@ -14,7 +14,8 @@
 			<ul>
 				<li><a th:href="GetClientHomePage">HOME</a>
 				<li><a th:href="GetBuyPage">BUY</a>
-				<li><a th:href="Logout">LOGOUT</a>
+				<li th:if="${user}==null"><a th:href="GetLogin">LOGIN</a>
+				<li th:if="${user}!=null"><a th:href="Logout">LOGOUT</a>
 			</ul>
 		</nav>
 		<div class="user" th:if="${user}!=null" th:text="${user.username}">User</div>

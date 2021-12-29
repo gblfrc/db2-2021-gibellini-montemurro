@@ -25,7 +25,9 @@ public class GetLogin extends HttpServlet {
 		//fetch error and success (if present, otherwise error is null)
 		Error success = (Error)request.getSession().getAttribute("sucReg");
 		request.getSession().removeAttribute("sucReg");
-		Error error = (Error)request.getAttribute("error");
+		Error error = (Error)request.getSession().getAttribute("logError");	
+		if (error!=null) request.getSession().removeAttribute("logError");
+		else error = (Error)request.getAttribute("error");
 		
 		//give access to landing page (page for login or registration)
 		String path = "/WEB-INF/index.html";

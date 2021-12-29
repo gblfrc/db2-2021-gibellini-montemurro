@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Error {
+import lombok.Data;
+
+public @Data class Error {
 	
 	int code;
 	String message;
@@ -18,14 +20,6 @@ public class Error {
 		this.message = message;
 	}
 	
-	public int getCode() {
-		return this.code;
-	}
-	
-	public String getMessage() {
-		return this.message;
-	}
-
 	public void forward(String forwardTo, HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setAttribute("error", this);
 		RequestDispatcher rd = servlet.getServletContext().getRequestDispatcher(forwardTo);
