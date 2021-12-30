@@ -13,7 +13,6 @@ public @Data class OptionalProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="name")
 	private String name;
 	
 	private int monthlyFee;

@@ -19,7 +19,6 @@ public @Data class AuditingTable implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="id")
 	private int id;
 		
 	private String username;

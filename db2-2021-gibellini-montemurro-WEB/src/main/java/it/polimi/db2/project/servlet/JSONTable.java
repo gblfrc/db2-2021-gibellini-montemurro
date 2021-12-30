@@ -44,7 +44,7 @@ public class JSONTable extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
 		String toSend = null;
 		
 		String param = request.getParameter("table");

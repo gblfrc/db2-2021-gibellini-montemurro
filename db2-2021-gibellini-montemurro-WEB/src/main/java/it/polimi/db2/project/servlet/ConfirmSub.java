@@ -1,6 +1,7 @@
 package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -48,7 +49,8 @@ public class ConfirmSub extends HttpServlet {
 		}
 		
 		//check user has requested payment
-		if(request.getAttribute("fail")==null) {
+		System.out.println(request.getParameter("fail"));
+		if(request.getParameter("fail")==null) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-requested payment");
 			error.forward("/GetClientHomePage", this, request, response);
 			return;
