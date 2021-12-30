@@ -1,0 +1,231 @@
+DELIMITER $$
+create trigger client_not_employee_tr before insert on client
+for each row
+begin  
+	if exists(
+			select * 
+			from employee
+			where Username=NEW.Username)
+            then SIGNAL sqlstate '45000' set message_text = "Error: Existing employee with same name";
+	end if;
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger employee_not_client_tr before insert on employee
+for each row
+begin  
+	if exists(
+			select * 
+			from client
+			where Username=NEW.Username)
+            then SIGNAL sqlstate '45000' set message_text = "Error: Existing client with same name";
+	end if;
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger insolvent_user_tr after update on orders
+for each row
+begin  
+	if NEW.Validity=0 and new.refusedPayments>=1
+	then update client set Insolvent=1 
+    where Username= ( 
+		select subscription.User
+        from subscription, orders
+        where subscription.ID=orders.Subscription and orders.ID=NEW.ID
+    );
+	end if;
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger uninsolvent_user_tr after update on orders
+for each row
+begin  
+	if NEW.Validity=1 and not exists(
+		select *
+        from subscription, orders, client
+        where subscription.ID=orders.Subscription and orders.ID!=NEW.ID and 
+        client.Username=subscription.User and client.Username=(
+        select subscription.User
+        from subscription, orders
+        where subscription.ID=orders.Subscription and orders.ID=NEW.ID)
+        and orders.Validity = 0)
+	then update client set Insolvent=0
+    where Username= ( 
+		select subscription.User
+        from subscription, orders
+        where subscription.ID=orders.Subscription and orders.ID=NEW.ID);
+	end if;
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger single_type_services_tr before insert on servpack
+for each row
+begin  
+	if exists( 
+		select * 
+		from servpack AS sp, service AS s
+		where sp.Service=s.ID and sp.Package=new.Package and s.type=(
+			select Type
+            from service
+			where ID=new.Service
+        )
+	)then SIGNAL sqlstate '45000' set message_text = "Error: More than a service with the same type";
+	end if;
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger new_order_tr after insert on subscription
+for each row
+begin  
+	set @amount=new.ValidityPeriod *(
+		select MonthlyFee
+        from validityperiod 
+        where Months=new.ValidityPeriod);
+	insert into orders(CreationDate, CreationTime, Validity, RefusedPayments, Subscription, Amount)
+	values (current_date(), current_time(), 0, 0, new.id, @amount);
+end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger amount_opt_tr after insert on optionalsub
+for each row
+begin  
+	set @vp= (select ValidityPeriod from subscription where ID=new.Subscription);
+	update orders
+	set Amount= Amount+ @vp *(
+		select MonthlyFee
+        from optionalproduct 
+        where Name=new.Product)
+	where subscription=new.Subscription;
+ end;   $$
+DELIMITER ;
+
+DELIMITER $$
+create trigger audit_UPDATE_tr after update on orders
+for each row
+begin  
+	set @us= (select subscription.User
+        from subscription, orders
+        where subscription.ID=orders.Subscription and orders.ID=new.ID);
+	set @email = (select email from client where username=@us);
+	if (
+    new.Validity=0 and new.RefusedPayments>old.RefusedPayments and 
+    (select sum(orders.RefusedPayments)
+	from subscription, orders
+	where subscription.ID=orders.Subscription and subscription.User=@us and orders.validity=0)>=3 )
+    then set @amount=(select sum(orders.Amount)
+					  from subscription, orders
+					  where subscription.ID=orders.Subscription and subscription.User=@us and orders.validity=0);
+	insert into auditingtable (Username, Email, Amount, RejectionDate, RejectionTime) values (@us, @email, @amount, curdate(), curtime());
+    end if;
+ end;  $$ 
+DELIMITER ;   
+
+------------------------------
+Materialized view triggers
+------------------------------
+
+DELIMITER $$
+create trigger mv_opt_prod_revenue_tr after update on orders
+for each row
+begin  
+	#declare cursors
+    declare done int default false;
+	declare product varchar(45);
+    declare cur_prod cursor for (select optionalsub.product from optionalsub where new.subscription=optionalsub.subscription);
+    declare continue handler for not found set done = true;
+
+	if (new.validity = 1 and old.validity = 0) then
+	
+		#open cursor
+		open cur_prod;
+
+		#execute cycle
+		prod_loop: loop
+			fetch cur_prod into product;
+			#SIGNAL sqlstate '45000' set message_text = product;
+
+			if done then 
+				leave prod_loop;
+			end if;
+			if product not in (select id_optprod from mv_optprod) then
+				insert into mv_optprod values (product, 0);
+			end if;
+
+			update mv_optprod set tot_revenue = (tot_revenue + 
+			(select monthlyFee
+			from optionalproduct
+			where Name = product) * 
+			(select ValidityPeriod
+			from subscription
+			where subscription.id=new.Subscription))
+			where id_optprod = product;
+		end loop;
+    end if;
+	end; $$ 
+DELIMITER ;
+
+DELIMITER $$
+create trigger mv_package_tr after update on orders
+for each row
+begin  
+	#declare cursors
+    declare done int default false;
+	declare product varchar(45);
+    declare cur_prod cursor for (select optionalsub.product from optionalsub where new.subscription=optionalsub.subscription);
+    declare continue handler for not found set done = true;
+	
+	if (new.validity = 1 and old.validity = 0) then
+		set @pack=(select package from subscription where id=new.subscription);
+		set @vp=(select validityPeriod from subscription where id=new.subscription);
+		set @amount= @vp* (select monthlyFee from validityperiod where months=@vp);
+        
+        if not exists (select * from mv_package where id_package=@pack and months=@vp) then
+			insert into mv_package values(@pack,@vp,(select name from package where id=@pack),0,0,0,0);
+		end if;
+        
+        #Update totRevenueWoOpt 
+		update mv_package
+        set totRevenueWoOpt=totRevenueWoOpt+@amount
+        where id_package=@pack and months=@vp;
+        
+        #Update totRevenueWOpt 
+        update mv_package
+        set totRevenueWOpt=totRevenueWOpt+@amount
+        where id_package=@pack and months=@vp;
+        
+        #Update totPurchase
+        update mv_package
+        set totPurchase=totPurchase+1
+        where id_package=@pack and months=@vp;
+        
+		#open cursor
+		open cur_prod;
+
+		#execute cycle
+		prod_loop: loop
+			fetch cur_prod into product;
+
+			if done then 
+				leave prod_loop;
+			end if;
+		
+			#Update totRevenueWOpt
+			update mv_package set totRevenueWOpt = (totRevenueWOpt + 
+			(select monthlyFee
+			from optionalproduct
+			where Name = product) * @vp)
+			where id_package = @pack and months=@vp;
+            
+            #Update totOptProd
+            update mv_package set totOptProd = totOptProd + 1
+			where id_package = @pack and months=@vp;
+		end loop;
+    end if;
+	end; $$ 
+DELIMITER ;
