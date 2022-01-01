@@ -79,7 +79,7 @@ form>p {
 	margin-top: 0.2em;
 }
 
-p:not([class="date"])>input[type="text"], p>input[type="password"], p>select
+p>input[type="text"], p>input[type="password"], p>input[type="date"], p>select
 	{
 	width: 65%;
 	float: right;

@@ -42,7 +42,6 @@ public class CreateService extends HttpServlet {
 
 		// check all parameters have been passed
 		List<String> parameters = Collections.list(request.getParameterNames());
-		System.out.println(parameters);
 		if (!parameters.contains("igb") || !parameters.contains("egbf") || !parameters.contains("isms")
 				|| !parameters.contains("esmsf") || !parameters.contains("im") || !parameters.contains("emf")) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal parameter passing");

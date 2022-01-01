@@ -39,7 +39,6 @@ public class RefetchOrder extends HttpServlet {
 		//try to fetch order
 		try {
 		int orId = Integer.parseInt(request.getParameter("orId"));
-		System.out.println("Parsed integer");
 		order = os.findOrderById(orId);
 		} catch(NumberFormatException cce) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal parameter passed");

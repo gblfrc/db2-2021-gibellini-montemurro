@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="orders")
@@ -25,11 +25,8 @@ public @Data class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	//@Temporal(TemporalType.DATE)
 	private Date creationDate;
-	
 	private Time creationTime;
-
 	private boolean validity;
 	private int refusedPayments;
 	

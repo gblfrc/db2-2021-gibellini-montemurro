@@ -78,11 +78,20 @@ public class JSONTable extends HttpServlet {
 				break;
 			case "suspended":
 				List<Object[]> suspendedOrders = orderService.getSuspendedOrders();
+				for(Object[] obj: suspendedOrders) {
+					System.out.println(obj);
+				}
 				toSend = gson.toJson(JSONConverter.converter(suspendedOrders));
 				break;
 			case "alerts":
 				List<AuditingTable> alerts = auditingService.findAlerts();
 				toSend = gson.toJson(alerts);
+				for(AuditingTable obj: alerts) {
+					System.out.println(obj);
+				}
+				System.out.println("---------------------------------------------------");
+				System.out.println(toSend);
+				System.out.println("---------------------------------------------------");
 				break;
 			case "best":
 				List<MvOptProd> bestSeller = mvOptProdService.findBestSeller();
@@ -101,7 +110,6 @@ public class JSONTable extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(toSend);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
