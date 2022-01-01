@@ -18,7 +18,14 @@ public class Register extends HttpServlet {
 
 	@EJB
 	private UserService uService;
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
+		error.forward("/GetLogin", this, request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username, password, email;
