@@ -25,6 +25,7 @@ import it.polimi.db2.project.entities.ValidityPeriod;
 import it.polimi.db2.project.services.OptService;
 import it.polimi.db2.project.services.SpService;
 import it.polimi.db2.project.services.SubService;
+import it.polimi.db2.project.services.VPService;
 import it.polimi.db2.project.utils.TemplateEngineHandler;
 import it.polimi.db2.project.utils.Error;
 
@@ -40,7 +41,9 @@ public class CreateSubscription extends HttpServlet {
 	OptService ops;
 	@EJB
 	SubService sbs;
-
+	@EJB
+	VPService vps;
+	
 	public void init() throws ServletException {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
@@ -78,7 +81,7 @@ public class CreateSubscription extends HttpServlet {
 		ValidityPeriod validityPeriod = null;
 		try {
 			valPer = Integer.parseInt(request.getParameter("validityPeriod"));
-			validityPeriod = sbs.getValidityPeriod(valPer);
+			validityPeriod = vps.getValidityPeriod(valPer);
 			// check existence of specified validity period
 			if (validityPeriod == null)
 				throw new NoSuchElementException();

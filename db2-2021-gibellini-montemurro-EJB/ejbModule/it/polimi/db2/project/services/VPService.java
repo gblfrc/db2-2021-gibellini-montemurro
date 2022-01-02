@@ -19,4 +19,7 @@ public class VPService {
 		return query.getResultList();
 	}
 	
+	public ValidityPeriod getValidityPeriod(int months) {
+		return em.find(ValidityPeriod.class, months);
+	}
 }
