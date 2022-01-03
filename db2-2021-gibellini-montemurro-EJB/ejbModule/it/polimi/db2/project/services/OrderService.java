@@ -29,9 +29,9 @@ public class OrderService {
 		return result;
 	}
 
-	public List<Object[]> getSuspendedOrders(){
-		TypedQuery<Object[]> query = em.createNamedQuery("Order.suspendedOrders", Object[].class);
-		List<Object[]> result;
+	public List<Order> getSuspendedOrders(){
+		TypedQuery<Order> query = em.createNamedQuery("Order.suspendedOrders", Order.class);
+		List<Order> result;
 		try {
 			result =query.getResultList();
 		} catch (NoResultException e) {

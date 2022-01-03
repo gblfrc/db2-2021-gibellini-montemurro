@@ -300,16 +300,28 @@
 				for (i = 0; i < dataPerPackage.length; i++) {
 					let newRow = document.createElement("tr");
 					let orderCell = document.createElement("td");
-					orderCell.textContent = dataPerPackage[i].property0;
+					orderCell.textContent = dataPerPackage[i].id;
 					newRow.appendChild(orderCell);
+					let userCell = document.createElement("td");
+					userCell.textContent = dataPerPackage[i].subscription.user;
+					newRow.appendChild(userCell);
 					let dateCell = document.createElement("td");
 					dateCell.setAttribute("class", "number");
-					dateCell.textContent = dataPerPackage[i].property1;
+					dateCell.textContent = dataPerPackage[i].creationDate;
 					newRow.appendChild(dateCell);
 					let timeCell = document.createElement("td");
 					timeCell.setAttribute("class", "number");
-					timeCell.textContent = dataPerPackage[i].property2;
+					timeCell.textContent = dataPerPackage[i].creationTime;
 					newRow.appendChild(timeCell);
+					let refusedCell = document.createElement("td");
+					refusedCell.setAttribute("class", "number");
+					refusedCell.textContent = dataPerPackage[i].refusedPayments;
+					newRow.appendChild(refusedCell);
+					let amountCell = document.createElement("td");
+					amountCell.setAttribute("class", "number");
+					amountCell.textContent = dataPerPackage[i].amount + '\u20ac';
+					newRow.appendChild(amountCell);
+					
 					suspendedOrders.suspendedOrders.appendChild(newRow);
 				}
 				this.element.removeAttribute("style");

@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.db2.project.entities.AuditingTable;
 import it.polimi.db2.project.entities.Client;
 import it.polimi.db2.project.entities.MvOptProd;
+import it.polimi.db2.project.entities.Order;
 import it.polimi.db2.project.services.AuditingService;
 import it.polimi.db2.project.services.MvOptProdService;
 import it.polimi.db2.project.services.MvPackageService;
@@ -77,21 +78,12 @@ public class JSONTable extends HttpServlet {
 				toSend = gson.toJson(insolvents);
 				break;
 			case "suspended":
-				List<Object[]> suspendedOrders = orderService.getSuspendedOrders();
-				for(Object[] obj: suspendedOrders) {
-					System.out.println(obj);
-				}
-				toSend = gson.toJson(JSONConverter.converter(suspendedOrders));
+				List<Order> suspendedOrders = orderService.getSuspendedOrders();
+				toSend = gson.toJson(suspendedOrders);
 				break;
 			case "alerts":
 				List<AuditingTable> alerts = auditingService.findAlerts();
-				toSend = gson.toJson(alerts);
-				for(AuditingTable obj: alerts) {
-					System.out.println(obj);
-				}
-				System.out.println("---------------------------------------------------");
-				System.out.println(toSend);
-				System.out.println("---------------------------------------------------");
+				toSend = gson.toJson(alerts);		
 				break;
 			case "best":
 				List<MvOptProd> bestSeller = mvOptProdService.findBestSeller();
