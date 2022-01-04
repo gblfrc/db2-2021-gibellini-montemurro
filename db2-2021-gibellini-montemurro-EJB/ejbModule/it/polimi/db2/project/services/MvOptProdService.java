@@ -21,6 +21,10 @@ public class MvOptProdService {
 		List<MvOptProd> result;
 		try {
 			result =query.getResultList();
+			//refresh to avoid cache issues
+			for(MvOptProd mop : result) {
+				em.refresh(mop);
+			}
 		} catch (NoResultException e) {
 			return result=new LinkedList<>();
 		}
