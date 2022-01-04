@@ -217,9 +217,9 @@
 					let avgCell = document.createElement("td");
 					avgCell.setAttribute("class", "number");
 					if(dataPerPackage[i].property1!=0){
-						avgCell.textContent = dataPerPackage[i].property2/dataPerPackage[i].property1;
+						avgCell.textContent = (dataPerPackage[i].property2/dataPerPackage[i].property1).toFixed(2);
 					}else{
-						avgCell.textContent ="0";
+						avgCell.textContent ="0.00";
 					}
 					newRow.appendChild(avgCell);
 					averageNumberOfOptional.averageNumberOfOptional.appendChild(newRow);

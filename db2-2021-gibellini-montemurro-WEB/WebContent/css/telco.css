@@ -173,6 +173,7 @@ div.user {
 	position: absolute;
 	top: 0px;
 	right: 0px;
+	padding: 1em 1em;
 }
 
 p.error, p.success {
