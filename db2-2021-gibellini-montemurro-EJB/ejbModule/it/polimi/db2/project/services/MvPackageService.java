@@ -1,6 +1,5 @@
 package it.polimi.db2.project.services;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,8 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import it.polimi.db2.project.entities.MvPackage;
 
 @Stateless
 public class MvPackageService {

@@ -37,7 +37,7 @@
 				let newInput = document.createElement("input");
 				newInput.setAttribute("type", "checkbox");
 				newInput.setAttribute("value", products[i]);
-				newInput.setAttribute("name", "optProd" + i);
+				newInput.setAttribute("name", "optprod");
 				let newLabel = document.createElement("label");
 				newLabel.innerText = products[i];
 				newOptProd.appendChild(newInput);

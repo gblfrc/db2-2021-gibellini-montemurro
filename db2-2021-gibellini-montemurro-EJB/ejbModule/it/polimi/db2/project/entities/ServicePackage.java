@@ -1,6 +1,7 @@
 package it.polimi.db2.project.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,12 +35,12 @@ public @Data class ServicePackage implements Serializable {
 	           inverseJoinColumns=@JoinColumn(name="Product"))
 	private List<OptionalProduct> optionalProducts;
 		
-	public boolean hasAllProducts(List<String> productsToCheck) {
-		List<String> allProducts = new LinkedList<>();
+	public boolean hasAllProducts(String[] productsToCheck) {
+		List<String> allProductNames = new LinkedList<>();
 		for(OptionalProduct op : optionalProducts) {
-			allProducts.add(op.getName());
+			allProductNames.add(op.getName());
 		}
-		if (allProducts.containsAll(productsToCheck)) return true;
+		if (allProductNames.containsAll(Arrays.asList(productsToCheck))) return true;
 		else return false;		
 	}
 	

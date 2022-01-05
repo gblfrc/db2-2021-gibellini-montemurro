@@ -43,9 +43,8 @@
 			<div id="opList" th:remove="all-but-first">
 				Optional products:
 				<div class="checkbox" th:each="product,num : ${products}">
-					<input type="checkbox" th:value="${product.name}"
-						th:name="'optProd' + ${num.index}"> <label
-						th:text="${product.name}">Sample product</label>
+					<input type="checkbox" th:value="${product.name}" name="optprod">
+					<label th:text="${product.name}">Sample product</label>
 				</div>
 				<div class="checkbox">
 					<input type="checkbox"> Another sample product

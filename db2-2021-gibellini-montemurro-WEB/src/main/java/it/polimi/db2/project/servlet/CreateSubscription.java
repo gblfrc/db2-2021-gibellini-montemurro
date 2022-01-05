@@ -2,7 +2,6 @@ package it.polimi.db2.project.servlet;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,7 +42,7 @@ public class CreateSubscription extends HttpServlet {
 	SubService sbs;
 	@EJB
 	VPService vps;
-	
+
 	public void init() throws ServletException {
 		templateEngine = TemplateEngineHandler.getEngine(getServletContext());
 	}
@@ -130,23 +129,16 @@ public class CreateSubscription extends HttpServlet {
 			return;
 		}
 
-		// get optional product parameters, then products themselves and save to
-		// subscription
+		// get optional product parameters, then products themselves and save to subscription
 		List<OptionalProduct> products = new LinkedList<>();
 		try {
-			List<String> allParameters = Collections.list(request.getParameterNames());
-			List<String> optProducts = new LinkedList<>();
-			for (String param : allParameters) {
-				if (param.contains("optProd"))
-					optProducts.add(request.getParameter(param));
+			String[] prodArray = request.getParameterValues("optprod");
+			if (prodArray != null) {
+				// check optional products are available for a given package
+				if (!sp.hasAllProducts(prodArray)) throw new IllegalArgumentException();
+				// fetch products
+				products = ops.findProductsSelected(prodArray);
 			}
-			// check optional products are available for a given package
-			if (!sp.hasAllProducts(optProducts))
-				throw new IllegalArgumentException();
-			// fetch optional products objects
-			String[] prodArray = new String[optProducts.size()];
-			optProducts.toArray(prodArray);
-			products = ops.findProductsSelected(prodArray);
 			sub.setOptionalProductsSub(products);
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Invalid optional product request");

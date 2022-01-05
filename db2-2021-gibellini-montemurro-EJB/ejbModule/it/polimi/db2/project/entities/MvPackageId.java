@@ -3,8 +3,6 @@ package it.polimi.db2.project.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Id;
-
 public class MvPackageId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
