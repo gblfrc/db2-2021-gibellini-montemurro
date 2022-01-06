@@ -49,7 +49,7 @@ public class JSONTable extends HttpServlet {
 		String toSend = null;
 		
 		String param = request.getParameter("table");
-		
+		//check parameter validity
 		if (param != null && !param.equals("")) {
 			switch (param.toLowerCase()) {
 			case "perpackage":

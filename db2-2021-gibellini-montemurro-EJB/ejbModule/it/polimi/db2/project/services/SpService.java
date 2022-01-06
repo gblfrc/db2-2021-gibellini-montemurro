@@ -34,7 +34,7 @@ public class SpService {
 	}
 	
 	/*
-	 * This method adds a service package
+	 * This method persists a service package
 	 */
 	public void addServicePackage(String name,List<Service> services,List<OptionalProduct> optionalProducts) {
 		ServicePackage servicePackage= new ServicePackage();

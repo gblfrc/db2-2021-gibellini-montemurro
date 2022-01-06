@@ -24,7 +24,7 @@ public class OptService {
 	}
 	
 	/*
-	 * This method adds in DB an optional product
+	 * This method persists an optional product
 	 */
 	public void addOptionalProduct(String name,int monthlyFee) {
 		OptionalProduct optionalProduct = new OptionalProduct();

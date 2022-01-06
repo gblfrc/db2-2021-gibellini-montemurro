@@ -41,6 +41,7 @@ public class OrderService {
 		return result;
 	}
 	
+	// this method retrieves the order associated to the subscription
 	public Order getOrderBySubscription(Subscription sub) {
 		TypedQuery<Order> query = em.createNamedQuery("Order.findBySubscription", Order.class);
 		query.setParameter("sub", sub);
@@ -48,18 +49,22 @@ public class OrderService {
 		return result;
 	}
 	
+	// this method persists order
 	public void persistOrder(Order order) {
 		em.persist(order);
 	}
 	
+	// this method refreshes order
 	public void refreshOrder(Order order) {
 		em.refresh(order);
 	}
 	
+	// this method merges order
 	public void mergeOrder(Order order) {
 		em.merge(order);
 	}
 	
+	// this method retrieves the order by its id
 	public Order findOrderById(int id) {
 		TypedQuery<Order> query = em.createNamedQuery("Order.findById", Order.class);
 		query.setParameter("id", id);
