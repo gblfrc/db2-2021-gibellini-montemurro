@@ -24,7 +24,6 @@ public class CheckLogin extends HttpServlet {
 		
 		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
 		error.forward("/GetLogin", this, request, response);
-		// what about filters and errors?
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

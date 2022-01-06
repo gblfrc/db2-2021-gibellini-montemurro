@@ -26,7 +26,6 @@ public @Data class Subscription implements Serializable {
 
 	private String user;
 
-	// bi-directional many-to-one association to ValidityPeriod
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ValidityPeriod")
 	private ValidityPeriod validityPeriod;
