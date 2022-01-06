@@ -35,17 +35,40 @@ public class PayOrder extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//get order related to subscription
-		Order order = (Order)request.getSession().getAttribute("order");
-		
-		//"call external service" (analyze fail parameter and save updated order)
-		boolean fail = Boolean.parseBoolean(request.getParameter("fail"));
-		if (fail) order.setRefusedPayments(order.getRefusedPayments()+1);
+		// get order related to subscription
+		Order order = (Order) request.getSession().getAttribute("order");
+
+		// check order is present
+		if (order == null) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-existent order");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
+
+		// "call external service" (analyze fail parameter and save updated order)
+		boolean fail;
+		try {
+			String failStr = request.getParameter("fail").toLowerCase();
+			if (!failStr.equals("true") && !failStr.equals("false")) throw new IllegalArgumentException();
+			fail = Boolean.parseBoolean(request.getParameter("fail"));
+		} catch (Exception e) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST,
+					"Illegal request: impossible to attempt payment");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
+		if (fail) order.setRefusedPayments(order.getRefusedPayments() + 1);
 		else order.setValidity(true);
-		os.mergeOrder(order);
-		
+		try {
+			os.mergeOrder(order);
+		} catch (Exception e) {
+			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
+
 		response.sendRedirect("GetActivationSchedule");
-		
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,6 +76,5 @@ public class PayOrder extends HttpServlet {
 		Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request");
 		error.forward("/GetClientHomePage", this, request, response);
 	}
-
 
 }

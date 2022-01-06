@@ -47,20 +47,28 @@ public class ConfirmSub extends HttpServlet {
 			return;
 		}
 		
-		//check user has requested payment
-		if(request.getParameter("fail")==null) {
-			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: non-requested payment");
+		//check user has requested payment correctly
+		String fail = request.getParameter("fail");
+		if(fail != null) fail = fail.toLowerCase();
+		if(fail == null || (!fail.equals("true") && !fail.equals("false"))) {
+			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal request: impossible to attempt payment");
 			error.forward("/GetClientHomePage", this, request, response);
 			return;
 		}
 		
-		//save subscription on DB
-		sbs.persistSubscription(sub);
-		
-		//get order related to subscription
-		Order order = os.getOrderBySubscription(sub);
-		request.getSession().setAttribute("order", order);
-		request.getSession().removeAttribute("subscription");
+		try {
+			//save subscription on DB
+			sbs.persistSubscription(sub);
+			//get order related to subscription
+			Order order = os.getOrderBySubscription(sub);
+			//replace in session sub object with order object
+			request.getSession().setAttribute("order", order);
+			request.getSession().removeAttribute("subscription");
+		} catch (Exception e) {
+			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred");
+			error.forward("/GetClientHomePage", this, request, response);
+			return;
+		}
 		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/PayOrder");
 		rd.forward(request, response);
