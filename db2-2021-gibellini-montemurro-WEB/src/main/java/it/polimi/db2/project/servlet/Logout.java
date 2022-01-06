@@ -18,10 +18,12 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session != null) {
+			//log out user and destroy other parameters (sub, order)
 			session.removeAttribute("user");
 			session.removeAttribute("subscription");
 			session.removeAttribute("order");
 			Error success = new Error(HttpServletResponse.SC_OK, "Successful logout");
+			//save success in session
 			session.setAttribute("success", success);
 		}
 		response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");

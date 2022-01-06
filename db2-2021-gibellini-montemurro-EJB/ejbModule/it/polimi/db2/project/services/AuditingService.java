@@ -15,6 +15,8 @@ public class AuditingService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
+	
+	// This method retrieves all alerts in auditing table
 	public List<AuditingTable> findAlerts() {
 		TypedQuery<AuditingTable> query = em.createNamedQuery("AuditingTable.findAlerts", AuditingTable.class);
 		List<AuditingTable> result;

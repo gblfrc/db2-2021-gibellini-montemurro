@@ -16,6 +16,7 @@ public class MvOptProdService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
+	//This method retrieves best optional products
 	public List<MvOptProd> findBestSeller() {
 		TypedQuery<MvOptProd> query = em.createNamedQuery("MvOptProd.findBestSeller", MvOptProd.class);
 		List<MvOptProd> result;

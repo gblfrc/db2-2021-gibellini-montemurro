@@ -13,6 +13,8 @@ public class MvPackageService {
 	@PersistenceContext(name = "project_pc")
 	private EntityManager em;
 	
+	//Those methods retrieve data related to purchases 
+	
 	public List<Object[]> findAllPurchasesPerPackageAndValidityPeriod() {
 		TypedQuery<Object[]> query = em.createNamedQuery("MvPackage.findPurchasesPerPackageAndValidityPeriod",  Object[].class);
 		List<Object[]> result;

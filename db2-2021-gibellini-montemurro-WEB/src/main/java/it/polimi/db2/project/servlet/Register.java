@@ -33,11 +33,13 @@ public class Register extends HttpServlet {
 			username = request.getParameter("username");
 			password = request.getParameter("password");
 			email = request.getParameter("email");
+			//check parameters validity
 			if (username == null || username.equals("") || username.substring(0, 1).equals(" ") ||
 					password == null || password.equals("")	|| password.substring(0, 1).equals(" ") ||
 					email == null|| email.equals("") || password.substring(0, 1).equals(" ") || email.contains(" ")) {
 				throw new Exception();
 			}
+			//save user in DB
 			uService.addClient(username, password, email);
 		} catch (Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Couldn't create account, invalid credentials");
@@ -46,6 +48,7 @@ public class Register extends HttpServlet {
 		}
 
 		Error success = new Error(HttpServletResponse.SC_OK, "Successful registration");
+		//save success in session
 		request.getSession().setAttribute("success", success);
 
 		response.sendRedirect(getServletContext().getContextPath() + "/GetLogin");

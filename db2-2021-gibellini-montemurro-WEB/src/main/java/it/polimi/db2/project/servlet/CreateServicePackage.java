@@ -48,6 +48,7 @@ public class CreateServicePackage extends HttpServlet {
 			name= request.getParameter("name");
 			optProdList= request.getParameterValues("typeOptional");
 			serviceList= request.getParameterValues("typeService");
+			//check parameters validity
 			if(name.equals("")||name==null||name.substring(0,1).equals(" ")||serviceList==null)throw new Exception();
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal service package request");
@@ -57,6 +58,7 @@ public class CreateServicePackage extends HttpServlet {
 		
 		List<OptionalProduct>optionals=null;
 		try {
+			//retrieve all optional products selected
 			if(optProdList!=null)optionals= optService.findProductsSelected(optProdList);
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Unavailable optional product");
@@ -65,6 +67,7 @@ public class CreateServicePackage extends HttpServlet {
 		}
 		List<Service>services;
 		try {
+			//retrieve all services selected
 			services= servService.findServicesSelected(serviceList);
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Unavailable service");
@@ -73,6 +76,7 @@ public class CreateServicePackage extends HttpServlet {
 		}	
 		
 		try {
+			//save service package in DB
 			spService.addServicePackage(name,services,optionals);
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred, couldn't add service package");

@@ -53,6 +53,7 @@ public class UserService {
 		em.persist(client);
 	}
 	
+	// this method retrieves all insolvent clients
 	public List<Client> findInsolvents(){
 		TypedQuery<Client> query = em.createNamedQuery("Client.getInsolventClients", Client.class);
 		List<Client> result;
