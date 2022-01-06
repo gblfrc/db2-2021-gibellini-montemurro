@@ -33,6 +33,7 @@ public class CreateOptionalProduct extends HttpServlet {
 		try {
 			name = request.getParameter("name");
 			monthlyFee = Integer.parseInt(request.getParameter("monthlyFee"));
+			//check parameter validity
 			if(name.equals("")||name==null||name.substring(0,1).equals(" "))throw new Exception();
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_BAD_REQUEST, "Illegal optional product request");
@@ -41,6 +42,7 @@ public class CreateOptionalProduct extends HttpServlet {
 		}
 
 		try {
+			//save optional product in DB
 			optService.addOptionalProduct(name,monthlyFee);
 		}catch(Exception e) {
 			Error error = new Error(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An accidental error occurred, couldn't add optional product");

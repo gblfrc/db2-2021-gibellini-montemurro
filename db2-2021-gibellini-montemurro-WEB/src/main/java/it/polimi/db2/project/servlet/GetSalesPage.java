@@ -29,6 +29,7 @@ public class GetSalesPage extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {					
+		//give access to sales page
 		String path = "/WEB-INF/sales.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());

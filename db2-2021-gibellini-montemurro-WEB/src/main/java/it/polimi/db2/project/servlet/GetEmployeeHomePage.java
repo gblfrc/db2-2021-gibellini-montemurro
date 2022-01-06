@@ -41,9 +41,12 @@ public class GetEmployeeHomePage extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Error error = (Error)request.getAttribute("error");
+		//get all optional products
 		List<OptionalProduct> optionalProducts= optService.findAllOptProducts();
+		//get all services
 		List<Service> services=servService.findAllServices();
 		
+		//give access to employee home page
 		String path = "/WEB-INF/employeeHome.html";
 		ServletContext servletContext = getServletContext();
 		
